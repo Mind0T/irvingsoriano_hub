@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Irvin Soriano · Ciencia de Datos, UX/UI & AI</title>
+<meta name="description" content="Portafolio de Irvin Soriano: ciencia de datos, diseño UX/UI y herramientas que construyo y uso todos los días.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/sistema.css">
+<style>
+.hero{display:grid; gap:22px; padding:40px 0 10px}
+.hero .areas{display:flex; flex-wrap:wrap; gap:10px 18px}
+.hero .areas span{display:inline-flex; align-items:center; gap:8px; font:600 12px/1 var(--font-display); letter-spacing:.14em; text-transform:uppercase}
+.hero .areas i{width:7px; height:7px; border-radius:50%; background:currentColor}
+.hero h2{font-size:clamp(30px,6vw,64px); font-weight:900; color:#fff; letter-spacing:-.03em; max-width:18ch}
+.hero .pitch{font-size:clamp(16px,2.2vw,20px); color:var(--text-secondary); max-width:58ch}
+.hero .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:6px}
+.block-head{display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap}
+.block-head h3{font-size:clamp(20px,3vw,28px); font-weight:800}
+.block-head a{font:700 13px var(--font-display); color:var(--text-secondary); display:inline-flex; align-items:center; gap:6px}
+.block-head a:hover{color:var(--text-primary)}
+.block-head svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tool-badge{display:inline-flex; align-items:center; gap:7px; font:700 10.5px var(--font-display); letter-spacing:.08em; text-transform:uppercase; color:var(--c); background:color-mix(in oklab,var(--c) 16%,transparent); padding:6px 11px; border-radius:99px}
+.tool-badge i{width:7px; height:7px; border-radius:50%; background:var(--c)}
+.tools2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+.tool-card{position:relative; border:1px solid var(--border-default); background:linear-gradient(160deg,var(--bg-surface),#0E0E0E); border-radius:var(--radius-xl); padding:26px; overflow:hidden; transition:var(--transition-base)}
+.tool-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
+.tool-card:hover{transform:translateY(-4px); border-color:var(--border-strong)}
+.tool-card h3{font-size:22px; margin:16px 0 4px}
+.tool-card .role{font:600 12.5px var(--font-display); color:var(--text-muted); margin-bottom:12px}
+.tool-card p{font-size:14px; margin:0 0 18px}
+.tool-card .links{display:flex; flex-wrap:wrap; gap:10px}
+@media (max-width:760px){ .tools2{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main class="wrap page">
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="areas">
+      <span style="color:var(--data)"><i></i><span data-i18n="a_data">Ciencia de Datos</span></span>
+      <span style="color:var(--ux)"><i></i>UX / UI</span>
+      <span style="color:var(--ai)"><i></i><span data-i18n="a_ai">AI Engineer · pronto</span></span>
+    </div>
+    <h2 data-i18n="hero_h">Construyo herramientas para pensar, estudiar y decidir mejor.</h2>
+    <p class="pitch" data-i18n="hero_p">Estudiante de Ciencia de Datos en ESCOM-IPN, con base en psicología y neurociencia. Diseño experiencias, analizo datos y llevo ideas de la nube al producto — y las herramientas que hago, las uso todos los días.</p>
+    <div class="cta">
+      <a class="btn primary" href="proyectos.html"><span data-i18n="hero_c1">Ver proyectos</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn ghost" href="herramientas.html"><span data-i18n="hero_c2">Herramientas que uso</span></a>
+    </div>
+  </section>
+
+  <!-- HERRAMIENTAS EN USO -->
+  <section class="reveal">
+    <div class="block-head">
+      <h3 data-i18n="tools_h">No solo las construí. Las uso.</h3>
+      <a href="herramientas.html" data-i18n="ver_mas">Ver más<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="tools2">
+      <article class="tool-card" style="--c:var(--tool)">
+        <span class="tool-badge"><i></i><span data-i18n="in_use">En uso diario</span></span>
+        <h3>Dame la Vida</h3>
+        <p class="role" data-i18n="t1_role">Tablero · Kanban + Calendario + Progreso</p>
+        <p data-i18n="t1_p">Gestiona escuela y vida: tareas, calendario, recordatorios y caminos de progreso por materia, certificación y hábito.</p>
+        <div class="links">
+          <a class="chip solid" style="--c:var(--tool)" href="https://tablero-irvin.vercel.app" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span data-i18n="open">Abrir</span></a>
+          <a class="chip" href="https://github.com/Mind0T/tablero-irvin" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </article>
+      <article class="tool-card" style="--c:var(--data)">
+        <span class="tool-badge"><i></i><span data-i18n="in_use">En uso diario</span></span>
+        <h3 data-i18n="t2_name">Plataforma de Estudio</h3>
+        <p class="role" data-i18n="t2_role">Aprende a programar con animaciones paso a paso</p>
+        <p data-i18n="t2_p">Estudia estructuras de datos con animaciones y pruebas de escritorio que siguen el código C línea por línea. Creciendo a más lenguajes.</p>
+        <div class="links">
+          <a class="chip" href="https://github.com/Mind0T/Entreno-code/tree/main/C/algoritmos_estructura_datos/Estudio" target="_blank" rel="noopener">GitHub</a>
+          <span class="chip" style="opacity:.6" data-i18n="soon_dom">estudio.irvingsoriano.com · pronto</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROYECTOS DESTACADOS -->
+  <section class="reveal">
+    <div class="block-head">
+      <h3 data-i18n="feat_h">Proyectos destacados</h3>
+      <a href="proyectos.html" data-i18n="ver_todos">Ver todos<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="cards" id="feat"></div>
+  </section>
+</main>
+
+<script src="js/fondo.js"></script>
+<script>
+window.PAGINA = "inicio";
+window.I18N = {
+  es:{a_data:"Ciencia de Datos",a_ai:"AI Engineer · pronto",
+    hero_h:"Construyo herramientas para pensar, estudiar y decidir mejor.",
+    hero_p:"Estudiante de Ciencia de Datos en ESCOM-IPN, con base en psicología y neurociencia. Diseño experiencias, analizo datos y llevo ideas de la nube al producto — y las herramientas que hago, las uso todos los días.",
+    hero_c1:"Ver proyectos",hero_c2:"Herramientas que uso",
+    tools_h:"No solo las construí. Las uso.",ver_mas:"Ver más",ver_todos:"Ver todos",in_use:"En uso diario",open:"Abrir",
+    t1_role:"Tablero · Kanban + Calendario + Progreso",t1_p:"Gestiona escuela y vida: tareas, calendario, recordatorios y caminos de progreso por materia, certificación y hábito.",
+    t2_name:"Plataforma de Estudio",t2_role:"Aprende a programar con animaciones paso a paso",t2_p:"Estudia estructuras de datos con animaciones y pruebas de escritorio que siguen el código C línea por línea. Creciendo a más lenguajes.",
+    soon_dom:"estudio.irvingsoriano.com · pronto",feat_h:"Proyectos destacados",code:"Código",live:"Ver"},
+  en:{a_data:"Data Science",a_ai:"AI Engineer · soon",
+    hero_h:"I build tools to think, study and decide better.",
+    hero_p:"Data Science student at ESCOM-IPN with a background in psychology and neuroscience. I design experiences, analyze data and take ideas from the cloud to the product — and the tools I build, I use every day.",
+    hero_c1:"See projects",hero_c2:"Tools I use",
+    tools_h:"I didn't just build them. I use them.",ver_mas:"See more",ver_todos:"See all",in_use:"Daily use",open:"Open",
+    t1_role:"Board · Kanban + Calendar + Progress",t1_p:"Manage school and life: tasks, calendar, reminders and progress roads by subject, certification and habit.",
+    t2_name:"Study Platform",t2_role:"Learn to code with step-by-step animations",t2_p:"Study data structures with animations and desktop traces that follow C code line by line. Growing to more languages.",
+    soon_dom:"estudio.irvingsoriano.com · soon",feat_h:"Featured projects",code:"Code",live:"Live"}
+};
+var FEAT = [
+  {n:"Línea de tiempo · Computación", area:"ux", lang:"JavaScript", repo:"linea_tiempo_computacion-1am1",
+    es:"Línea de tiempo interactiva de la evolución de la computación. La raíz visual de los caminos del tablero.",
+    en:"Interactive timeline of computing's evolution. The visual root of the board's roads."},
+  {n:"Telecom X · Predicción (ML)", area:"data", lang:"Python", repo:"challenge-aluraTelecom2-IrvinSoriano",
+    es:"Pipeline de ML para predecir churn: SMOTE, Regresión Logística vs Random Forest y feature importance.",
+    en:"ML pipeline to predict churn: SMOTE, Logistic Regression vs Random Forest and feature importance."},
+  {n:"Eivind Street", area:"foto", lang:"JavaScript", repo:"eivindstreet",
+    es:"Fotografía documental y urbana de CDMX bajo mi seudónimo Eivind. Vanilla JS con foco en rendimiento.",
+    en:"Documentary and urban photography of Mexico City under my pseudonym Eivind. Performance-focused vanilla JS."}
+];
+var AREAN = {data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},foto:{es:"Fotografía",en:"Photography",c:"var(--foto)"}};
+var GH="https://github.com/Mind0T/";
+function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+window.render = function(lang){
+  var gh='<svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>';
+  document.getElementById("feat").innerHTML = FEAT.map(function(p){
+    var a=AREAN[p.area];
+    return '<article class="card" style="--c:'+a.c+'"><div class="card-top"><span class="dot"></span><span class="card-area">'+a[lang]+'</span></div>'+
+      '<h3>'+escp(p.n)+'</h3><p>'+escp(p[lang])+'</p><div class="card-foot">'+
+      '<a href="'+GH+p.repo+'" target="_blank" rel="noopener">'+gh+window.T("code")+'</a>'+
+      '<span class="card-lang"><span class="dot" style="width:8px;height:8px;border-radius:50%;display:inline-block;background:'+a.c+'"></span>'+p.lang+'</span></div></article>';
+  }).join("");
+};
+</script>
+<script src="js/sitio.js"></script>
+</body>
+</html>

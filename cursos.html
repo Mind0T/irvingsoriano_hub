@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cursos · Irvin Soriano</title>
+<meta name="description" content="Próximamente: cursos de programación y contenido en tecnología de Irvin Soriano, con rutas de aprendizaje y video.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/sistema.css">
+<style>
+.soon{border:1px dashed var(--border-strong); background:linear-gradient(160deg,var(--bg-surface),#0C0C0C); border-radius:var(--radius-xl); padding:clamp(34px,5vw,64px) clamp(24px,4vw,48px); text-align:center}
+.soon .tag{display:inline-block; font:700 11px var(--font-display); letter-spacing:.16em; text-transform:uppercase; color:var(--ai); border:1px solid color-mix(in oklab,var(--ai) 40%,transparent); background:color-mix(in oklab,var(--ai) 12%,transparent); padding:8px 16px; border-radius:99px; margin-bottom:22px}
+.soon h2{font-size:clamp(26px,4.5vw,42px); margin-bottom:16px; color:#fff}
+.soon p{max-width:58ch; margin:0 auto; font-size:16px}
+.soon .feats{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:28px}
+.soon .feats span{font:600 13px var(--font-display); color:var(--text-secondary); border:1px solid var(--border-default); background:var(--bg-surface-2); padding:10px 16px; border-radius:99px}
+.soon .road{display:inline-grid; text-align:left; margin-top:34px}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<main class="wrap page">
+  <div class="pagehead reveal" style="--acc:var(--ai)">
+    <p class="eyebrow" data-i18n="eye">Cursos · próximamente</p>
+    <h2 data-i18n="h">Enseñar lo que aprendo</h2>
+  </div>
+  <div class="soon reveal">
+    <span class="tag" data-i18n="tag">Próximamente · 2027</span>
+    <h2 data-i18n="sh">Cursos y contenido en tecnología</h2>
+    <p data-i18n="sp">Estoy preparando una sección donde impartiré cursos de programación y publicaré contenido en video sobre nube, datos e IA. La idea: enseñar lo que aprendo, con el mismo formato de "caminos" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.</p>
+    <div class="feats">
+      <span data-i18n="f1">Rutas de aprendizaje</span><span data-i18n="f2">Videos en YouTube</span><span data-i18n="f3">Laboratorios y quizzes</span><span data-i18n="f4">Práctica con mis herramientas</span>
+    </div>
+  </div>
+</main>
+
+<script src="js/fondo.js"></script>
+<script>
+window.PAGINA = "cursos";
+window.I18N = {
+  es:{eye:"Cursos · próximamente",h:"Enseñar lo que aprendo",tag:"Próximamente · 2027",sh:"Cursos y contenido en tecnología",
+    sp:"Estoy preparando una sección donde impartiré cursos de programación y publicaré contenido en video sobre nube, datos e IA. La idea: enseñar lo que aprendo, con el mismo formato de \"caminos\" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.",
+    f1:"Rutas de aprendizaje",f2:"Videos en YouTube",f3:"Laboratorios y quizzes",f4:"Práctica con mis herramientas"},
+  en:{eye:"Courses · coming soon",h:"Teach what I learn",tag:"Coming soon · 2027",sh:"Courses and tech content",
+    sp:"I'm preparing a section where I'll teach programming courses and publish video content on cloud, data and AI. The idea: teach what I learn, with the same \"roads\" format and guided practice from my tools. Videos will live on YouTube and the paths, here.",
+    f1:"Learning paths",f2:"YouTube videos",f3:"Labs and quizzes",f4:"Practice with my tools"}
+};
+</script>
+<script src="js/sitio.js"></script>
+</body>
+</html>

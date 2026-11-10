@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perfil · Irvin Soriano</title>
+<meta name="description" content="Irvin Soriano: de la psicología y la neurociencia a la ciencia de datos, el diseño UX/UI y la nube.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/sistema.css">
+<style>
+.about{display:grid; grid-template-columns:1fr 330px; gap:48px; align-items:start}
+.about p{margin:0 0 18px; font-size:16px}
+.about .hl{color:var(--text-primary); font-weight:600}
+.about .facts{display:flex; flex-wrap:wrap; gap:9px; margin-top:26px}
+.about .fact{border:1px solid var(--border-default); background:var(--bg-surface); border-radius:99px; padding:8px 15px; font:600 13px var(--font-display); color:var(--text-secondary)}
+.about .fact b{color:var(--text-primary)}
+.photo{position:relative}
+.photo img{border-radius:var(--radius-lg); border:1px solid var(--border-strong); box-shadow:var(--shadow-card); width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center 20%}
+.photo .cap{position:absolute; left:14px; bottom:14px; right:14px; font:600 12px var(--font-display); color:#fff; background:rgba(10,10,10,.6); backdrop-filter:blur(8px); border:1px solid var(--border-strong); border-radius:10px; padding:9px 12px}
+@media (max-width:860px){ .about{grid-template-columns:1fr; gap:30px} .photo{max-width:300px} }
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<main class="wrap page">
+  <div class="pagehead reveal" style="--acc:var(--foto)">
+    <p class="eyebrow" data-i18n="eye">Perfil</p>
+    <h2 data-i18n="h">De la mente humana a los datos</h2>
+  </div>
+  <div class="about reveal">
+    <div class="txt">
+      <p data-i18n="p1">Empecé estudiando <span class="hl">psicología</span> en la UNAM, me formé en <span class="hl">fotografía</span>, y hoy curso <span class="hl">Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.</p>
+      <p data-i18n="p2">Soy <span class="hl">Sub Líder de Marketing y diseñador</span> del AWS Student Builder Group del IPN, y lideré la identidad y el UX/UI del AWS Student Community Day CDMX 2026. Fui speaker en el AWS Summit 2026 y gané el 2.º lugar del track IBM en el Hackathon Talent Land con SUSVI, una plataforma de análisis geoespacial. Me muevo entre el diseño UX/UI, el análisis de datos y la nube, y ahora voy hacia el <span class="hl">AI Engineering</span>.</p>
+      <p data-i18n="p3">Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class="hl">las uso todos los días</span>. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas.</p>
+      <div class="facts">
+        <span class="fact"><b>ESCOM</b> · IPN</span>
+        <span class="fact" data-i18n="f_psy"><b>Psicología</b> · UNAM</span>
+        <span class="fact"><b>AWS SBG</b> · IPN</span>
+        <span class="fact" data-i18n="f_city"><b>CDMX</b> · México</span>
+      </div>
+    </div>
+    <figure class="photo">
+      <img src="assets/irvin.jpg" alt="Irvin Soriano">
+      <figcaption class="cap" data-i18n="cap">Amazon · AWS Summit 2026</figcaption>
+    </figure>
+  </div>
+</main>
+
+<script src="js/fondo.js"></script>
+<script>
+window.PAGINA = "perfil";
+window.I18N = {
+  es:{eye:"Perfil",h:"De la mente humana a los datos",f_psy:"<b>Psicología</b> · UNAM",f_city:"<b>CDMX</b> · México",cap:"Amazon · AWS Summit 2026",
+    p1:"Empecé estudiando <span class='hl'>psicología</span> en la UNAM, me formé en <span class='hl'>fotografía</span>, y hoy curso <span class='hl'>Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.",
+    p2:"Soy <span class='hl'>Sub Líder de Marketing y diseñador</span> del AWS Student Builder Group del IPN, y lideré la identidad y el UX/UI del AWS Student Community Day CDMX 2026. Fui speaker en el AWS Summit 2026 y gané el 2.º lugar del track IBM en el Hackathon Talent Land con SUSVI, una plataforma de análisis geoespacial. Me muevo entre el diseño UX/UI, el análisis de datos y la nube, y ahora voy hacia el <span class='hl'>AI Engineering</span>.",
+    p3:"Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class='hl'>las uso todos los días</span>. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas."},
+  en:{eye:"About",h:"From the human mind to data",f_psy:"<b>Psychology</b> · UNAM",f_city:"<b>Mexico City</b> · Mexico",cap:"Amazon · AWS Summit 2026",
+    p1:"I started out studying <span class='hl'>psychology</span> at UNAM, trained in <span class='hl'>photography</span>, and today I study <span class='hl'>Data Science</span> at ESCOM, IPN. That path wasn't a detour: understanding how people think and decide is exactly what helps me design data, interfaces and products that actually work.",
+    p2:"I'm <span class='hl'>Marketing Sub-Lead and designer</span> of the AWS Student Builder Group at IPN, and I led the identity and UX/UI of the AWS Student Community Day CDMX 2026. I spoke at the AWS Summit 2026 and won 2nd place in the IBM track at Hackathon Talent Land with SUSVI, a geospatial analysis platform. I move between UX/UI design, data analysis and the cloud, and I'm now heading toward <span class='hl'>AI Engineering</span>.",
+    p3:"What defines me most: I don't just build tools to study and stay organized — <span class='hl'>I use them every day</span>. This site is both my portfolio and the place where those tools live."}
+};
+</script>
+<script src="js/sitio.js"></script>
+</body>
+</html>

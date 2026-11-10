@@ -2,6 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/tablero", "destination": "https://tablero.irvingsoriano.com", "permanent": false },
+    { "source": "/tablero/:path*", "destination": "https://tablero.irvingsoriano.com/:path*", "permanent": false },
+    { "source": "/estudio", "destination": "https://estudio.irvingsoriano.com", "permanent": false },
+    { "source": "/estudio/:path*", "destination": "https://estudio.irvingsoriano.com/:path*", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

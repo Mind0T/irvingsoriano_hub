@@ -3,13 +3,13 @@
   "proyectos": [
     {
       "id": "tablero-irvin", "nombre": "Dame la Vida · Tablero", "area": "tool", "lang": "JavaScript",
-      "repo": "tablero-irvin", "live": "https://tablero-irvin.vercel.app", "fecha": "2026-11-10", "destacado": true, "estado": "",
+      "repo": "tablero-irvin", "live": "https://tablero.irvingsoriano.com", "fecha": "2026-11-10", "destacado": true, "estado": "",
       "es": "Tablero personal de escuela y vida: kanban, calendario, recordatorios por WhatsApp, sync con Google Calendar y una vista de caminos con mi progreso por materia, certificación y hábito.",
       "en": "Personal school-and-life board: kanban, calendar, WhatsApp reminders, Google Calendar sync and a roads view of my progress by subject, certification and habit."
     },
     {
       "id": "estudio", "nombre": "Plataforma de Estudio", "area": "tool", "lang": "JavaScript",
-      "repo": "Entreno-code", "live": "", "fecha": "2026-11-10", "destacado": true, "estado": "",
+      "repo": "Entreno-code", "live": "https://estudio.irvingsoriano.com", "fecha": "2026-11-10", "destacado": true, "estado": "",
       "es": "Sitio para estudiar algoritmos y estructuras de datos con animaciones SVG y pruebas de escritorio que siguen el código C línea por línea: pila, heap y apuntadores. Creciendo a más lenguajes.",
       "en": "A site to study algorithms and data structures with SVG animations and desktop traces that follow C code line by line: stack, heap and pointers. Growing to more languages."
     },

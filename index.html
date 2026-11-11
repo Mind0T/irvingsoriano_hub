@@ -13,9 +13,9 @@
 <link rel="stylesheet" href="css/sistema.css">
 <style>
 /* ---------- HERO ---------- */
-.hero{display:grid; gap:28px; padding:clamp(18px,3.5vw,40px) 0 14px; justify-items:center; text-align:center}
-.hero-tag{margin:0; max-width:22ch; font:300 clamp(25px,4.6vw,48px)/1.2 var(--font-display); color:var(--text-primary); letter-spacing:-.015em}
-.hero-tag b{font-weight:600; color:#fff}
+.hero{display:grid; gap:22px; padding:clamp(14px,2.5vw,28px) 0 10px; justify-items:center; text-align:center}
+.hero-tag{margin:2px 0 0; max-width:34ch; font:300 clamp(17px,2.5vw,27px)/1.35 var(--font-display); color:var(--text-secondary); letter-spacing:-.01em}
+.hero-tag b{font-weight:600; color:var(--text-primary)}
 .hero .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:2px; justify-content:center}
 
 /* ---------- CARRUSEL Datos × Diseño ---------- */
@@ -75,9 +75,7 @@
 <main class="wrap page">
   <!-- HERO -->
   <section class="hero reveal">
-    <p class="hero-tag" data-i18n="hero_tag">El enfoque <b>Data-Driven</b> y el <b>diseño UX</b> son la verdadera diferencia en cualquier proyecto.</p>
-
-    <!-- carrusel -->
+    <!-- carrusel (protagonista) -->
     <section class="stage" id="stage" aria-roledescription="carrusel" aria-label="Datos y diseño">
       <span class="kick" data-i18n="kick">Donde los datos se encuentran con el diseño</span>
       <span class="glow" id="glow" aria-hidden="true"></span>
@@ -86,9 +84,10 @@
       <div class="dots" id="dots" role="tablist" aria-label="Elegir faceta"></div>
     </section>
 
+    <p class="hero-tag" data-i18n="hero_tag">El enfoque <b>Data-Driven</b> y el <b>diseño UX</b> son la verdadera diferencia en cualquier proyecto.</p>
+
     <div class="cta">
       <a class="btn primary" href="proyectos.html"><span data-i18n="hero_c1">Ver proyectos</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn ghost" href="herramientas.html"><span data-i18n="hero_c2">Herramientas que uso</span></a>
     </div>
   </section>
 </main>

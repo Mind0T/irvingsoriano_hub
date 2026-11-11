@@ -25,22 +25,21 @@
     var header = document.createElement("header");
     header.className = "top wrap";
     header.innerHTML =
-      '<div class="brand">' +
-        '<img class="logo" src="assets/logo.png" width="46" alt="">' +
-        '<div><h1>Irving Soriano</h1></div>' +
-      '</div>' +
-      '<div></div>' +
+      '<a class="brand" href="index.html" aria-label="Inicio">' +
+        '<img class="logo" src="assets/logo.png" alt="">' +
+        '<span class="wordmark">IRVING SORIANO</span>' +
+      '</a>' +
+      '<nav class="nav"><div class="seg2" id="segnav">' + navHTML() + '</div></nav>' +
       '<div class="head-right">' +
-        '<button class="burger" id="burger" aria-label="' + CHROME[lang].menu + '"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
         '<span class="lang" role="group" aria-label="Idioma"><button data-lang="es" aria-pressed="' + (lang === "es") + '">ES</button><button data-lang="en" aria-pressed="' + (lang === "en") + '">EN</button></span>' +
-      '</div>' +
-      '<nav class="nav"><div class="seg2" id="segnav">' + navHTML() + '</div></nav>';
+        '<button class="burger" id="burger" aria-label="' + CHROME[lang].menu + '" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
+      '</div>';
     document.body.insertBefore(header, document.body.firstChild.nextSibling);
 
     // footer
     var foot = document.createElement("div");
     foot.className = "wrap";
-    foot.innerHTML = '<div class="foot"><span>© 2026 Irvin Jair Soriano Rosales</span><span data-chrome="foot">' + CHROME[lang].foot + '</span></div>';
+    foot.innerHTML = '<div class="foot"><span>© 2026 Irvin Jair Soriano Rosales</span></div>';
     document.body.appendChild(foot);
 
     // eventos
@@ -50,7 +49,10 @@
       location.reload();
     });
     var burger = header.querySelector("#burger"), seg = header.querySelector("#segnav");
-    burger.addEventListener("click", function () { seg.classList.toggle("open"); });
+    burger.addEventListener("click", function () {
+      var open = seg.classList.toggle("open");
+      burger.setAttribute("aria-expanded", String(open));
+    });
   }
 
   // i18n de contenido: aplica textos marcados con data-i18n usando window.I18N de la página

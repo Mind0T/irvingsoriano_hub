@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Perfil · Irvin Soriano</title>
-<meta name="description" content="Irvin Soriano: de la psicología y la neurociencia a la ciencia de datos, el diseño UX/UI y la nube.">
+<title>Acerca de mí · Irvin Soriano</title>
+<meta name="description" content="Irvin Soriano: de la psicología y la neurociencia a la ciencia de datos, el diseño UX/UI y la nube. Formación académica y certificaciones.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -21,6 +21,36 @@
 .photo{position:relative}
 .photo img{border-radius:var(--radius-lg); border:1px solid var(--border-strong); box-shadow:var(--shadow-card); width:100%; aspect-ratio:3/4; object-fit:cover; object-position:center 20%}
 .photo .cap{position:absolute; left:14px; bottom:14px; right:14px; font:600 12px var(--font-display); color:#fff; background:rgba(10,10,10,.6); backdrop-filter:blur(8px); border:1px solid var(--border-strong); border-radius:10px; padding:9px 12px}
+
+/* ---------- disclosure / acordeón ---------- */
+.disc{border:1px solid var(--border-default); background:var(--bg-surface); border-radius:var(--radius-lg); margin-bottom:14px; overflow:hidden}
+.disc>summary{list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:18px 20px; transition:var(--transition-base)}
+.disc>summary::-webkit-details-marker{display:none}
+.disc>summary:hover{background:var(--bg-surface-2)}
+.disc>summary .ic{flex:0 0 auto; width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:color-mix(in oklab,var(--c,var(--data)) 16%,transparent); color:var(--c,var(--data))}
+.disc>summary .ic svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.disc>summary h3{font-size:16px; font-weight:800; color:var(--text-primary)}
+.disc>summary .sub{font:600 12px var(--font-display); color:var(--text-muted); margin-top:2px}
+.disc>summary .chev{margin-left:auto; width:20px;height:20px; stroke:var(--text-muted); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .3s ease}
+.disc[open]>summary .chev{transform:rotate(180deg)}
+.disc .disc-body{padding:4px 20px 22px}
+.disc[open] .disc-body>*{animation:din .4s ease-out both}
+@keyframes din{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+
+/* certificaciones */
+.cert-group{border:1px solid var(--border-default); background:var(--bg-lane); border-radius:var(--radius-md); padding:16px 18px; margin-bottom:12px}
+.cert-group h4{font-size:13px; letter-spacing:.03em; margin-bottom:10px; color:var(--text-secondary)}
+.cert{display:flex; align-items:flex-start; gap:11px; padding:9px 0; border-top:1px solid var(--border-default)}
+.cert:first-of-type{border-top:0}
+.cert .mk{flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:1px}
+.cert .mk.done{background:rgba(127,184,154,.16)} .cert .mk.prog{background:rgba(226,163,54,.16)}
+.cert .mk svg{width:12px; height:12px; stroke-width:2.4; fill:none; stroke-linecap:round; stroke-linejoin:round}
+.cert .mk.done svg{stroke:var(--color-ok)} .cert .mk.prog svg{stroke:var(--color-warn)}
+.cert .c-name{color:var(--text-primary); font-weight:600; font-size:14px}
+.cert .c-meta{font:600 11px var(--font-display); color:var(--text-muted)}
+.credly{margin-top:10px; display:inline-flex; align-items:center; gap:8px; font:700 13px var(--font-display); color:var(--text-secondary)}
+.credly:hover{color:var(--text-primary)} .credly svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+
 @media (max-width:860px){ .about{grid-template-columns:1fr; gap:30px} .photo{max-width:300px} }
 </style>
 </head>
@@ -28,7 +58,7 @@
 <canvas id="sky" aria-hidden="true"></canvas>
 <main class="wrap page">
   <div class="pagehead reveal" style="--acc:var(--foto)">
-    <p class="eyebrow" data-i18n="eye">Perfil</p>
+    <p class="eyebrow" data-i18n="eye">Acerca de mí</p>
     <h2 data-i18n="h">De la mente humana a los datos</h2>
   </div>
   <div class="about reveal">
@@ -48,20 +78,75 @@
       <figcaption class="cap" data-i18n="cap">Amazon · AWS Summit 2026</figcaption>
     </figure>
   </div>
+
+  <!-- FORMACIÓN (acordeón) -->
+  <section class="reveal" style="margin-top:14px">
+    <details class="disc" style="--c:var(--data)">
+      <summary>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg></span>
+        <span><h3 data-i18n="d1_h">Formación académica</h3><div class="sub" data-i18n="d1_s">De soldadura y sistemas a psicología, fotografía y ciencia de datos</div></span>
+        <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <div class="disc-body"><div class="road" id="road"></div></div>
+    </details>
+    <details class="disc" style="--c:var(--web)">
+      <summary>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 15a4 4 0 100-8 4 4 0 000 8zM12 15v6l-3-2-3 2v-6"/></svg></span>
+        <span><h3 data-i18n="d2_h">Certificaciones</h3><div class="sub" data-i18n="d2_s">Nube y datos · verificables en Credly</div></span>
+        <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <div class="disc-body">
+        <div id="certs"></div>
+        <a class="credly" href="https://www.credly.com/users/irving-soriano" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 15a4 4 0 100-8 4 4 0 000 8zM12 15v6l-3-2-3 2v-6"/></svg><span data-i18n="credly">Verifica mis insignias en Credly</span></a>
+      </div>
+    </details>
+  </section>
 </main>
 
 <script src="js/fondo.js"></script>
 <script>
 window.PAGINA = "perfil";
 window.I18N = {
-  es:{eye:"Perfil",h:"De la mente humana a los datos",f_psy:"<b>Psicología</b> · UNAM",f_city:"<b>CDMX</b> · México",cap:"Amazon · AWS Summit 2026",
+  es:{eye:"Acerca de mí",h:"De la mente humana a los datos",f_psy:"<b>Psicología</b> · UNAM",f_city:"<b>CDMX</b> · México",cap:"Amazon · AWS Summit 2026",
+    d1_h:"Formación académica",d1_s:"De soldadura y sistemas a psicología, fotografía y ciencia de datos",
+    d2_h:"Certificaciones",d2_s:"Nube y datos · verificables en Credly",
+    credly:"Verifica mis insignias en Credly",done:"Obtenida",prog:"En curso",
     p1:"Empecé estudiando <span class='hl'>psicología</span> en la UNAM, me formé en <span class='hl'>fotografía</span>, y hoy curso <span class='hl'>Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.",
     p2:"Soy <span class='hl'>Sub Líder de Marketing y diseñador</span> del AWS Student Builder Group del IPN, y lideré la identidad y el UX/UI del AWS Student Community Day CDMX 2026. Fui speaker en el AWS Summit 2026 y gané el 2.º lugar del track IBM en el Hackathon Talent Land con SUSVI, una plataforma de análisis geoespacial. Me muevo entre el diseño UX/UI, el análisis de datos y la nube, y ahora voy hacia el <span class='hl'>AI Engineering</span>.",
     p3:"Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class='hl'>las uso todos los días</span>. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas."},
-  en:{eye:"About",h:"From the human mind to data",f_psy:"<b>Psychology</b> · UNAM",f_city:"<b>Mexico City</b> · Mexico",cap:"Amazon · AWS Summit 2026",
+  en:{eye:"About me",h:"From the human mind to data",f_psy:"<b>Psychology</b> · UNAM",f_city:"<b>Mexico City</b> · Mexico",cap:"Amazon · AWS Summit 2026",
+    d1_h:"Academic background",d1_s:"From welding and systems to psychology, photography and data science",
+    d2_h:"Certifications",d2_s:"Cloud and data · verifiable on Credly",
+    credly:"Verify my badges on Credly",done:"Earned",prog:"In progress",
     p1:"I started out studying <span class='hl'>psychology</span> at UNAM, trained in <span class='hl'>photography</span>, and today I study <span class='hl'>Data Science</span> at ESCOM, IPN. That path wasn't a detour: understanding how people think and decide is exactly what helps me design data, interfaces and products that actually work.",
     p2:"I'm <span class='hl'>Marketing Sub-Lead and designer</span> of the AWS Student Builder Group at IPN, and I led the identity and UX/UI of the AWS Student Community Day CDMX 2026. I spoke at the AWS Summit 2026 and won 2nd place in the IBM track at Hackathon Talent Land with SUSVI, a geospatial analysis platform. I move between UX/UI design, data analysis and the cloud, and I'm now heading toward <span class='hl'>AI Engineering</span>.",
     p3:"What defines me most: I don't just build tools to study and stay organized — <span class='hl'>I use them every day</span>. This site is both my portfolio and the place where those tools live."}
+};
+var EDU=[
+  {yr:"2007–2010",c:"var(--text-muted)",es:"Técnico en Sistemas Computacionales",en:"Computer Systems Technician",w:"Centro de Computación Profesional de México"},
+  {yr:"2007–2010",c:"var(--text-muted)",es:"Técnico en Soldadura Industrial",en:"Industrial Welding Technician",w:"CECyT · IPN"},
+  {yr:"2013–2018",c:"var(--foto)",es:"Licenciatura en Psicología",en:"B.A. in Psychology",w:"Facultad de Psicología · UNAM",esn:"Pasante",enn:"Coursework completed"},
+  {yr:"2020–2022",c:"var(--ux)",es:"Carrera en Fotografía",en:"Photography Program",w:"Escuela Activa de Fotografía"},
+  {yr:"2024–…",c:"var(--data)",es:"Licenciatura en Ciencia de Datos",en:"B.S. in Data Science",w:"ESCOM · IPN",esn:"En curso · 3.er semestre",enn:"In progress · 3rd semester"}
+];
+var CERTS=[
+  {by:"Google",items:[{n:"Google Cloud Computing Foundations",s:"done"},{n:"Google Cloud · Artificial Intelligence",s:"done"},{n:"Associate Cloud Engineer",s:"prog"}]},
+  {by:"AWS",items:[{n:"Cloud Practitioner",s:"done"},{n:"AI Practitioner",s:"prog"}]},
+  {by:"Oracle · Alura",items:[{n:"Data Science Specialist",s:"done"},{n:"Oracle Cloud Infrastructure Foundations",s:"done"}]},
+  {by:"DataCamp · FinOps · EBAC",items:[{n:"Data Literacy · DataCamp",s:"done"},{n:"AI Fundamentals · DataCamp",s:"done"},{n:"FinOps Practitioner + FOCUS",s:"prog"},{n:"UX/UI · EBAC",s:"prog"}]}
+];
+function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+window.render = function(lang){
+  document.getElementById("road").innerHTML = EDU.map(function(e){
+    var note = lang==="es"?e.esn:e.enn;
+    return '<div class="road-node" style="--c:'+e.c+'"><div class="yr">'+escp(e.yr)+'</div><h3>'+escp(lang==="es"?e.es:e.en)+'</h3><div class="where">'+escp(e.w)+'</div>'+(note?'<div class="note">'+escp(note)+'</div>':'')+'</div>';
+  }).join("");
+  var ck='<svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>', cl='<svg viewBox="0 0 24 24"><path d="M12 7v5l3 2M12 21a9 9 0 110-18 9 9 0 010 18z"/></svg>';
+  document.getElementById("certs").innerHTML = CERTS.map(function(g){
+    return '<div class="cert-group"><h4>'+escp(g.by)+'</h4>'+g.items.map(function(it){
+      return '<div class="cert"><span class="mk '+it.s+'">'+(it.s==="done"?ck:cl)+'</span><span><span class="c-name">'+escp(it.n)+'</span><br><span class="c-meta">'+window.T(it.s)+'</span></span></div>';
+    }).join("")+'</div>';
+  }).join("");
 };
 </script>
 <script src="js/sitio.js"></script>

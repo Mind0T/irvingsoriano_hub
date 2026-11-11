@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cursos · Irvin Soriano</title>
-<meta name="description" content="Próximamente: cursos de programación y contenido en tecnología de Irvin Soriano, con rutas de aprendizaje y video.">
+<title>Comunidad · Irvin Soriano</title>
+<meta name="description" content="Comunidad: lo que Irvin Soriano construye y enseña con la comunidad tech — AWS SBG, Student Community Day, contenido y su plataforma de estudio abierta.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -12,41 +12,128 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
 <style>
-.soon{border:1px dashed var(--border-strong); background:linear-gradient(160deg,var(--bg-surface),#0C0C0C); border-radius:var(--radius-xl); padding:clamp(34px,5vw,64px) clamp(24px,4vw,48px); text-align:center}
-.soon .tag{display:inline-block; font:700 11px var(--font-display); letter-spacing:.16em; text-transform:uppercase; color:var(--ai); border:1px solid color-mix(in oklab,var(--ai) 40%,transparent); background:color-mix(in oklab,var(--ai) 12%,transparent); padding:8px 16px; border-radius:99px; margin-bottom:22px}
-.soon h2{font-size:clamp(26px,4.5vw,42px); margin-bottom:16px; color:#fff}
-.soon p{max-width:58ch; margin:0 auto; font-size:16px}
-.soon .feats{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:28px}
-.soon .feats span{font:600 13px var(--font-display); color:var(--text-secondary); border:1px solid var(--border-default); background:var(--bg-surface-2); padding:10px 16px; border-radius:99px}
-.soon .road{display:inline-grid; text-align:left; margin-top:34px}
+.sect-title{display:flex; align-items:center; gap:10px; margin:10px 2px 16px; font:800 12px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:var(--c,var(--text-secondary))}
+.sect-title .dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+
+.comm{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.ccard{position:relative; border:1px solid var(--border-default); background:linear-gradient(160deg,var(--bg-surface),#0E0E0E); border-radius:var(--radius-lg); padding:22px; overflow:hidden; transition:var(--transition-base)}
+.ccard::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
+.ccard:hover{transform:translateY(-3px); border-color:var(--border-strong)}
+.ccard .role{display:inline-flex;align-items:center;gap:7px;font:800 10.5px var(--font-display);letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin-bottom:10px}
+.ccard .role .dot{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.ccard h3{font-size:17px;font-weight:800;color:#fff;margin:0 0 7px}
+.ccard p{font-size:13.5px;color:var(--text-secondary);margin:0}
+
+/* CTA plataforma de estudio */
+.study{display:grid;grid-template-columns:1fr auto;align-items:center;gap:22px;
+  border:1px solid color-mix(in oklab,var(--data) 40%,var(--border-default));
+  background:linear-gradient(140deg,color-mix(in oklab,var(--data) 14%,#101010),#0C0C0C 72%);
+  border-radius:var(--radius-xl);padding:28px clamp(22px,3vw,34px)}
+.study .role{display:inline-flex;align-items:center;gap:7px;font:800 10.5px var(--font-display);letter-spacing:.12em;text-transform:uppercase;color:var(--data);margin-bottom:10px}
+.study .role .dot{width:7px;height:7px;border-radius:50%;background:var(--data);box-shadow:0 0 10px var(--data)}
+.study h3{font-size:clamp(20px,3vw,26px);font-weight:900;color:#fff;margin:0 0 8px}
+.study p{font-size:14.5px;color:var(--text-secondary);margin:0;max-width:52ch}
+@media (max-width:620px){.study{grid-template-columns:1fr}}
+
+/* contenido próximamente */
+.soon{border:1px dashed var(--border-strong); background:linear-gradient(160deg,var(--bg-surface),#0C0C0C); border-radius:var(--radius-xl); padding:clamp(28px,4vw,48px); text-align:center}
+.soon .tag{display:inline-block; font:700 11px var(--font-display); letter-spacing:.16em; text-transform:uppercase; color:var(--ai); border:1px solid color-mix(in oklab,var(--ai) 40%,transparent); background:color-mix(in oklab,var(--ai) 12%,transparent); padding:8px 16px; border-radius:99px; margin-bottom:18px}
+.soon h3{font-size:clamp(22px,3.6vw,32px); margin-bottom:12px; color:#fff; font-weight:900}
+.soon p{max-width:56ch; margin:0 auto; font-size:15px}
+.soon .feats{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:24px}
+.soon .feats span{font:600 12.5px var(--font-display); color:var(--text-secondary); border:1px solid var(--border-default); background:var(--bg-surface-2); padding:9px 15px; border-radius:99px}
+
+@media (max-width:620px){ .comm{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
 <main class="wrap page">
-  <div class="pagehead reveal" style="--acc:var(--ai)">
-    <p class="eyebrow" data-i18n="eye">Cursos · próximamente</p>
-    <h2 data-i18n="h">Enseñar lo que aprendo</h2>
+  <div class="pagehead reveal" style="--acc:var(--ux)">
+    <p class="eyebrow" data-i18n="eye">Comunidad</p>
+    <h2 data-i18n="h">Construir y enseñar en comunidad</h2>
+    <p class="lead" data-i18n="p">Lo que hago con la comunidad tech: diseño, divulgación y herramientas abiertas para que otros aprendan.</p>
   </div>
-  <div class="soon reveal">
-    <span class="tag" data-i18n="tag">Próximamente · 2027</span>
-    <h2 data-i18n="sh">Cursos y contenido en tecnología</h2>
-    <p data-i18n="sp">Estoy preparando una sección donde impartiré cursos de programación y publicaré contenido en video sobre nube, datos e IA. La idea: enseñar lo que aprendo, con el mismo formato de "caminos" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.</p>
-    <div class="feats">
-      <span data-i18n="f1">Rutas de aprendizaje</span><span data-i18n="f2">Videos en YouTube</span><span data-i18n="f3">Laboratorios y quizzes</span><span data-i18n="f4">Práctica con mis herramientas</span>
+
+  <!-- FORMACIÓN EN COMUNIDAD -->
+  <section class="reveal">
+    <div class="sect-title" style="--c:var(--ai)"><span class="dot"></span><span data-i18n="st1">Formación en comunidad</span></div>
+    <div class="comm">
+      <article class="ccard" style="--c:var(--ai)">
+        <span class="role"><span class="dot"></span>AWS SBG · IPN</span>
+        <h3 data-i18n="c1_h">Sub Líder de Marketing y diseño</h3>
+        <p data-i18n="c1_p">En el AWS Student Builder Group del IPN dirijo identidad, marketing y UX/UI, y creo series de contenido educativo para acercar la nube a más estudiantes.</p>
+      </article>
+      <article class="ccard" style="--c:var(--data)">
+        <span class="role"><span class="dot"></span>Student Community Day · CDMX 2026</span>
+        <h3 data-i18n="c2_h">Identidad y UX/UI del evento</h3>
+        <p data-i18n="c2_p">Lideré la identidad visual y la experiencia del AWS Student Community Day CDMX 2026, el mayor encuentro estudiantil de nube de la comunidad.</p>
+      </article>
+      <article class="ccard" style="--c:var(--ux)">
+        <span class="role"><span class="dot"></span>AWS Summit 2026</span>
+        <h3 data-i18n="c3_h">Speaker</h3>
+        <p data-i18n="c3_p">Compartí en el AWS Summit 2026 cómo la base en psicología y neurociencia se conecta con el diseño de datos y producto.</p>
+      </article>
+      <article class="ccard" style="--c:var(--web)">
+        <span class="role"><span class="dot"></span>Hackathon Talent Land</span>
+        <h3 data-i18n="c4_h">2.º lugar · track IBM</h3>
+        <p data-i18n="c4_p">Con SUSVI, una plataforma de análisis geoespacial construida en equipo, obtuvimos el 2.º lugar del track IBM.</p>
+      </article>
     </div>
-  </div>
+  </section>
+
+  <!-- PLATAFORMA DE ESTUDIO -->
+  <section class="reveal">
+    <div class="sect-title" style="--c:var(--data)"><span class="dot"></span><span data-i18n="st2">Aprende con mis herramientas</span></div>
+    <div class="study">
+      <div>
+        <span class="role"><span class="dot"></span><span data-i18n="in_use">En uso diario · abierto</span></span>
+        <h3 data-i18n="s_h">Plataforma de Estudio</h3>
+        <p data-i18n="s_p">Un sitio abierto para estudiar algoritmos y estructuras de datos con animaciones y pruebas de escritorio que siguen el código línea por línea. Lo construí para mí y lo comparto con la comunidad.</p>
+      </div>
+      <a class="btn primary" href="https://estudio.irvingsoriano.com" target="_blank" rel="noopener"><span data-i18n="s_cta">Abrir estudio</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </section>
+
+  <!-- CREACIÓN DE CONTENIDO -->
+  <section class="reveal">
+    <div class="sect-title" style="--c:var(--ai)"><span class="dot"></span><span data-i18n="st3">Creación de contenido</span></div>
+    <div class="soon">
+      <span class="tag" data-i18n="tag">Próximamente · 2027</span>
+      <h3 data-i18n="sh">Cursos y contenido en video</h3>
+      <p data-i18n="sp">Preparo cursos de programación y contenido en video sobre nube, datos e IA: enseñar lo que aprendo, con el mismo formato de "caminos" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.</p>
+      <div class="feats">
+        <span data-i18n="f1">Rutas de aprendizaje</span><span data-i18n="f2">Videos en YouTube</span><span data-i18n="f3">Laboratorios y quizzes</span><span data-i18n="f4">Práctica con mis herramientas</span>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script src="js/fondo.js"></script>
 <script>
 window.PAGINA = "cursos";
 window.I18N = {
-  es:{eye:"Cursos · próximamente",h:"Enseñar lo que aprendo",tag:"Próximamente · 2027",sh:"Cursos y contenido en tecnología",
-    sp:"Estoy preparando una sección donde impartiré cursos de programación y publicaré contenido en video sobre nube, datos e IA. La idea: enseñar lo que aprendo, con el mismo formato de \"caminos\" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.",
+  es:{eye:"Comunidad",h:"Construir y enseñar en comunidad",p:"Lo que hago con la comunidad tech: diseño, divulgación y herramientas abiertas para que otros aprendan.",
+    st1:"Formación en comunidad",st2:"Aprende con mis herramientas",st3:"Creación de contenido",
+    c1_h:"Sub Líder de Marketing y diseño",c1_p:"En el AWS Student Builder Group del IPN dirijo identidad, marketing y UX/UI, y creo series de contenido educativo para acercar la nube a más estudiantes.",
+    c2_h:"Identidad y UX/UI del evento",c2_p:"Lideré la identidad visual y la experiencia del AWS Student Community Day CDMX 2026, el mayor encuentro estudiantil de nube de la comunidad.",
+    c3_h:"Speaker",c3_p:"Compartí en el AWS Summit 2026 cómo la base en psicología y neurociencia se conecta con el diseño de datos y producto.",
+    c4_h:"2.º lugar · track IBM",c4_p:"Con SUSVI, una plataforma de análisis geoespacial construida en equipo, obtuvimos el 2.º lugar del track IBM.",
+    in_use:"En uso diario · abierto",s_h:"Plataforma de Estudio",s_cta:"Abrir estudio",
+    s_p:"Un sitio abierto para estudiar algoritmos y estructuras de datos con animaciones y pruebas de escritorio que siguen el código línea por línea. Lo construí para mí y lo comparto con la comunidad.",
+    tag:"Próximamente · 2027",sh:"Cursos y contenido en video",
+    sp:"Preparo cursos de programación y contenido en video sobre nube, datos e IA: enseñar lo que aprendo, con el mismo formato de \"caminos\" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.",
     f1:"Rutas de aprendizaje",f2:"Videos en YouTube",f3:"Laboratorios y quizzes",f4:"Práctica con mis herramientas"},
-  en:{eye:"Courses · coming soon",h:"Teach what I learn",tag:"Coming soon · 2027",sh:"Courses and tech content",
-    sp:"I'm preparing a section where I'll teach programming courses and publish video content on cloud, data and AI. The idea: teach what I learn, with the same \"roads\" format and guided practice from my tools. Videos will live on YouTube and the paths, here.",
+  en:{eye:"Community",h:"Building and teaching with the community",p:"What I do with the tech community: design, outreach and open tools so others can learn.",
+    st1:"Community work",st2:"Learn with my tools",st3:"Content creation",
+    c1_h:"Marketing Sub-Lead & design",c1_p:"At the AWS Student Builder Group (IPN) I lead identity, marketing and UX/UI, and create educational content series to bring the cloud closer to more students.",
+    c2_h:"Event identity and UX/UI",c2_p:"I led the visual identity and experience of the AWS Student Community Day CDMX 2026, the community's largest student cloud gathering.",
+    c3_h:"Speaker",c3_p:"At the AWS Summit 2026 I shared how a background in psychology and neuroscience connects with data and product design.",
+    c4_h:"2nd place · IBM track",c4_p:"With SUSVI, a team-built geospatial analysis platform, we took 2nd place in the IBM track.",
+    in_use:"Daily use · open",s_h:"Study Platform",s_cta:"Open study",
+    s_p:"An open site to study algorithms and data structures with animations and desktop traces that follow code line by line. I built it for myself and I share it with the community.",
+    tag:"Coming soon · 2027",sh:"Courses and video content",
+    sp:"I'm preparing programming courses and video content on cloud, data and AI: teaching what I learn, with the same \"roads\" format and guided practice from my tools. Videos will live on YouTube and the paths, here.",
     f1:"Learning paths",f2:"YouTube videos",f3:"Labs and quizzes",f4:"Practice with my tools"}
 };
 </script>

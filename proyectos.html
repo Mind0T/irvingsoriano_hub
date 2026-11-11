@@ -4,13 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proyectos · Irvin Soriano</title>
-<meta name="description" content="Proyectos de Irvin Soriano en ciencia de datos, UX/UI, web y fotografía.">
+<meta name="description" content="Proyectos de Irvin Soriano en ciencia de datos, UX/UI, web y fotografía. Un campo de burbujas agrupadas por temática.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
+<style>
+.pb-wrap{display:grid; grid-template-columns:1fr 340px; gap:22px; align-items:start}
+
+/* campo de burbujas agrupadas por temática */
+.field{display:flex; flex-wrap:wrap; gap:14px; align-content:flex-start}
+.cluster{flex:1 1 230px; min-width:0; border:1px solid var(--border-default); border-radius:var(--radius-xl);
+  background:linear-gradient(160deg, rgba(20,20,20,.55), rgba(12,12,12,.35)); padding:16px 14px 20px;
+  position:relative; overflow:hidden}
+.cluster::before{content:""; position:absolute; inset:0 0 auto 0; height:3px; background:var(--c); opacity:.8}
+.cluster-h{display:flex; align-items:center; gap:8px; margin:2px 4px 14px; font:800 11px var(--font-display);
+  letter-spacing:.12em; text-transform:uppercase; color:var(--c)}
+.cluster-h .dot{width:8px; height:8px; border-radius:50%; background:var(--c); box-shadow:0 0 10px var(--c)}
+.bubbles{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding:4px 0 2px}
+
+.bubble{position:relative; display:flex; align-items:center; justify-content:center; text-align:center;
+  width:var(--sz,104px); height:var(--sz,104px); border-radius:50%; padding:10px;
+  border:1px solid color-mix(in oklab, var(--c) 55%, var(--border-strong));
+  background:radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--c) 30%, #141414), #101010 80%);
+  color:var(--text-primary); font:800 12px/1.15 var(--font-display); letter-spacing:-.01em;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;
+  animation:float var(--dur,7s) ease-in-out var(--del,0s) infinite; will-change:transform}
+.bubble:hover,.bubble:focus-visible,.bubble[aria-pressed="true"]{
+  transform:scale(1.12); border-color:var(--c); box-shadow:0 0 0 4px color-mix(in oklab, var(--c) 18%, transparent), var(--shadow-card); outline:none}
+.bubble[aria-pressed="true"]{animation-play-state:paused}
+.field.dim .bubble:not(.match){opacity:.26; filter:saturate(.5)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(-1 * var(--amp,8px)))}}
+
+/* panel de detalle */
+.detail{position:sticky; top:16px; border:1px solid var(--border-default); border-radius:var(--radius-xl);
+  background:var(--bg-surface); box-shadow:var(--shadow-card); padding:24px; min-height:300px; overflow:hidden}
+.detail::before{content:""; position:absolute; inset:0 0 auto 0; height:4px; background:var(--c,var(--border-strong)); transition:background .4s ease}
+.detail .d-hint{color:var(--text-muted); font-size:14px}
+.detail .d-hint svg{width:34px; height:34px; stroke:var(--text-muted); fill:none; stroke-width:1.6; margin-bottom:12px}
+.d-in{opacity:0; transform:translateY(10px); animation:din .45s ease-out forwards}
+@keyframes din{to{opacity:1; transform:none}}
+.detail .d-area{display:inline-flex; align-items:center; gap:8px; font:800 11px var(--font-display); letter-spacing:.1em; text-transform:uppercase; color:var(--c)}
+.detail .d-area .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.detail .d-flag{margin-left:8px; font:700 9.5px var(--font-display); letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); border:1px solid var(--border-strong); padding:3px 8px; border-radius:99px}
+.detail h3{font-size:22px; font-weight:900; color:#fff; margin:12px 0 10px}
+.detail p{font-size:14px; color:var(--text-secondary); margin:0 0 18px}
+.detail .d-foot{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.detail .d-lang{margin-left:auto; font:600 11.5px var(--font-display); color:var(--text-muted); display:inline-flex; align-items:center; gap:6px}
+
+@media (max-width:860px){
+  .pb-wrap{grid-template-columns:1fr}
+  .detail{position:static; order:-1; min-height:0}
+}
+@media (prefers-reduced-motion:reduce){ .bubble{animation:none} }
+</style>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -18,52 +67,86 @@
   <div class="pagehead reveal" style="--acc:var(--ux)">
     <p class="eyebrow" data-i18n="eye">Proyectos</p>
     <h2 data-i18n="h">Trabajo en tecnología y diseño</h2>
-    <p class="lead" data-i18n="p">Una selección de mis repositorios en GitHub. Se actualiza solo conforme avanzo.</p>
+    <p class="lead" data-i18n="p">Un campo de burbujas agrupadas por temática. Pasa el cursor o toca una para ver el proyecto.</p>
   </div>
-  <div class="filters reveal" id="filters" role="group" aria-label="Filtrar"></div>
-  <div class="cards" id="grid"></div>
-  <p id="empty" class="lead" hidden style="color:var(--text-muted)"></p>
+  <div class="pb-wrap reveal">
+    <div class="field" id="field"></div>
+    <aside class="detail" id="detail" style="--c:var(--text-muted)" aria-live="polite"></aside>
+  </div>
 </main>
 
 <script src="js/fondo.js"></script>
 <script>
 window.PAGINA = "proyectos";
 window.I18N = {
-  es:{eye:"Proyectos",h:"Trabajo en tecnología y diseño",p:"Una selección de mis repositorios en GitHub. Se actualiza solo conforme avanzo.",code:"Código",live:"Ver",wip:"En construcción",empty:"Nada por aquí todavía."},
-  en:{eye:"Projects",h:"Work in tech and design",p:"A selection of my GitHub repositories. It refreshes itself as I go.",code:"Code",live:"Live",wip:"Work in progress",empty:"Nothing here yet."}
+  es:{eye:"Proyectos",h:"Trabajo en tecnología y diseño",p:"Un campo de burbujas agrupadas por temática. Pasa el cursor o toca una para ver el proyecto.",
+    code:"Código",live:"Ver",wip:"En construcción",hint:"Pasa el cursor o toca una burbuja para descubrir cada proyecto."},
+  en:{eye:"Projects",h:"Work in tech and design",p:"A field of bubbles grouped by theme. Hover or tap one to see the project.",
+    code:"Code",live:"Live",wip:"Work in progress",hint:"Hover or tap a bubble to discover each project."}
 };
-var AREAS={all:{es:"Todos",en:"All",c:"var(--text-primary)"},tool:{es:"Herramientas",en:"Tools",c:"var(--tool)"},data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},web:{es:"Web",en:"Web",c:"var(--web)"},foto:{es:"Fotografía",en:"Photography",c:"var(--foto)"}};
-var GH="https://github.com/Mind0T/", DATA=[], filt="all", curLang="es";
+var AREAS={tool:{es:"Herramientas",en:"Tools",c:"var(--tool)"},data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},web:{es:"Web",en:"Web",c:"var(--web)"},foto:{es:"Fotografía",en:"Photography",c:"var(--foto)"}};
+var ORDER=["tool","data","ux","web","foto"];
+var GH="https://github.com/Mind0T/", DATA=[], curLang="es";
 function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 var GHSVG='<svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>';
 var EXT='<svg viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>';
-function drawFilters(){
-  document.getElementById("filters").innerHTML = Object.keys(AREAS).map(function(k){
-    return '<button data-f="'+k+'" aria-pressed="'+(filt===k)+'">'+AREAS[k][curLang]+'</button>';
-  }).join("");
+
+/* etiqueta corta para la burbuja */
+function shortName(n){ return n.replace(/\s*·.*$/,"").trim(); }
+
+function bubbleHTML(p,i){
+  var a=AREAS[p.area]||AREAS.tool;
+  var sz = p.destacado ? 128 : 100;
+  var dur = (6 + (i%4)).toFixed(1);
+  var del = (-(i%5)*0.7).toFixed(1);
+  var amp = (6 + (i%3)*3);
+  return '<button class="bubble" data-id="'+escp(p.id)+'" data-area="'+p.area+'" style="--c:'+a.c+'; --sz:'+sz+'px; --dur:'+dur+'s; --del:'+del+'s; --amp:'+amp+'px" '+
+    'aria-pressed="false"><span>'+escp(shortName(p.nombre))+'</span></button>';
 }
-function drawGrid(){
-  var list = DATA.filter(function(p){return filt==="all"||p.area===filt;});
-  var g=document.getElementById("grid"), e=document.getElementById("empty");
-  g.innerHTML = list.map(function(p){
-    var a=AREAS[p.area]||AREAS.tool;
-    return '<article class="card" style="--c:'+a.c+'"><div class="card-top"><span class="dot"></span><span class="card-area">'+escp(a[curLang])+'</span>'+
-      (p.estado==="wip"?'<span class="card-flag">'+escp(window.T("wip"))+'</span>':'')+'</div>'+
-      '<h3>'+escp(p.nombre)+'</h3><p>'+escp(p[curLang]||p.es)+'</p><div class="card-foot">'+
-      '<a href="'+GH+escp(p.repo)+'" target="_blank" rel="noopener">'+GHSVG+window.T("code")+'</a>'+
-      (p.live?'<a href="'+escp(p.live)+'" target="_blank" rel="noopener">'+EXT+window.T("live")+'</a>':'')+
-      '<span class="card-lang"><span style="width:8px;height:8px;border-radius:50%;display:inline-block;background:'+a.c+'"></span>'+escp(p.lang)+'</span></div></article>';
+function paintField(){
+  var field=document.getElementById("field");
+  field.innerHTML = ORDER.filter(function(ar){ return DATA.some(function(p){return p.area===ar;}); }).map(function(ar){
+    var a=AREAS[ar], list=DATA.filter(function(p){return p.area===ar;});
+    var k=0;
+    return '<section class="cluster" style="--c:'+a.c+'"><div class="cluster-h"><span class="dot"></span>'+escp(a[curLang])+'</div>'+
+      '<div class="bubbles">'+list.map(function(p){ return bubbleHTML(p,k++); }).join("")+'</div></section>';
   }).join("");
-  e.hidden = list.length>0; e.textContent = window.T("empty");
+  showHint();
 }
+function showHint(){
+  var d=document.getElementById("detail");
+  d.style.setProperty("--c","var(--text-muted)");
+  d.innerHTML='<div class="d-hint"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg><br>'+escp(window.T("hint"))+'</div>';
+}
+function setDetail(p){
+  var a=AREAS[p.area]||AREAS.tool, d=document.getElementById("detail");
+  d.style.setProperty("--c",a.c);
+  d.innerHTML='<div class="d-in"><span class="d-area"><span class="dot"></span>'+escp(a[curLang])+
+    (p.estado==="wip"?'<span class="d-flag">'+escp(window.T("wip"))+'</span>':'')+'</span>'+
+    '<h3>'+escp(p.nombre)+'</h3><p>'+escp(p[curLang]||p.es)+'</p>'+
+    '<div class="d-foot"><a class="chip" href="'+GH+escp(p.repo)+'" target="_blank" rel="noopener">'+GHSVG+window.T("code")+'</a>'+
+    (p.live?'<a class="chip solid" style="--c:'+a.c+'" href="'+escp(p.live)+'" target="_blank" rel="noopener">'+EXT+window.T("live")+'</a>':'')+
+    '<span class="d-lang"><span style="width:8px;height:8px;border-radius:50%;display:inline-block;background:'+a.c+'"></span>'+escp(p.lang)+'</span></div></div>';
+}
+function byId(id){ return DATA.filter(function(p){return p.id===id;})[0]; }
+
 window.render = function(lang){
   curLang=lang;
   fetch("data/proyectos.json").then(function(r){return r.json();}).then(function(j){
-    DATA=(j.proyectos||[]); drawFilters(); drawGrid();
-  }).catch(function(){ drawFilters(); drawGrid(); });
-  document.getElementById("filters").addEventListener("click",function(e){
-    var b=e.target.closest("[data-f]"); if(!b) return; filt=b.dataset.f; drawFilters(); drawGrid();
-  });
+    // excluye la plataforma de estudio (tiene su propio espacio)
+    DATA=(j.proyectos||[]).filter(function(p){ return p.id!=="estudio"; });
+    paintField();
+  }).catch(function(){ paintField(); });
+
+  var field=document.getElementById("field");
+  function activate(b){
+    var p=byId(b.dataset.id); if(!p) return;
+    field.querySelectorAll(".bubble").forEach(function(x){ x.setAttribute("aria-pressed", x===b); });
+    setDetail(p);
+  }
+  field.addEventListener("mouseover", function(e){ var b=e.target.closest(".bubble"); if(b) setDetail(byId(b.dataset.id)); });
+  field.addEventListener("focusin", function(e){ var b=e.target.closest(".bubble"); if(b) activate(b); });
+  field.addEventListener("click", function(e){ var b=e.target.closest(".bubble"); if(b) activate(b); });
 };
 </script>
 <script src="js/sitio.js"></script>

@@ -4,10 +4,8 @@
   var NAV = [
     { k: "inicio", href: "index.html", es: "Inicio", en: "Home" },
     { k: "proyectos", href: "proyectos.html", es: "Proyectos", en: "Projects" },
-    { k: "perfil", href: "perfil.html", es: "Perfil", en: "About" },
-    { k: "formacion", href: "formacion.html", es: "Formación", en: "Education" },
-    { k: "herramientas", href: "herramientas.html", es: "Herramientas", en: "Tools" },
-    { k: "cursos", href: "cursos.html", es: "Cursos", en: "Courses" }
+    { k: "perfil", href: "perfil.html", es: "Acerca de mí", en: "About me" },
+    { k: "cursos", href: "cursos.html", es: "Comunidad", en: "Community" }
   ];
   var CHROME = {
     es: { foot: "Hecho con la estética de mi tablero · fake it till you make it", menu: "Menú" },

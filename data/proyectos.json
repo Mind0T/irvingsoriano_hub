@@ -15,13 +15,13 @@
     },
     {
       "id": "linea-tiempo", "nombre": "Línea de tiempo · Computación", "area": "ux", "lang": "JavaScript",
-      "repo": "linea_tiempo_computacion-1am1", "live": "", "fecha": "2026-09-14", "destacado": true, "estado": "",
+      "repo": "linea_tiempo_computacion-1am1", "live": "https://linea-tiempo-computacion-1am1.vercel.app/", "fecha": "2026-09-14", "destacado": true, "estado": "",
       "es": "Línea de tiempo interactiva de la evolución de la computación: un camino con hitos por generación, hardware, arquitectura y programación. La raíz visual de los caminos del tablero.",
       "en": "Interactive timeline of computing's evolution: a path with milestones by generation, hardware, architecture and programming. The visual root of the board's roads."
     },
     {
       "id": "creativity-board-scd", "nombre": "Creativity Board · SCD + SBG", "area": "tool", "lang": "JavaScript",
-      "repo": "creativity-board-scd", "live": "", "fecha": "2026-11-09", "destacado": false, "estado": "",
+      "repo": "creativity-board-scd", "live": "https://creativity-sbg-ipn.vercel.app/", "fecha": "2026-11-09", "destacado": false, "estado": "",
       "es": "Kanban que sirve dos tableros (AWS Student Community Day CDMX y SBG IPN) con branding distinto cada uno. Google Sheets + Apps Script + Vercel. Base del tablero que hoy uso.",
       "en": "A kanban serving two boards (AWS Student Community Day CDMX and SBG IPN), each with its own branding. Google Sheets + Apps Script + Vercel. The base of the board I use today."
     },
@@ -45,27 +45,27 @@
     },
     {
       "id": "misspalomitas", "nombre": "MissPalomitas", "area": "web", "lang": "JavaScript",
-      "repo": "MissPalomitas", "live": "", "fecha": "2025-12-08", "destacado": false, "estado": "",
+      "repo": "MissPalomitas", "live": "https://www.misspalomitas.com/", "fecha": "2025-12-08", "destacado": false, "estado": "",
       "es": "Sitio web de mi negocio de palomitas gourmet: catálogo de sabores salados, dulces y picositos, y vitrina de la marca.",
       "en": "Website for my gourmet popcorn business: a catalog of savory, sweet and spicy flavors and the brand's storefront."
     },
     {
       "id": "eivind-street", "nombre": "Eivind Street", "area": "foto", "lang": "JavaScript",
-      "repo": "eivindstreet", "live": "", "fecha": "2025-12-10", "destacado": false, "estado": "",
+      "repo": "eivindstreet", "live": "https://www.eivindstreet.com/", "fecha": "2025-12-10", "destacado": false, "estado": "",
       "es": "Portafolio de fotografía documental y urbana de CDMX (Iztapalapa, Jamaica, Metro) y videografía, bajo mi seudónimo Eivind. Vanilla JS con foco en rendimiento y SEO.",
       "en": "A portfolio of documentary and urban photography from Mexico City (Iztapalapa, Jamaica, the Metro) and videography, under my pseudonym Eivind. Vanilla JS focused on performance and SEO."
     },
     {
       "id": "eivind-leso", "nombre": "Eivind Leso", "area": "foto", "lang": "JavaScript",
-      "repo": "EivindLeso", "live": "", "fecha": "2025-12-10", "destacado": false, "estado": "",
+      "repo": "EivindLeso", "live": "https://www.eivindleso.com/", "fecha": "2025-12-10", "destacado": false, "estado": "",
       "es": "Portafolio de fotografía comercial, editorial, de producto y retrato. Vanilla JS con lazy loading, imágenes responsivas y optimización de carga (WPO).",
       "en": "A commercial, editorial, product and portrait photography portfolio. Vanilla JS with lazy loading, responsive images and load optimization (WPO)."
     },
     {
       "id": "awsscd-ui", "nombre": "AWS SCD · Página UI/UX", "area": "ux", "lang": "HTML",
-      "repo": "awsscd_page_UI_UX", "live": "", "fecha": "2026-06-19", "destacado": false, "estado": "wip",
-      "es": "Interfaz y experiencia de la web oficial del AWS Student Community Day CDMX 2026. En construcción.",
-      "en": "UI/UX for the official AWS Student Community Day CDMX 2026 website. Work in progress."
+      "repo": "awsscd_page_UI_UX", "live": "https://studentcommunitydaymexico.com", "fecha": "2026-06-19", "destacado": false, "estado": "",
+      "es": "Interfaz y experiencia de la web oficial del AWS Student Community Day CDMX 2026: identidad, UX/UI y maquetado del evento.",
+      "en": "UI and experience for the official AWS Student Community Day CDMX 2026 website: identity, UX/UI and layout for the event."
     }
   ]
 }

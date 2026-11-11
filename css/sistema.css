@@ -47,10 +47,9 @@ header.top{
   background:transparent; border:0; border-bottom:1px solid var(--border-default); border-radius:0;
   box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; padding:11px 4px;
 }
-.brand{display:flex; align-items:center; gap:13px; min-width:0; text-decoration:none; flex:0 0 auto}
-.logo{width:34px; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.08))}
-.wordmark{font:200 15px/1 var(--font-display); letter-spacing:.34em; text-transform:uppercase; color:var(--text-primary); white-space:nowrap}
-.nav{flex:1 1 auto; display:flex; justify-content:center; min-width:0}
+.brand{display:flex; align-items:center; min-width:0; text-decoration:none; flex:1 1 0}
+.logo-full{height:30px; width:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.08))}
+.nav{flex:0 0 auto; display:flex; justify-content:center; min-width:0}
 .seg2{display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(14px,2.2vw,34px); padding:0; background:none; border:0; border-radius:0}
 .seg2 a{
   height:auto; padding:6px 2px; border-radius:0; display:inline-flex; align-items:center;
@@ -58,7 +57,7 @@ header.top{
 }
 .seg2 a:hover{color:var(--text-primary)}
 .seg2 a[aria-current="page"]{background:none; box-shadow:none; color:#fff; font-weight:700}
-.head-right{display:flex; align-items:center; gap:10px; flex:0 0 auto}
+.head-right{display:flex; align-items:center; gap:10px; flex:1 1 0; justify-content:flex-end}
 .lang{display:inline-flex; border:1px solid var(--border-strong); border-radius:99px; overflow:hidden}
 .lang button{padding:6px 11px; font:700 12px/1 var(--font-display); color:var(--text-muted)}
 .lang button[aria-pressed="true"]{background:var(--silver); color:#0A0A0A}

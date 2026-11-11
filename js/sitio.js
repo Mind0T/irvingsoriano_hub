@@ -25,9 +25,8 @@
     var header = document.createElement("header");
     header.className = "top wrap";
     header.innerHTML =
-      '<a class="brand" href="index.html" aria-label="Inicio">' +
-        '<img class="logo" src="assets/logo.png" alt="">' +
-        '<span class="wordmark">IRVING SORIANO</span>' +
+      '<a class="brand" href="index.html" aria-label="Irving Soriano · Inicio">' +
+        '<img class="logo-full" src="assets/logo-wordmark.png" alt="Irving Soriano">' +
       '</a>' +
       '<nav class="nav"><div class="seg2" id="segnav">' + navHTML() + '</div></nav>' +
       '<div class="head-right">' +

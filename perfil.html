@@ -90,35 +90,16 @@
     </figure>
   </div>
 
-  <!-- EXPERIENCIA Y COMUNIDAD -->
+  <!-- EXPERIENCIA · FORMACIÓN · CERTIFICACIONES (acordeones) -->
   <section class="reveal" style="margin-top:8px">
-    <div class="exp-title" style="--c:var(--ai)"><span class="dot"></span><span data-i18n="exp_t">Experiencia y comunidad</span></div>
-    <div class="comm">
-      <article class="ccard" style="--c:var(--ai)">
-        <span class="role"><span class="dot"></span>AWS SBG · IPN</span>
-        <h3 data-i18n="e1_h">Líder de Marketing y Diseño</h3>
-        <p data-i18n="e1_p">En el AWS Student Builder Group del IPN dirijo identidad, marketing y UX/UI, y creo series de contenido educativo para acercar la nube a más estudiantes.</p>
-      </article>
-      <article class="ccard" style="--c:var(--data)">
-        <span class="role"><span class="dot"></span>Student Community Day · CDMX 2026</span>
-        <h3 data-i18n="e2_h">Identidad y UX/UI del evento</h3>
-        <p data-i18n="e2_p">Lideré la identidad visual y la experiencia del AWS Student Community Day CDMX 2026, el mayor encuentro estudiantil de nube de la comunidad.</p>
-      </article>
-      <article class="ccard" style="--c:var(--ux)">
-        <span class="role"><span class="dot"></span>AWS Summit 2026</span>
-        <h3 data-i18n="e3_h">Speaker</h3>
-        <p data-i18n="e3_p">Compartí en el AWS Summit 2026 cómo la base en psicología y neurociencia se conecta con el diseño de datos y producto.</p>
-      </article>
-      <article class="ccard" style="--c:var(--web)">
-        <span class="role"><span class="dot"></span>Hackathon Talent Land</span>
-        <h3 data-i18n="e4_h">2.º lugar · track IBM</h3>
-        <p data-i18n="e4_p">Con SUSVI, una plataforma de análisis geoespacial construida en equipo, obtuvimos el 2.º lugar del track IBM.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- FORMACIÓN (acordeón) -->
-  <section class="reveal" style="margin-top:14px">
+    <details class="disc" style="--c:var(--ai)" open>
+      <summary>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h18v13H3zM8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span>
+        <span><h3 data-i18n="exp_h">Experiencia</h3><div class="sub" data-i18n="exp_s">Roles y eventos en la comunidad tech</div></span>
+        <svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <div class="disc-body"><div class="road" id="expRoad"></div></div>
+    </details>
     <details class="disc" style="--c:var(--data)">
       <summary>
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/></svg></span>
@@ -149,11 +130,7 @@ window.I18N = {
     d1_h:"Formación académica",d1_s:"De soldadura y sistemas a psicología, fotografía y ciencia de datos",
     d2_h:"Certificaciones",d2_s:"Nube y datos · verificables en Credly",
     credly:"Verifica mis insignias en Credly",done:"Obtenida",prog:"En curso",
-    exp_t:"Experiencia y comunidad",
-    e1_h:"Líder de Marketing y Diseño",e1_p:"En el AWS Student Builder Group del IPN dirijo identidad, marketing y UX/UI, y creo series de contenido educativo para acercar la nube a más estudiantes.",
-    e2_h:"Identidad y UX/UI del evento",e2_p:"Lideré la identidad visual y la experiencia del AWS Student Community Day CDMX 2026, el mayor encuentro estudiantil de nube de la comunidad.",
-    e3_h:"Speaker",e3_p:"Compartí en el AWS Summit 2026 cómo la base en psicología y neurociencia se conecta con el diseño de datos y producto.",
-    e4_h:"2.º lugar · track IBM",e4_p:"Con SUSVI, una plataforma de análisis geoespacial construida en equipo, obtuvimos el 2.º lugar del track IBM.",
+    exp_h:"Experiencia",exp_s:"Roles y eventos en la comunidad tech",
     p1:"Empecé estudiando <span class='hl'>psicología</span> en la UNAM, me formé en <span class='hl'>fotografía</span>, y hoy curso <span class='hl'>Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.",
     p2:"Soy <span class='hl'>Líder de Marketing y diseñador</span> del AWS Student Builder Group del IPN, y lideré la identidad y el UX/UI del AWS Student Community Day CDMX 2026. Fui speaker en el AWS Summit 2026 y gané el 2.º lugar del track IBM en el Hackathon Talent Land con SUSVI, una plataforma de análisis geoespacial. Me muevo entre el diseño UX/UI, el análisis de datos y la nube, y ahora voy hacia el <span class='hl'>AI Engineering</span>.",
     p3:"Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class='hl'>las uso todos los días</span>. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas."},
@@ -161,15 +138,28 @@ window.I18N = {
     d1_h:"Academic background",d1_s:"From welding and systems to psychology, photography and data science",
     d2_h:"Certifications",d2_s:"Cloud and data · verifiable on Credly",
     credly:"Verify my badges on Credly",done:"Earned",prog:"In progress",
-    exp_t:"Experience & community",
-    e1_h:"Marketing & Design Lead",e1_p:"At the AWS Student Builder Group (IPN) I lead identity, marketing and UX/UI, and create educational content series to bring the cloud closer to more students.",
-    e2_h:"Event identity and UX/UI",e2_p:"I led the visual identity and experience of the AWS Student Community Day CDMX 2026, the community's largest student cloud gathering.",
-    e3_h:"Speaker",e3_p:"At the AWS Summit 2026 I shared how a background in psychology and neuroscience connects with data and product design.",
-    e4_h:"2nd place · IBM track",e4_p:"With SUSVI, a team-built geospatial analysis platform, we took 2nd place in the IBM track.",
+    exp_h:"Experience",exp_s:"Roles and events in the tech community",
     p1:"I started out studying <span class='hl'>psychology</span> at UNAM, trained in <span class='hl'>photography</span>, and today I study <span class='hl'>Data Science</span> at ESCOM, IPN. That path wasn't a detour: understanding how people think and decide is exactly what helps me design data, interfaces and products that actually work.",
     p2:"I'm <span class='hl'>Marketing Lead and designer</span> of the AWS Student Builder Group at IPN, and I led the identity and UX/UI of the AWS Student Community Day CDMX 2026. I spoke at the AWS Summit 2026 and won 2nd place in the IBM track at Hackathon Talent Land with SUSVI, a geospatial analysis platform. I move between UX/UI design, data analysis and the cloud, and I'm now heading toward <span class='hl'>AI Engineering</span>.",
     p3:"What defines me most: I don't just build tools to study and stay organized — <span class='hl'>I use them every day</span>. This site is both my portfolio and the place where those tools live."}
 };
+var EXP=[
+  {yr:"Feb 2025 – actualidad",c:"var(--ai)",
+    es:{r:"Líder de Marketing y Diseño",o:"AWS Student Builder Group · IPN",n:"Identidad y branding de la comunidad, materiales para redes, producción audiovisual y una línea gráfica que impulsa el engagement."},
+    en:{r:"Marketing & Design Lead",o:"AWS Student Builder Group · IPN",n:"Community identity and branding, social media materials, audiovisual production and a graphic line that drives engagement."}},
+  {yr:"2026",c:"var(--data)",
+    es:{r:"Líder de Creativity y Diseño Visual",o:"AWS Student Community Day CDMX",n:"Identidad visual del evento (mascota «Fetch»), merchandising, displays y UX/UI de la web oficial."},
+    en:{r:"Creativity & Visual Design Lead",o:"AWS Student Community Day CDMX",n:"Event visual identity (mascot “Fetch”), merchandising, displays and UX/UI of the official website."}},
+  {yr:"2026",c:"var(--ux)",
+    es:{r:"Speaker",o:"AWS Summit 2026",n:"Plática «Todos necesitamos un tío Iroh»: el valor del mentoring en el desarrollo profesional."},
+    en:{r:"Speaker",o:"AWS Summit 2026",n:"Talk “We all need an uncle Iroh”: the value of mentoring in professional growth."}},
+  {yr:"2026",c:"var(--web)",
+    es:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · Track IBM",n:"2.º lugar en «Ciudades Inteligentes y Sostenibles» con SUSVI (análisis geoespacial); pitch, Design Thinking e IA generativa (IBM watsonx)."},
+    en:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · IBM Track",n:"2nd place in “Smart & Sustainable Cities” with SUSVI (geospatial analysis); pitch, Design Thinking and generative AI (IBM watsonx)."}},
+  {yr:"Nov 2023 – Jul 2024",c:"var(--foto)",
+    es:{r:"Líder de Creativity",o:"Club de Ciencia de Datos · ESCOM",n:"Identidad del club, evento «Data for Everyone 2024», campañas en redes y producción multimedia."},
+    en:{r:"Creativity Lead",o:"Data Science Club · ESCOM",n:"Club identity, “Data for Everyone 2024” event, social campaigns and multimedia production."}}
+];
 var EDU=[
   {yr:"2007–2010",c:"var(--text-muted)",es:"Técnico en Sistemas Computacionales",en:"Computer Systems Technician",w:"Centro de Computación Profesional de México"},
   {yr:"2007–2010",c:"var(--text-muted)",es:"Técnico en Soldadura Industrial",en:"Industrial Welding Technician",w:"CECyT · IPN"},
@@ -185,6 +175,10 @@ var CERTS=[
 ];
 function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 window.render = function(lang){
+  document.getElementById("expRoad").innerHTML = EXP.map(function(e){
+    var t = lang==="es"?e.es:e.en;
+    return '<div class="road-node" style="--c:'+e.c+'"><div class="yr">'+escp(e.yr)+'</div><h3>'+escp(t.r)+'</h3><div class="where">'+escp(t.o)+'</div><div class="note">'+escp(t.n)+'</div></div>';
+  }).join("");
   document.getElementById("road").innerHTML = EDU.map(function(e){
     var note = lang==="es"?e.esn:e.enn;
     return '<div class="road-node" style="--c:'+e.c+'"><div class="yr">'+escp(e.yr)+'</div><h3>'+escp(lang==="es"?e.es:e.en)+'</h3><div class="where">'+escp(e.w)+'</div>'+(note?'<div class="note">'+escp(note)+'</div>':'')+'</div>';

@@ -27,7 +27,7 @@
     header.innerHTML =
       '<div class="brand">' +
         '<img class="logo" src="assets/logo.png" width="46" alt="">' +
-        '<div><p class="eyebrow">Irvin · ESCOM IPN</p><h1>Irvin Soriano</h1><p class="motto">fake it till you make it</p></div>' +
+        '<div><h1>Irving Soriano</h1></div>' +
       '</div>' +
       '<div></div>' +
       '<div class="head-right">' +

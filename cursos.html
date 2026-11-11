@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
 <style>
 .sect-title{display:flex; align-items:center; gap:10px; margin:10px 2px 16px; font:800 12px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:var(--c,var(--text-secondary))}
@@ -52,35 +52,8 @@
   <div class="pagehead reveal" style="--acc:var(--ux)">
     <p class="eyebrow" data-i18n="eye">Comunidad</p>
     <h2 data-i18n="h">Construir y enseñar en comunidad</h2>
-    <p class="lead" data-i18n="p">Lo que hago con la comunidad tech: diseño, divulgación y herramientas abiertas para que otros aprendan.</p>
+    <p class="lead" data-i18n="p">Herramientas abiertas y contenido para aprender conmigo: comparto lo que construyo con la comunidad tech.</p>
   </div>
-
-  <!-- FORMACIÓN EN COMUNIDAD -->
-  <section class="reveal">
-    <div class="sect-title" style="--c:var(--ai)"><span class="dot"></span><span data-i18n="st1">Formación en comunidad</span></div>
-    <div class="comm">
-      <article class="ccard" style="--c:var(--ai)">
-        <span class="role"><span class="dot"></span>AWS SBG · IPN</span>
-        <h3 data-i18n="c1_h">Sub Líder de Marketing y diseño</h3>
-        <p data-i18n="c1_p">En el AWS Student Builder Group del IPN dirijo identidad, marketing y UX/UI, y creo series de contenido educativo para acercar la nube a más estudiantes.</p>
-      </article>
-      <article class="ccard" style="--c:var(--data)">
-        <span class="role"><span class="dot"></span>Student Community Day · CDMX 2026</span>
-        <h3 data-i18n="c2_h">Identidad y UX/UI del evento</h3>
-        <p data-i18n="c2_p">Lideré la identidad visual y la experiencia del AWS Student Community Day CDMX 2026, el mayor encuentro estudiantil de nube de la comunidad.</p>
-      </article>
-      <article class="ccard" style="--c:var(--ux)">
-        <span class="role"><span class="dot"></span>AWS Summit 2026</span>
-        <h3 data-i18n="c3_h">Speaker</h3>
-        <p data-i18n="c3_p">Compartí en el AWS Summit 2026 cómo la base en psicología y neurociencia se conecta con el diseño de datos y producto.</p>
-      </article>
-      <article class="ccard" style="--c:var(--web)">
-        <span class="role"><span class="dot"></span>Hackathon Talent Land</span>
-        <h3 data-i18n="c4_h">2.º lugar · track IBM</h3>
-        <p data-i18n="c4_p">Con SUSVI, una plataforma de análisis geoespacial construida en equipo, obtuvimos el 2.º lugar del track IBM.</p>
-      </article>
-    </div>
-  </section>
 
   <!-- PLATAFORMA DE ESTUDIO -->
   <section class="reveal">
@@ -113,23 +86,15 @@
 <script>
 window.PAGINA = "cursos";
 window.I18N = {
-  es:{eye:"Comunidad",h:"Construir y enseñar en comunidad",p:"Lo que hago con la comunidad tech: diseño, divulgación y herramientas abiertas para que otros aprendan.",
-    st1:"Formación en comunidad",st2:"Aprende con mis herramientas",st3:"Creación de contenido",
-    c1_h:"Sub Líder de Marketing y diseño",c1_p:"En el AWS Student Builder Group del IPN dirijo identidad, marketing y UX/UI, y creo series de contenido educativo para acercar la nube a más estudiantes.",
-    c2_h:"Identidad y UX/UI del evento",c2_p:"Lideré la identidad visual y la experiencia del AWS Student Community Day CDMX 2026, el mayor encuentro estudiantil de nube de la comunidad.",
-    c3_h:"Speaker",c3_p:"Compartí en el AWS Summit 2026 cómo la base en psicología y neurociencia se conecta con el diseño de datos y producto.",
-    c4_h:"2.º lugar · track IBM",c4_p:"Con SUSVI, una plataforma de análisis geoespacial construida en equipo, obtuvimos el 2.º lugar del track IBM.",
+  es:{eye:"Comunidad",h:"Construir y enseñar en comunidad",p:"Herramientas abiertas y contenido para aprender conmigo: comparto lo que construyo con la comunidad tech.",
+    st2:"Aprende con mis herramientas",st3:"Creación de contenido",
     in_use:"En uso diario · abierto",s_h:"Plataforma de Estudio",s_cta:"Abrir estudio",
     s_p:"Un sitio abierto para estudiar algoritmos y estructuras de datos con animaciones y pruebas de escritorio que siguen el código línea por línea. Lo construí para mí y lo comparto con la comunidad.",
     tag:"Próximamente · 2027",sh:"Cursos y contenido en video",
     sp:"Preparo cursos de programación y contenido en video sobre nube, datos e IA: enseñar lo que aprendo, con el mismo formato de \"caminos\" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.",
     f1:"Rutas de aprendizaje",f2:"Videos en YouTube",f3:"Laboratorios y quizzes",f4:"Práctica con mis herramientas"},
-  en:{eye:"Community",h:"Building and teaching with the community",p:"What I do with the tech community: design, outreach and open tools so others can learn.",
-    st1:"Community work",st2:"Learn with my tools",st3:"Content creation",
-    c1_h:"Marketing Sub-Lead & design",c1_p:"At the AWS Student Builder Group (IPN) I lead identity, marketing and UX/UI, and create educational content series to bring the cloud closer to more students.",
-    c2_h:"Event identity and UX/UI",c2_p:"I led the visual identity and experience of the AWS Student Community Day CDMX 2026, the community's largest student cloud gathering.",
-    c3_h:"Speaker",c3_p:"At the AWS Summit 2026 I shared how a background in psychology and neuroscience connects with data and product design.",
-    c4_h:"2nd place · IBM track",c4_p:"With SUSVI, a team-built geospatial analysis platform, we took 2nd place in the IBM track.",
+  en:{eye:"Community",h:"Building and teaching with the community",p:"Open tools and content to learn with me: I share what I build with the tech community.",
+    st2:"Learn with my tools",st3:"Content creation",
     in_use:"Daily use · open",s_h:"Study Platform",s_cta:"Open study",
     s_p:"An open site to study algorithms and data structures with animations and desktop traces that follow code line by line. I built it for myself and I share it with the community.",
     tag:"Coming soon · 2027",sh:"Courses and video content",

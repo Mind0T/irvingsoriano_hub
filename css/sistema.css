@@ -51,14 +51,14 @@ header.top{
 }
 .brand{display:flex; align-items:center; gap:16px; min-width:0}
 .logo{width:46px; height:auto; display:block; filter:drop-shadow(0 0 14px rgba(255,255,255,.08))}
-.brand h1{font:800 clamp(22px,3.4vw,34px)/1 var(--font-display); color:var(--text-primary); letter-spacing:-.01em}
+.brand h1{font:300 clamp(22px,3.4vw,34px)/1 var(--font-display); color:var(--text-primary); letter-spacing:.01em}
 .brand .eyebrow{margin:0 0 7px}
 .brand .motto{margin:8px 0 0}
 .head-right{display:flex; align-items:center; gap:12px; justify-self:end}
 .lang{display:inline-flex; border:1px solid var(--border-strong); border-radius:99px; overflow:hidden}
 .lang button{padding:7px 12px; font:700 12px/1 var(--font-display); color:var(--text-muted)}
 .lang button[aria-pressed="true"]{background:var(--silver); color:#0A0A0A}
-.nav{grid-column:1/-1; display:flex}
+.nav{grid-column:1/-1; display:flex; justify-content:center}
 .seg2{display:flex; flex-wrap:wrap; gap:4px; padding:4px; background:var(--bg-input); border:1px solid var(--border-default); border-radius:var(--radius-md)}
 .seg2 a{
   height:38px; padding:0 18px; border-radius:var(--radius-sm); display:inline-flex; align-items:center; gap:8px;

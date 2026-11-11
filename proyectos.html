@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Proyectos · Irvin Soriano</title>
-<meta name="description" content="Proyectos de Irvin Soriano en ciencia de datos, UX/UI, web y fotografía. Un campo de burbujas agrupadas por temática.">
+<title>Proyectos · Irving Soriano</title>
+<meta name="description" content="Proyectos de Irving Soriano en ciencia de datos, UX/UI, web y fotografía.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -12,53 +12,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
 <style>
-.pb-wrap{display:grid; grid-template-columns:1fr 340px; gap:22px; align-items:start}
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
 
-/* campo de burbujas agrupadas por temática */
-.field{display:flex; flex-wrap:wrap; gap:14px; align-content:flex-start}
-.cluster{flex:1 1 230px; min-width:0; border:1px solid var(--border-default); border-radius:var(--radius-xl);
-  background:linear-gradient(160deg, rgba(20,20,20,.55), rgba(12,12,12,.35)); padding:16px 14px 20px;
-  position:relative; overflow:hidden}
-.cluster::before{content:""; position:absolute; inset:0 0 auto 0; height:3px; background:var(--c); opacity:.8}
-.cluster-h{display:flex; align-items:center; gap:8px; margin:2px 4px 14px; font:800 11px var(--font-display);
-  letter-spacing:.12em; text-transform:uppercase; color:var(--c)}
-.cluster-h .dot{width:8px; height:8px; border-radius:50%; background:var(--c); box-shadow:0 0 10px var(--c)}
-.bubbles{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding:4px 0 2px}
+.bento{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; grid-auto-flow:dense}
+.pcard{position:relative; display:flex; flex-direction:column; min-height:210px; padding:22px;
+  border:1px solid var(--border-default); border-radius:var(--radius-xl); overflow:hidden; text-decoration:none;
+  background:linear-gradient(165deg, color-mix(in oklab,var(--c) 10%, var(--bg-surface)), #0C0C0C 80%);
+  transform:perspective(900px); transform-style:preserve-3d; transition:transform .3s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .3s;
+  will-change:transform; animation:cardIn .5s ease-out both}
+@keyframes cardIn{from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none}}
+.pcard.feat{grid-column:span 2; grid-row:span 2}
+.pcard::before{content:""; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .3s;
+  background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), color-mix(in oklab,var(--c) 26%, transparent), transparent 62%)}
+.pcard::after{content:""; position:absolute; inset:0 0 auto 0; height:3px; z-index:1;
+  background:linear-gradient(90deg, var(--c), color-mix(in oklab,var(--c) 10%, transparent))}
+.pcard:hover{border-color:color-mix(in oklab,var(--c) 55%, var(--border-strong)); box-shadow:0 18px 50px rgba(0,0,0,.5), 0 0 0 1px color-mix(in oklab,var(--c) 22%, transparent)}
+.pcard:hover::before{opacity:1}
+.pcard>*{position:relative; z-index:2}
+.p-area{display:inline-flex; align-items:center; gap:8px; font:800 10.5px var(--font-display); letter-spacing:.12em; text-transform:uppercase; color:var(--c); margin-bottom:14px}
+.p-area .dot{width:8px; height:8px; border-radius:50%; background:var(--c); box-shadow:0 0 10px var(--c)}
+.p-flag{margin-left:8px; font:700 9px var(--font-display); letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); border:1px solid var(--border-strong); padding:3px 7px; border-radius:99px}
+.pcard h3{font-size:18px; font-weight:800; color:#fff; letter-spacing:-.01em; margin:0 0 9px; line-height:1.2}
+.pcard.feat h3{font-size:clamp(22px,2.6vw,30px); margin-bottom:12px}
+.pcard p{font-size:13.5px; color:var(--text-secondary); margin:0 0 18px; flex:1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+.pcard.feat p{font-size:15px; -webkit-line-clamp:6}
+.p-foot{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:auto}
+.p-foot a{display:inline-flex; align-items:center; gap:6px; font:700 12.5px var(--font-display); color:var(--text-secondary); transition:color .15s}
+.p-foot a:hover{color:#fff}
+.p-foot svg{width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.p-lang{margin-left:auto; font:600 11.5px var(--font-display); color:var(--text-muted); display:inline-flex; align-items:center; gap:6px}
+.p-lang .dot{width:8px; height:8px; border-radius:50%; background:var(--c)}
 
-.bubble{position:relative; display:flex; align-items:center; justify-content:center; text-align:center;
-  width:var(--sz,104px); height:var(--sz,104px); border-radius:50%; padding:10px;
-  border:1px solid color-mix(in oklab, var(--c) 55%, var(--border-strong));
-  background:radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--c) 30%, #141414), #101010 80%);
-  color:var(--text-primary); font:800 12px/1.15 var(--font-display); letter-spacing:-.01em;
-  transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease;
-  animation:float var(--dur,7s) ease-in-out var(--del,0s) infinite; will-change:transform}
-.bubble:hover,.bubble:focus-visible,.bubble[aria-pressed="true"]{
-  transform:scale(1.12); border-color:var(--c); box-shadow:0 0 0 4px color-mix(in oklab, var(--c) 18%, transparent), var(--shadow-card); outline:none}
-.bubble[aria-pressed="true"]{animation-play-state:paused}
-.field.dim .bubble:not(.match){opacity:.26; filter:saturate(.5)}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(-1 * var(--amp,8px)))}}
-
-/* panel de detalle */
-.detail{position:sticky; top:16px; border:1px solid var(--border-default); border-radius:var(--radius-xl);
-  background:var(--bg-surface); box-shadow:var(--shadow-card); padding:24px; min-height:300px; overflow:hidden}
-.detail::before{content:""; position:absolute; inset:0 0 auto 0; height:4px; background:var(--c,var(--border-strong)); transition:background .4s ease}
-.detail .d-hint{color:var(--text-muted); font-size:14px}
-.detail .d-hint svg{width:34px; height:34px; stroke:var(--text-muted); fill:none; stroke-width:1.6; margin-bottom:12px}
-.d-in{opacity:0; transform:translateY(10px); animation:din .45s ease-out forwards}
-@keyframes din{to{opacity:1; transform:none}}
-.detail .d-area{display:inline-flex; align-items:center; gap:8px; font:800 11px var(--font-display); letter-spacing:.1em; text-transform:uppercase; color:var(--c)}
-.detail .d-area .dot{width:8px;height:8px;border-radius:50%;background:var(--c)}
-.detail .d-flag{margin-left:8px; font:700 9.5px var(--font-display); letter-spacing:.06em; text-transform:uppercase; color:var(--text-muted); border:1px solid var(--border-strong); padding:3px 8px; border-radius:99px}
-.detail h3{font-size:22px; font-weight:900; color:#fff; margin:12px 0 10px}
-.detail p{font-size:14px; color:var(--text-secondary); margin:0 0 18px}
-.detail .d-foot{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
-.detail .d-lang{margin-left:auto; font:600 11.5px var(--font-display); color:var(--text-muted); display:inline-flex; align-items:center; gap:6px}
-
-@media (max-width:860px){
-  .pb-wrap{grid-template-columns:1fr}
-  .detail{position:static; order:-1; min-height:0}
-}
-@media (prefers-reduced-motion:reduce){ .bubble{animation:none} }
+@media (max-width:1000px){ .bento{grid-template-columns:repeat(2,1fr)} .pcard.feat{grid-column:span 2; grid-row:span 1} }
+@media (max-width:560px){ .bento{grid-template-columns:1fr} .pcard, .pcard.feat{grid-column:auto; grid-row:auto} .pcard p,.pcard.feat p{-webkit-line-clamp:4} }
+@media (prefers-reduced-motion:reduce){ .pcard{animation:none; transition:border-color .2s} }
 </style>
 </head>
 <body>
@@ -67,86 +54,71 @@
   <div class="pagehead reveal" style="--acc:var(--ux)">
     <p class="eyebrow" data-i18n="eye">Proyectos</p>
     <h2 data-i18n="h">Trabajo en tecnología y diseño</h2>
-    <p class="lead" data-i18n="p">Un campo de burbujas agrupadas por temática. Pasa el cursor o toca una para ver el proyecto.</p>
+    <p class="lead" data-i18n="p">Ciencia de datos, UX/UI, web y fotografía. Filtra por tema y pasa el cursor sobre cada proyecto.</p>
   </div>
-  <div class="pb-wrap reveal">
-    <div class="field" id="field"></div>
-    <aside class="detail" id="detail" style="--c:var(--text-muted)" aria-live="polite"></aside>
-  </div>
+  <div class="filters reveal" id="filters" role="group" aria-label="Filtrar"></div>
+  <div class="bento reveal" id="bento"></div>
+  <p id="empty" class="lead" hidden style="color:var(--text-muted)"></p>
 </main>
 
 <script src="js/fondo.js"></script>
 <script>
 window.PAGINA = "proyectos";
 window.I18N = {
-  es:{eye:"Proyectos",h:"Trabajo en tecnología y diseño",p:"Un campo de burbujas agrupadas por temática. Pasa el cursor o toca una para ver el proyecto.",
-    code:"Código",live:"Ver",wip:"En construcción",hint:"Pasa el cursor o toca una burbuja para descubrir cada proyecto."},
-  en:{eye:"Projects",h:"Work in tech and design",p:"A field of bubbles grouped by theme. Hover or tap one to see the project.",
-    code:"Code",live:"Live",wip:"Work in progress",hint:"Hover or tap a bubble to discover each project."}
+  es:{eye:"Proyectos",h:"Trabajo en tecnología y diseño",p:"Ciencia de datos, UX/UI, web y fotografía. Filtra por tema y pasa el cursor sobre cada proyecto.",code:"Código",live:"Ver",wip:"En construcción",empty:"Nada por aquí todavía."},
+  en:{eye:"Projects",h:"Work in tech and design",p:"Data science, UX/UI, web and photography. Filter by theme and hover over each project.",code:"Code",live:"Live",wip:"Work in progress",empty:"Nothing here yet."}
 };
-var AREAS={tool:{es:"Herramientas",en:"Tools",c:"var(--tool)"},data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},web:{es:"Web",en:"Web",c:"var(--web)"},foto:{es:"Fotografía",en:"Photography",c:"var(--foto)"}};
-var ORDER=["tool","data","ux","web","foto"];
-var GH="https://github.com/Mind0T/", DATA=[], curLang="es";
+var AREAS={all:{es:"Todos",en:"All",c:"var(--text-primary)"},tool:{es:"Herramientas",en:"Tools",c:"var(--tool)"},data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},web:{es:"Web",en:"Web",c:"var(--web)"},foto:{es:"Fotografía",en:"Photography",c:"var(--foto)"}};
+var GH="https://github.com/Mind0T/", DATA=[], filt="all", curLang="es";
+var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 var GHSVG='<svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.9 2.3 5.9 2.6 5.9 2.6a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.5 9c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>';
 var EXT='<svg viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>';
 
-/* etiqueta corta para la burbuja */
-function shortName(n){ return n.replace(/\s*·.*$/,"").trim(); }
-
-function bubbleHTML(p,i){
-  var a=AREAS[p.area]||AREAS.tool;
-  var sz = p.destacado ? 128 : 100;
-  var dur = (6 + (i%4)).toFixed(1);
-  var del = (-(i%5)*0.7).toFixed(1);
-  var amp = (6 + (i%3)*3);
-  return '<button class="bubble" data-id="'+escp(p.id)+'" data-area="'+p.area+'" style="--c:'+a.c+'; --sz:'+sz+'px; --dur:'+dur+'s; --del:'+del+'s; --amp:'+amp+'px" '+
-    'aria-pressed="false"><span>'+escp(shortName(p.nombre))+'</span></button>';
-}
-function paintField(){
-  var field=document.getElementById("field");
-  field.innerHTML = ORDER.filter(function(ar){ return DATA.some(function(p){return p.area===ar;}); }).map(function(ar){
-    var a=AREAS[ar], list=DATA.filter(function(p){return p.area===ar;});
-    var k=0;
-    return '<section class="cluster" style="--c:'+a.c+'"><div class="cluster-h"><span class="dot"></span>'+escp(a[curLang])+'</div>'+
-      '<div class="bubbles">'+list.map(function(p){ return bubbleHTML(p,k++); }).join("")+'</div></section>';
+function drawFilters(){
+  document.getElementById("filters").innerHTML = Object.keys(AREAS).map(function(k){
+    return '<button data-f="'+k+'" aria-pressed="'+(filt===k)+'">'+escp(AREAS[k][curLang])+'</button>';
   }).join("");
-  showHint();
 }
-function showHint(){
-  var d=document.getElementById("detail");
-  d.style.setProperty("--c","var(--text-muted)");
-  d.innerHTML='<div class="d-hint"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg><br>'+escp(window.T("hint"))+'</div>';
+function drawGrid(){
+  var list = DATA.filter(function(p){return filt==="all"||p.area===filt;});
+  var g=document.getElementById("bento"), e=document.getElementById("empty");
+  g.innerHTML = list.map(function(p,i){
+    var a=AREAS[p.area]||AREAS.tool;
+    var feat = p.destacado ? " feat" : "";
+    return '<article class="pcard'+feat+'" style="--c:'+a.c+'; animation-delay:'+(i*0.04).toFixed(2)+'s" data-area="'+p.area+'">'+
+      '<span class="p-area"><span class="dot"></span>'+escp(a[curLang])+(p.estado==="wip"?'<span class="p-flag">'+escp(window.T("wip"))+'</span>':'')+'</span>'+
+      '<h3>'+escp(p.nombre)+'</h3><p>'+escp(p[curLang]||p.es)+'</p>'+
+      '<div class="p-foot">'+
+        '<a href="'+GH+escp(p.repo)+'" target="_blank" rel="noopener">'+GHSVG+window.T("code")+'</a>'+
+        (p.live?'<a href="'+escp(p.live)+'" target="_blank" rel="noopener">'+EXT+window.T("live")+'</a>':'')+
+        '<span class="p-lang"><span class="dot"></span>'+escp(p.lang)+'</span>'+
+      '</div></article>';
+  }).join("");
+  e.hidden = list.length>0; e.textContent = window.T("empty");
+  if(!reduce) bindTilt(g);
 }
-function setDetail(p){
-  var a=AREAS[p.area]||AREAS.tool, d=document.getElementById("detail");
-  d.style.setProperty("--c",a.c);
-  d.innerHTML='<div class="d-in"><span class="d-area"><span class="dot"></span>'+escp(a[curLang])+
-    (p.estado==="wip"?'<span class="d-flag">'+escp(window.T("wip"))+'</span>':'')+'</span>'+
-    '<h3>'+escp(p.nombre)+'</h3><p>'+escp(p[curLang]||p.es)+'</p>'+
-    '<div class="d-foot"><a class="chip" href="'+GH+escp(p.repo)+'" target="_blank" rel="noopener">'+GHSVG+window.T("code")+'</a>'+
-    (p.live?'<a class="chip solid" style="--c:'+a.c+'" href="'+escp(p.live)+'" target="_blank" rel="noopener">'+EXT+window.T("live")+'</a>':'')+
-    '<span class="d-lang"><span style="width:8px;height:8px;border-radius:50%;display:inline-block;background:'+a.c+'"></span>'+escp(p.lang)+'</span></div></div>';
+function bindTilt(g){
+  g.querySelectorAll(".pcard").forEach(function(card){
+    card.addEventListener("pointermove", function(ev){
+      var r=card.getBoundingClientRect();
+      var px=(ev.clientX-r.left)/r.width, py=(ev.clientY-r.top)/r.height;
+      card.style.setProperty("--mx",(px*100).toFixed(1)+"%");
+      card.style.setProperty("--my",(py*100).toFixed(1)+"%");
+      card.style.transform="perspective(900px) rotateX("+((py-.5)*-5).toFixed(2)+"deg) rotateY("+((px-.5)*6).toFixed(2)+"deg) translateY(-4px)";
+    });
+    card.addEventListener("pointerleave", function(){ card.style.transform="perspective(900px)"; });
+  });
 }
-function byId(id){ return DATA.filter(function(p){return p.id===id;})[0]; }
-
 window.render = function(lang){
   curLang=lang;
   fetch("data/proyectos.json").then(function(r){return r.json();}).then(function(j){
-    // excluye la plataforma de estudio (tiene su propio espacio)
     DATA=(j.proyectos||[]).filter(function(p){ return p.id!=="estudio"; });
-    paintField();
-  }).catch(function(){ paintField(); });
-
-  var field=document.getElementById("field");
-  function activate(b){
-    var p=byId(b.dataset.id); if(!p) return;
-    field.querySelectorAll(".bubble").forEach(function(x){ x.setAttribute("aria-pressed", x===b); });
-    setDetail(p);
-  }
-  field.addEventListener("mouseover", function(e){ var b=e.target.closest(".bubble"); if(b) setDetail(byId(b.dataset.id)); });
-  field.addEventListener("focusin", function(e){ var b=e.target.closest(".bubble"); if(b) activate(b); });
-  field.addEventListener("click", function(e){ var b=e.target.closest(".bubble"); if(b) activate(b); });
+    drawFilters(); drawGrid();
+  }).catch(function(){ drawFilters(); drawGrid(); });
+  document.getElementById("filters").addEventListener("click",function(e){
+    var b=e.target.closest("[data-f]"); if(!b) return; filt=b.dataset.f; drawFilters(); drawGrid();
+  });
 };
 </script>
 <script src="js/sitio.js"></script>

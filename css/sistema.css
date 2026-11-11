@@ -48,7 +48,7 @@ header.top{
   box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; padding:11px 4px;
 }
 .brand{display:flex; align-items:center; min-width:0; text-decoration:none; flex:1 1 0}
-.logo-full{height:30px; width:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.08))}
+.logo-full{height:40px; width:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.08))}
 .nav{flex:0 0 auto; display:flex; justify-content:center; min-width:0}
 .seg2{display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(14px,2.2vw,34px); padding:0; background:none; border:0; border-radius:0}
 .seg2 a{

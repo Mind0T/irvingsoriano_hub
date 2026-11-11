@@ -5,6 +5,7 @@
     { k: "inicio", href: "index.html", es: "Inicio", en: "Home" },
     { k: "proyectos", href: "proyectos.html", es: "Proyectos", en: "Projects" },
     { k: "perfil", href: "perfil.html", es: "Acerca de mí", en: "About me" },
+    { k: "learning", href: "learning.html", es: "Learning Zone", en: "Learning Zone" },
     { k: "cursos", href: "cursos.html", es: "Comunidad", en: "Community" }
   ];
   var CHROME = {

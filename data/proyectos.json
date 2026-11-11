@@ -2,7 +2,7 @@
   "_nota": "Los campos 'destacado', 'area', 'es', 'en' los curas tú. El resto (lenguaje, fecha, repo) lo refresca la GitHub Action desde la API.",
   "proyectos": [
     {
-      "id": "tablero-irvin", "nombre": "Dame la Vida · Tablero", "area": "tool", "lang": "JavaScript",
+      "id": "tablero-irvin", "nombre": "Gestor de actividades y productividad", "area": "tool", "lang": "JavaScript",
       "repo": "tablero-irvin", "live": "https://tablero.irvingsoriano.com", "fecha": "2026-11-10", "destacado": true, "estado": "",
       "es": "Tablero personal de escuela y vida: kanban, calendario, recordatorios por WhatsApp, sync con Google Calendar y una vista de caminos con mi progreso por materia, certificación y hábito.",
       "en": "Personal school-and-life board: kanban, calendar, WhatsApp reminders, Google Calendar sync and a roads view of my progress by subject, certification and habit."
@@ -50,13 +50,13 @@
       "en": "Website for my gourmet popcorn business: a catalog of savory, sweet and spicy flavors and the brand's storefront."
     },
     {
-      "id": "eivind-street", "nombre": "Eivind Street", "area": "foto", "lang": "JavaScript",
+      "id": "eivind-street", "nombre": "Eivind Street", "area": "web", "lang": "JavaScript",
       "repo": "eivindstreet", "live": "https://www.eivindstreet.com/", "fecha": "2025-12-10", "destacado": false, "estado": "",
       "es": "Portafolio de fotografía documental y urbana de CDMX (Iztapalapa, Jamaica, Metro) y videografía, bajo mi seudónimo Eivind. Vanilla JS con foco en rendimiento y SEO.",
       "en": "A portfolio of documentary and urban photography from Mexico City (Iztapalapa, Jamaica, the Metro) and videography, under my pseudonym Eivind. Vanilla JS focused on performance and SEO."
     },
     {
-      "id": "eivind-leso", "nombre": "Eivind Leso", "area": "foto", "lang": "JavaScript",
+      "id": "eivind-leso", "nombre": "Eivind Leso", "area": "web", "lang": "JavaScript",
       "repo": "EivindLeso", "live": "https://www.eivindleso.com/", "fecha": "2025-12-10", "destacado": false, "estado": "",
       "es": "Portafolio de fotografía comercial, editorial, de producto y retrato. Vanilla JS con lazy loading, imágenes responsivas y optimización de carga (WPO).",
       "en": "A commercial, editorial, product and portrait photography portfolio. Vanilla JS with lazy loading, responsive images and load optimization (WPO)."

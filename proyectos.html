@@ -12,7 +12,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
 <style>
-.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px}
+.filterbar{margin-bottom:22px}
+.filter-toggle{display:inline-flex; align-items:center; gap:9px; height:42px; padding:0 16px; border-radius:99px;
+  border:1px solid var(--border-strong); background:var(--bg-surface); color:var(--text-primary);
+  font:700 13.5px var(--font-display); cursor:pointer; transition:var(--transition-base)}
+.filter-toggle:hover{border-color:var(--silver); background:var(--bg-surface-2)}
+.filter-toggle svg{width:17px; height:17px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.filter-toggle b{color:var(--text-muted); font-weight:600}
+.filter-toggle .chev{width:16px; height:16px; margin-left:2px; transition:transform .25s ease}
+.filter-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; animation:fdrop .25s ease-out}
+@keyframes fdrop{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
 
 .bento{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; grid-auto-flow:dense}
 .pcard{position:relative; display:flex; flex-direction:column; min-height:210px; padding:22px;
@@ -56,7 +66,14 @@
     <h2 data-i18n="h">Trabajo en tecnología y diseño</h2>
     <p class="lead" data-i18n="p">Ciencia de datos, UX/UI, web y fotografía. Filtra por tema y pasa el cursor sobre cada proyecto.</p>
   </div>
-  <div class="filters reveal" id="filters" role="group" aria-label="Filtrar"></div>
+  <div class="filterbar reveal">
+    <button class="filter-toggle" id="filterToggle" type="button" aria-expanded="false" aria-controls="filters">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg>
+      <span data-i18n="filtrar">Filtrar</span><b id="filterNow"></b>
+      <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar" hidden></div>
+  </div>
   <div class="bento reveal" id="bento"></div>
   <p id="empty" class="lead" hidden style="color:var(--text-muted)"></p>
 </main>
@@ -65,10 +82,10 @@
 <script>
 window.PAGINA = "proyectos";
 window.I18N = {
-  es:{eye:"Proyectos",h:"Trabajo en tecnología y diseño",p:"Ciencia de datos, UX/UI, web y fotografía. Filtra por tema y pasa el cursor sobre cada proyecto.",code:"Código",live:"Ver",wip:"En construcción",empty:"Nada por aquí todavía."},
-  en:{eye:"Projects",h:"Work in tech and design",p:"Data science, UX/UI, web and photography. Filter by theme and hover over each project.",code:"Code",live:"Live",wip:"Work in progress",empty:"Nothing here yet."}
+  es:{eye:"Proyectos",h:"Trabajo en tecnología y diseño",p:"Ciencia de datos, UX/UI y web. Filtra por tema y pasa el cursor sobre cada proyecto.",code:"Código",live:"Ver",wip:"En construcción",empty:"Nada por aquí todavía.",filtrar:"Filtrar"},
+  en:{eye:"Projects",h:"Work in tech and design",p:"Data science, UX/UI and web. Filter by theme and hover over each project.",code:"Code",live:"Live",wip:"Work in progress",empty:"Nothing here yet.",filtrar:"Filter"}
 };
-var AREAS={all:{es:"Todos",en:"All",c:"var(--text-primary)"},tool:{es:"Herramientas",en:"Tools",c:"var(--tool)"},data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},web:{es:"Web",en:"Web",c:"var(--web)"},foto:{es:"Fotografía",en:"Photography",c:"var(--foto)"}};
+var AREAS={all:{es:"Todos",en:"All",c:"var(--text-primary)"},tool:{es:"Herramientas",en:"Tools",c:"var(--tool)"},data:{es:"Ciencia de Datos",en:"Data Science",c:"var(--data)"},ux:{es:"UX / UI",en:"UX / UI",c:"var(--ux)"},web:{es:"Web",en:"Web",c:"var(--web)"}};
 var GH="https://github.com/Mind0T/", DATA=[], filt="all", curLang="es";
 var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
@@ -110,14 +127,30 @@ function bindTilt(g){
     card.addEventListener("pointerleave", function(){ card.style.transform="perspective(900px)"; });
   });
 }
+function updateLabel(){
+  var el=document.getElementById("filterNow"); if(el) el.textContent=" · "+AREAS[filt][curLang];
+}
+function collapseFilters(){
+  document.getElementById("filters").hidden=true;
+  document.getElementById("filterToggle").setAttribute("aria-expanded","false");
+}
 window.render = function(lang){
   curLang=lang;
   fetch("data/proyectos.json").then(function(r){return r.json();}).then(function(j){
     DATA=(j.proyectos||[]).filter(function(p){ return p.id!=="estudio"; });
-    drawFilters(); drawGrid();
-  }).catch(function(){ drawFilters(); drawGrid(); });
-  document.getElementById("filters").addEventListener("click",function(e){
-    var b=e.target.closest("[data-f]"); if(!b) return; filt=b.dataset.f; drawFilters(); drawGrid();
+    drawFilters(); drawGrid(); updateLabel();
+  }).catch(function(){ drawFilters(); drawGrid(); updateLabel(); });
+
+  var toggle=document.getElementById("filterToggle"), panel=document.getElementById("filters");
+  toggle.addEventListener("click",function(){
+    var open=panel.hidden; panel.hidden=!open; toggle.setAttribute("aria-expanded",String(open));
+  });
+  panel.addEventListener("click",function(e){
+    var b=e.target.closest("[data-f]"); if(!b) return;
+    filt=b.dataset.f; drawFilters(); drawGrid(); updateLabel(); collapseFilters();
+  });
+  document.addEventListener("click",function(e){
+    if(!e.target.closest(".filterbar")) collapseFilters();
   });
 };
 </script>

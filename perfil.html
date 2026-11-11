@@ -48,8 +48,12 @@
 .cert .mk.done svg{stroke:var(--color-ok)} .cert .mk.prog svg{stroke:var(--color-warn)}
 .cert .c-name{color:var(--text-primary); font-weight:600; font-size:14px}
 .cert .c-meta{font:600 11px var(--font-display); color:var(--text-muted)}
-.credly{margin-top:10px; display:inline-flex; align-items:center; gap:8px; font:700 13px var(--font-display); color:var(--text-secondary)}
-.credly:hover{color:var(--text-primary)} .credly svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.social{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+.sbtn{display:inline-flex; align-items:center; gap:9px; height:42px; padding:0 17px; border-radius:99px; border:1px solid var(--border-strong); font:700 13px var(--font-display); color:var(--text-secondary); transition:var(--transition-base)}
+.sbtn:hover{color:var(--text-primary); border-color:var(--silver); background:var(--bg-surface-2)}
+.sbtn svg{width:18px; height:18px}
+.sbtn .credly-i{stroke:currentColor; fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+.sbtn .li-i{fill:currentColor}
 
 /* experiencia y comunidad (perfil profesional) */
 .exp-title{display:flex; align-items:center; gap:10px; margin:30px 2px 16px; font:800 12px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:var(--c,var(--text-secondary))}
@@ -75,15 +79,9 @@
   </div>
   <div class="about reveal">
     <div class="txt">
-      <p data-i18n="p1">Empecé estudiando <span class="hl">psicología</span> en la UNAM, me formé en <span class="hl">fotografía</span>, y hoy curso <span class="hl">Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.</p>
+      <p data-i18n="p1">Empecé estudiando <span class="hl">psicología</span> en la UNAM y hoy curso <span class="hl">Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.</p>
       <p data-i18n="p2">Soy <span class="hl">Líder de Marketing y diseñador</span> del AWS Student Builder Group del IPN, y lideré la identidad y el UX/UI del AWS Student Community Day CDMX 2026. Fui speaker en el AWS Summit 2026 y gané el 2.º lugar del track IBM en el Hackathon Talent Land con SUSVI, una plataforma de análisis geoespacial. Me muevo entre el diseño UX/UI, el análisis de datos y la nube, y ahora voy hacia el <span class="hl">AI Engineering</span>.</p>
-      <p data-i18n="p3">Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class="hl">las uso todos los días</span>. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas.</p>
-      <div class="facts">
-        <span class="fact"><b>ESCOM</b> · IPN</span>
-        <span class="fact" data-i18n="f_psy"><b>Psicología</b> · UNAM</span>
-        <span class="fact"><b>AWS SBG</b> · IPN</span>
-        <span class="fact" data-i18n="f_city"><b>CDMX</b> · México</span>
-      </div>
+      <p data-i18n="p3">Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class="hl">las uso todos los días</span>. También soy un <span class="hl">apasionado de la fotografía</span>, y esa mirada por el detalle y la composición se cuela en cómo diseño. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas.</p>
     </div>
     <figure class="photo">
       <img src="assets/irvin.jpg" alt="Irvin Soriano">
@@ -116,7 +114,14 @@
       </summary>
       <div class="disc-body">
         <div id="certs"></div>
-        <a class="credly" href="https://www.credly.com/users/irving-soriano" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 15a4 4 0 100-8 4 4 0 000 8zM12 15v6l-3-2-3 2v-6"/></svg><span data-i18n="credly">Verifica mis insignias en Credly</span></a>
+        <div class="social">
+          <a class="sbtn" href="https://www.credly.com/users/irving-soriano" target="_blank" rel="noopener">
+            <svg class="credly-i" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5 7 22l5-3 5 3-1.5-7.5"/></svg>Credly
+          </a>
+          <a class="sbtn" href="https://www.linkedin.com/in/irving-soriano" target="_blank" rel="noopener">
+            <svg class="li-i" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.73v20.54C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn
+          </a>
+        </div>
       </div>
     </details>
   </section>
@@ -131,17 +136,17 @@ window.I18N = {
     d2_h:"Certificaciones",d2_s:"Nube y datos · verificables en Credly",
     credly:"Verifica mis insignias en Credly",done:"Obtenida",prog:"En curso",
     exp_h:"Experiencia",exp_s:"Roles y eventos en la comunidad tech",
-    p1:"Empecé estudiando <span class='hl'>psicología</span> en la UNAM, me formé en <span class='hl'>fotografía</span>, y hoy curso <span class='hl'>Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.",
+    p1:"Empecé estudiando <span class='hl'>psicología</span> en la UNAM y hoy curso <span class='hl'>Ciencia de Datos</span> en la ESCOM del IPN. Ese recorrido no fue un desvío: entender cómo piensa y decide la gente es justo lo que me ayuda a diseñar datos, interfaces y productos que de verdad sirven.",
     p2:"Soy <span class='hl'>Líder de Marketing y diseñador</span> del AWS Student Builder Group del IPN, y lideré la identidad y el UX/UI del AWS Student Community Day CDMX 2026. Fui speaker en el AWS Summit 2026 y gané el 2.º lugar del track IBM en el Hackathon Talent Land con SUSVI, una plataforma de análisis geoespacial. Me muevo entre el diseño UX/UI, el análisis de datos y la nube, y ahora voy hacia el <span class='hl'>AI Engineering</span>.",
-    p3:"Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class='hl'>las uso todos los días</span>. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas."},
+    p3:"Lo que más me define: no solo construyo herramientas para estudiar y organizarme — <span class='hl'>las uso todos los días</span>. También soy un <span class='hl'>apasionado de la fotografía</span>, y esa mirada por el detalle y la composición se cuela en cómo diseño. Este sitio es a la vez mi portafolio y el lugar donde viven esas herramientas."},
   en:{eye:"About me",h:"From the human mind to data",f_psy:"<b>Psychology</b> · UNAM",f_city:"<b>Mexico City</b> · Mexico",cap:"Amazon · AWS Summit 2026",
     d1_h:"Academic background",d1_s:"From psychology and photography to data science",
     d2_h:"Certifications",d2_s:"Cloud and data · verifiable on Credly",
     credly:"Verify my badges on Credly",done:"Earned",prog:"In progress",
     exp_h:"Experience",exp_s:"Roles and events in the tech community",
-    p1:"I started out studying <span class='hl'>psychology</span> at UNAM, trained in <span class='hl'>photography</span>, and today I study <span class='hl'>Data Science</span> at ESCOM, IPN. That path wasn't a detour: understanding how people think and decide is exactly what helps me design data, interfaces and products that actually work.",
+    p1:"I started out studying <span class='hl'>psychology</span> at UNAM and today I study <span class='hl'>Data Science</span> at ESCOM, IPN. That path wasn't a detour: understanding how people think and decide is exactly what helps me design data, interfaces and products that actually work.",
     p2:"I'm <span class='hl'>Marketing Lead and designer</span> of the AWS Student Builder Group at IPN, and I led the identity and UX/UI of the AWS Student Community Day CDMX 2026. I spoke at the AWS Summit 2026 and won 2nd place in the IBM track at Hackathon Talent Land with SUSVI, a geospatial analysis platform. I move between UX/UI design, data analysis and the cloud, and I'm now heading toward <span class='hl'>AI Engineering</span>.",
-    p3:"What defines me most: I don't just build tools to study and stay organized — <span class='hl'>I use them every day</span>. This site is both my portfolio and the place where those tools live."}
+    p3:"What defines me most: I don't just build tools to study and stay organized — <span class='hl'>I use them every day</span>. I'm also a <span class='hl'>passionate photographer</span>, and that eye for detail and composition shows in how I design. This site is both my portfolio and the place where those tools live."}
 };
 var EXP=[
   {yr:"Feb 2025 – actualidad",c:"var(--ai)",
@@ -154,8 +159,8 @@ var EXP=[
     es:{r:"Speaker",o:"AWS Summit 2026",n:"Plática «Todos necesitamos un tío Iroh»: el valor del mentoring en el desarrollo profesional."},
     en:{r:"Speaker",o:"AWS Summit 2026",n:"Talk “We all need an uncle Iroh”: the value of mentoring in professional growth."}},
   {yr:"2026",c:"var(--web)",
-    es:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · Track IBM",n:"2.º lugar en «Ciudades Inteligentes y Sostenibles» con SUSVI (análisis geoespacial); pitch, Design Thinking e IA generativa (IBM watsonx)."},
-    en:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · IBM Track",n:"2nd place in “Smart & Sustainable Cities” with SUSVI (geospatial analysis); pitch, Design Thinking and generative AI (IBM watsonx)."}},
+    es:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · Track IBM",n:"Gané junto a mi equipo el 2.º lugar en «Ciudades Inteligentes y Sostenibles» con SUSVI, una plataforma de análisis geoespacial, donde fungí como speaker y design thinker."},
+    en:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · IBM Track",n:"Won 2nd place with my team in “Smart & Sustainable Cities” with SUSVI, a geospatial analysis platform, where I served as speaker and design thinker."}},
   {yr:"Nov 2023 – Jul 2024",c:"var(--foto)",
     es:{r:"Líder de Creativity",o:"Club de Ciencia de Datos · ESCOM",n:"Identidad del club, evento «Data for Everyone 2024», campañas en redes y producción multimedia."},
     en:{r:"Creativity Lead",o:"Data Science Club · ESCOM",n:"Club identity, “Data for Everyone 2024” event, social campaigns and multimedia production."}}

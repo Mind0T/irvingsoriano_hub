@@ -21,7 +21,8 @@
 /* ---------- CARRUSEL Datos × Diseño ---------- */
 .stage{position:relative; width:100%; text-align:left; border:1px solid var(--border-default); border-radius:var(--radius-xl);
   background:linear-gradient(150deg, rgba(20,20,20,.9), #0C0C0C 70%); overflow:hidden; box-shadow:0 18px 60px rgba(0,0,0,.5);
-  animation:stageIn .8s cubic-bezier(.2,.8,.2,1) both}
+  animation:stageIn .8s cubic-bezier(.2,.8,.2,1) both; touch-action:pan-y; cursor:grab}
+.stage:active{cursor:grabbing}
 @keyframes stageIn{from{opacity:0; transform:scale(.955) translateY(22px)} to{opacity:1; transform:none}}
 .stage .kick{position:absolute; top:18px; left:22px; z-index:3; font:700 11px var(--font-display);
   letter-spacing:.16em; text-transform:uppercase; color:var(--text-muted)}
@@ -152,10 +153,7 @@ var CAR = [
     en:{f:"UX / UI", h:"Design that explains itself", p:"Clear, inclusive, intentional interfaces. Less friction, less decision fatigue."}},
   {k:"cloud", c:"var(--cloud)",
     es:{f:"Nube & Datos", h:"De la idea al producto", p:"Llevo ideas de la nube al producto: AWS y Google Cloud, datos conectados y en vivo."},
-    en:{f:"Cloud & Data", h:"From idea to product", p:"I take ideas from the cloud to the product: AWS and Google Cloud, data connected and live."}},
-  {k:"ai", c:"var(--ai)",
-    es:{f:"AI Engineering · pronto", h:"Lo que viene", p:"El siguiente paso: construir con IA sobre todo lo anterior. En camino."},
-    en:{f:"AI Engineering · soon", h:"What's next", p:"The next step: building with AI on top of all the above. On the way."}}
+    en:{f:"Cloud & Data", h:"From idea to product", p:"I take ideas from the cloud to the product: AWS and Google Cloud, data connected and live."}}
 ];
 
 var idx=0, timer=null, paused=false;
@@ -187,7 +185,7 @@ function show(i){
   dots.forEach(function(el,n){ el.setAttribute("aria-pressed", n===idx); });
   document.getElementById("glow").style.setProperty("--c", CAR[idx].c);
 }
-function start(){ stop(); if(reduce||paused) return; timer=setInterval(function(){ show(idx+1); }, 4600); }
+function start(){ stop(); if(reduce||paused) return; timer=setInterval(function(){ show(idx+1); }, 3000); }
 function stop(){ if(timer){ clearInterval(timer); timer=null; } }
 
 document.getElementById("dots").addEventListener("click", function(e){
@@ -205,6 +203,16 @@ document.getElementById("toggle").addEventListener("click", function(){
     ? '<path d="M8 5v14l11-7z"/>' : '<path d="M8 5h3v14H8zM13 5h3v14h-3z"/>';
   if(paused) stop(); else start();
 });
+/* deslizar con dedo o mouse para adelantar/retroceder */
+(function(){
+  var sx=null;
+  stage.addEventListener("pointerdown", function(e){ if(e.target.closest(".ctrl,.dots")) return; sx=e.clientX; });
+  stage.addEventListener("pointerup", function(e){
+    if(sx===null) return; var dx=e.clientX-sx; sx=null;
+    if(Math.abs(dx)>40){ show(idx+(dx<0?1:-1)); start(); }
+  });
+  stage.addEventListener("pointercancel", function(){ sx=null; });
+})();
 </script>
 <script src="js/sitio.js"></script>
 </body>

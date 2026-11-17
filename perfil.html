@@ -13,8 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
 <style>
-.about{display:grid; grid-template-columns:1fr 400px; gap:48px; align-items:start}
-.about p{margin:0 0 18px; font-size:16px}
+.about{display:grid; grid-template-columns:minmax(0,1fr) 380px; gap:clamp(32px,5vw,56px); align-items:center}
+.about .txt{max-width:60ch}
+.about p{margin:0 0 18px; font-size:16px; line-height:1.72}
 .about .hl{color:var(--text-primary); font-weight:600}
 .about .facts{display:flex; flex-wrap:wrap; gap:9px; margin-top:26px}
 .about .fact{border:1px solid var(--border-default); background:var(--bg-surface); border-radius:99px; padding:8px 15px; font:600 13px var(--font-display); color:var(--text-secondary)}
@@ -154,6 +155,9 @@ var EXP=[
   {yr:"Feb 2025 – actualidad",c:"var(--ai)",
     es:{r:"Líder de Marketing y Diseño",o:"AWS Student Builder Group · IPN",n:"Identidad y branding de la comunidad, materiales para redes, producción audiovisual y una línea gráfica que impulsa el engagement."},
     en:{r:"Marketing & Design Lead",o:"AWS Student Builder Group · IPN",n:"Community identity and branding, social media materials, audiovisual production and a graphic line that drives engagement."}},
+  {yr:"2026",c:"var(--ux)",
+    es:{r:"UX/UI Designer & Design Thinker",o:"NASA Space Apps Challenge CDMX · ORBITAL",n:"En el reto «Health Monitoring Software for Astronauts», con el equipo Tacos de Asada, dirigí las fases de empatizar y definir: construí el persona de la astronauta Katya, el empathy map y el journey map (antes / durante / después), y reformulé el reto —de monitorear indicadores a la autoevaluación del astronauta—. Diseñé ORBI, una identidad calmada que cambia de color y solo avisa cuando algo importa, además de la figura humana clicable. Prototipo en Figma y Claude Design, conectado al backend real del equipo."},
+    en:{r:"UX/UI Designer & Design Thinker",o:"NASA Space Apps Challenge CDMX · ORBITAL",n:"In the “Health Monitoring Software for Astronauts” challenge, with team Tacos de Asada, I led the empathize and define phases: I built astronaut Katya's persona, the empathy map and the journey map (before / during / after), and reframed the challenge —from tracking metrics to astronaut self-assessment—. I designed ORBI, a calm identity that shifts color and only speaks when it matters, plus the clickable human figure. Prototype in Figma and Claude Design, wired to the team's real backend."}},
   {yr:"2026",c:"var(--data)",
     es:{r:"Líder de Creativity y Diseño Visual",o:"AWS Student Community Day CDMX",n:"Identidad visual del evento (mascota «Fetch»), merchandising, displays y UX/UI de la web oficial."},
     en:{r:"Creativity & Visual Design Lead",o:"AWS Student Community Day CDMX",n:"Event visual identity (mascot “Fetch”), merchandising, displays and UX/UI of the official website."}},

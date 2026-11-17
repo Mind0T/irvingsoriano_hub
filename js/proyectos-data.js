@@ -62,7 +62,7 @@
         {t:"Backend (Rubén)", u:GH+"Taquit/Space-Challenge"},
         {t:"Design kit", u:GH+"Mind0T/Space_app_design"}
       ],
-      live:"", rol:{es:"UX/UI Designer & Design Thinker", en:"UX/UI Designer & Design Thinker"},
+      live:"https://space-challenge-front.vercel.app", rol:{es:"UX/UI Designer & Design Thinker", en:"UX/UI Designer & Design Thinker"},
       frase:{es:"En el reto de la NASA diseñé la calma: salud de astronautas que se entiende de un vistazo.",
              en:"At the NASA challenge I designed calm: astronaut health you grasp at a glance."},
       resumen:{es:"Reto 'Health Monitoring Software for Astronauts' del NASA Space Apps Challenge CDMX 2026, con el equipo Tacos de Asada. Mi rol fue UX/UI designer y design thinker: corrí las fases de empatizar y definir, construí el persona de la astronauta Katya, el journey map y la figura humana clicable, y diseñé ORBI — una identidad calmada que solo habla cuando algo cambia. Software local, sin internet.",
@@ -71,8 +71,8 @@
                   en:["Reframed the challenge: from tracking metrics to astronaut self-assessment","Persona, empathy map and journey map (before / during / after)","ORBI: an identity that shifts color and speaks only when it matters","Design built in Claude Design and wired to the real backend"]},
       tech:["Figma","Claude Design","Design Thinking","React","UX Research"],
       preview:{type:"gallery", shots:[
-        {src:"assets/orbital/front-demo.png", cap:{es:"La interfaz ORBI: tripulación, identidad y arco de salud.", en:"The ORBI interface: crew, identity and the health arc."}},
-        {src:"assets/orbital/design-kit.png", cap:{es:"Design Thinking Kit — aterrizar el problema antes de construir.", en:"Design Thinking Kit — landing the problem before building."}}
+        {src:"assets/orbital/front-demo.png", url:"https://space-challenge-front.vercel.app", cap:{es:"La interfaz ORBI (front en vivo): tripulación, identidad y arco de salud.", en:"The ORBI interface (live front): crew, identity and the health arc."}},
+        {src:"assets/orbital/design-kit.png", url:"https://github.com/Mind0T/Space_app_design", cap:{es:"Design Thinking Kit — aterrizar el problema antes de construir.", en:"Design Thinking Kit — landing the problem before building."}}
       ]}
     },
     {

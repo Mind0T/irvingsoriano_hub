@@ -151,13 +151,11 @@
         '</div>'+
       '</section>'+
       '<div class="eiv-dial" id="eivDial" aria-label="'+(lang==="en"?"Projects":"Proyectos")+'">'+
-        '<button class="eiv-arrow" data-dir="-1" aria-label="'+(lang==="en"?"Previous":"Anterior")+'"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>'+
         '<div class="eiv-dial-stage" id="eivDialStage">'+
           '<svg class="eiv-dial-arc" id="eivDialSvg" aria-hidden="true"><path id="eivDialArc" d=""/></svg>'+
           '<div class="eiv-dial-items" id="eivDialItems"></div>'+
         '</div>'+
-        '<button class="eiv-arrow" data-dir="1" aria-label="'+(lang==="en"?"Next":"Siguiente")+'"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>'+
-        '<p class="eiv-dial-hint">'+(lang==="en"?"Swipe or use the arrows · tap to open":"Desliza o usa las flechas · toca para abrir")+'</p>'+
+        '<p class="eiv-dial-hint">'+(lang==="en"?"Swipe · tap a project to browse · the center one opens":"Desliza · toca un proyecto para recorrer · el del centro abre")+'</p>'+
       '</div>';
 
     var canvas = document.getElementById("eivCanvas");
@@ -213,23 +211,38 @@
       });
       return out;
     }
+    var OPEN_SVG='<svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg>';
     function preview(p) {
       if (p.preview.type==="live") {
-        return '<div class="eiv-frame"><div class="load">'+tx.loading+'</div>'+
-               '<iframe loading="lazy" src="'+p.preview.url+'" title="preview" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></div>';
+        // póster clicable (siempre renderiza) + iframe que aparece si carga en el navegador
+        return '<a class="eiv-frame" href="'+p.preview.url+'" target="_blank" rel="noopener" style="--c:'+areaColor(p.area)+'" aria-label="'+tx.live+'">'+
+          '<span class="eiv-poster"><span class="pic"><svg viewBox="0 0 24 24">'+(ICON[p.icon]||"")+'</svg></span><span class="pnm">'+p.nombre[lang]+'</span><span class="popen">'+tx.live+' '+OPEN_SVG+'</span></span>'+
+          '</a>';
       }
       if (p.preview.type==="gallery") {
         return '<div class="eiv-shots">'+p.preview.shots.map(function(sh){
-          return '<figure class="eiv-shot"><img src="'+sh.src+'" alt="" loading="lazy"><figcaption class="cap">'+sh.cap[lang]+'</figcaption></figure>';
+          var o = sh.url ? (' href="'+sh.url+'" target="_blank" rel="noopener"') : "";
+          var tag = sh.url ? "a" : "figure";
+          return '<'+tag+' class="eiv-shot'+(sh.url?" link":"")+'"'+o+'><img src="'+sh.src+'" alt="" loading="lazy">'+
+            (sh.url?'<span class="eiv-frame-badge">'+tx.live+' '+OPEN_SVG+'</span>':'')+
+            '<span class="cap">'+sh.cap[lang]+'</span></'+tag+'>';
         }).join("")+'</div>';
       }
       return '<div class="eiv-viz" style="color:'+areaColor(p.area)+'">'+viz(p.preview.viz, lang)+'</div>';
     }
+    function wireGrab(panel, grab){
+      if(!grab) return; var sy=null, dy=0;
+      grab.addEventListener("pointerdown", function(e){ sy=e.clientY; dy=0; panel.style.transition="none"; try{grab.setPointerCapture(e.pointerId);}catch(_){ } });
+      grab.addEventListener("pointermove", function(e){ if(sy==null) return; dy=Math.max(0, e.clientY-sy); panel.style.transform="translateY("+dy+"px)"; });
+      grab.addEventListener("pointerup", function(){ if(sy==null) return; sy=null; panel.style.transition=""; if(dy>120) closeDetail(); else panel.style.transform=""; });
+      grab.addEventListener("pointercancel", function(){ sy=null; panel.style.transition=""; panel.style.transform=""; });
+    }
     function openDetail(idx) {
-      var p=P[idx], c=areaColor(p.area);
+      var p=P[idx], c=areaColor(p.area), panel=sheet.querySelector(".eiv-panel");
       sheet.style.setProperty("--c", c);
-      sheet.querySelector(".eiv-panel").scrollTop=0;
+      panel.scrollTop=0; panel.style.transform="";
       sheet.querySelector("#eivPanelInner").innerHTML =
+        '<div class="eiv-grab" id="eivGrab"><span></span></div>'+
         '<div class="eiv-ph">'+
           '<button class="eiv-close" id="eivClose" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>'+
           '<span class="eiv-area"><span class="dot"></span>'+p.area.toUpperCase()+' · '+(p.lang||"")+'</span>'+
@@ -238,20 +251,21 @@
           (p.rol?'<span class="eiv-rol"><span>'+tx.role+'</span> '+p.rol[lang]+'</span>':'')+
         '</div>'+
         '<div class="eiv-body">'+
-          '<div class="eiv-sec"><h3>'+tx.preview+'</h3>'+preview(p)+'</div>'+
-          '<div class="eiv-sec"><h3>'+tx.about+'</h3><p class="lead">'+p.resumen[lang]+'</p></div>'+
-          '<div class="eiv-sec"><h3>'+tx.high+'</h3><ul class="eiv-hl">'+p.highlights[lang].map(function(h){return '<li>'+h+'</li>';}).join("")+'</ul></div>'+
-          '<div class="eiv-sec"><h3>'+tx.tech+'</h3><div class="eiv-tech">'+p.tech.map(function(t){return '<span>'+t+'</span>';}).join("")+'</div></div>'+
-          '<div class="eiv-links">'+links(p)+'</div>'+
+          '<div class="eiv-col-media"><div class="eiv-sec"><h3>'+tx.preview+'</h3>'+preview(p)+'</div></div>'+
+          '<div class="eiv-col-text">'+
+            '<div class="eiv-sec"><h3>'+tx.about+'</h3><p class="lead">'+p.resumen[lang]+'</p></div>'+
+            '<div class="eiv-sec"><h3>'+tx.high+'</h3><ul class="eiv-hl">'+p.highlights[lang].map(function(h){return '<li>'+h+'</li>';}).join("")+'</ul></div>'+
+            '<div class="eiv-sec"><h3>'+tx.tech+'</h3><div class="eiv-tech">'+p.tech.map(function(t){return '<span>'+t+'</span>';}).join("")+'</div></div>'+
+            '<div class="eiv-links">'+links(p)+'</div>'+
+          '</div>'+
         '</div>';
-      var fr=sheet.querySelector(".eiv-frame iframe");
-      if (fr) fr.addEventListener("load", function(){ var l=sheet.querySelector(".eiv-frame .load"); if(l) l.style.display="none"; });
       sheet.classList.add("open"); document.body.style.overflow="hidden";
       sheet.querySelector("#eivClose").addEventListener("click", closeDetail);
+      wireGrab(panel, sheet.querySelector("#eivGrab"));
     }
     function closeDetail(){
       sheet.classList.remove("open"); document.body.style.overflow="";
-      setTimeout(function(){ var pi=sheet.querySelector("#eivPanelInner"); if(pi) pi.innerHTML=""; }, 300);
+      setTimeout(function(){ var pi=sheet.querySelector("#eivPanelInner"); if(pi) pi.innerHTML=""; var pp=sheet.querySelector(".eiv-panel"); if(pp){ pp.style.transform=""; pp.style.transition=""; } }, 300);
     }
     sheet.querySelector(".eiv-scrim").addEventListener("click", closeDetail);
     document.addEventListener("keydown", function(e){ if(e.key==="Escape" && sheet.classList.contains("open")) closeDetail(); });
@@ -264,9 +278,8 @@
     dialStage.addEventListener("pointermove", function(e){ if(ddx==null) return; var dx=e.clientX-ddx; if(Math.abs(dx)>38){ rotate(dx<0?1:-1); ddx=e.clientX; dmoved=true; } });
     dialStage.addEventListener("pointerup", function(){ ddx=null; });
     dialStage.addEventListener("pointercancel", function(){ ddx=null; });
-    dialStage.addEventListener("click", function(e){ var b=e.target.closest(".eiv-dslot"); if(!b) return; if(dmoved){ dmoved=false; return; } var idx=+b.dataset.idx; setSel(idx); openDetail(idx); });
+    dialStage.addEventListener("click", function(e){ var b=e.target.closest(".eiv-dslot"); if(!b) return; if(dmoved){ dmoved=false; return; } var idx=+b.dataset.idx; if(idx===sel) openDetail(idx); else setSel(idx); });
     dial.addEventListener("wheel", function(e){ if(Math.abs(e.deltaX)>Math.abs(e.deltaY) && Math.abs(e.deltaX)>4){ e.preventDefault(); rotate(e.deltaX>0?1:-1); } }, {passive:false});
-    dial.querySelectorAll(".eiv-arrow").forEach(function(a){ a.addEventListener("click", function(){ rotate(+a.dataset.dir); }); });
 
     // identidad
     function openCurrent(){ if(sel<0) setSel(0); openDetail(sel<0?0:sel); }

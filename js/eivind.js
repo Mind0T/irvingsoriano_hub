@@ -34,106 +34,72 @@
     return { r:(n>>16)&255, g:(n>>8)&255, b:n&255 };
   }
 
-  /* =========================================================
-     IDENTIDAD — núcleo + arcos orbitales + halo (reactiva)
-     ========================================================= */
+  /* Identidad "Eivind" — esfera de NODOS INTERCONECTADOS + HUD + barrido
+     (estilo Jarvis/Ultron): red neuronal que rota, con anillos de interfaz,
+     ticks, barrido tipo radar y núcleo vivo. Reacciona al hablar. */
   function Identity(canvas) {
-    var ctx = canvas.getContext("2d"), dpr = 1, S = 300;
-    var t = 0, amp = 0, ampT = 0, pulse = 0, raf = 0;
-    var cur = hex2rgb("#9DB4CF"), tgt = hex2rgb("#9DB4CF");
-    var ripples = [];
-    // 3 anillos con inclinación y velocidad distintas (arcos, no puntos sueltos)
-    var rings = [
-      { tilt:0.30, rot:0.0,  spd:0.22, w:2.2 },
-      { tilt:0.62, rot:1.1,  spd:-0.15, w:1.6 },
-      { tilt:0.90, rot:2.4,  spd:0.33, w:1.3 }
-    ];
-    var motes = [];
-    for (var i=0;i<22;i++) motes.push({ ring:i%3, a:Math.random()*6.28, sp:0.4+Math.random()*0.7, r:0.7+Math.random()*1.5 });
-
-    function size() {
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      var box = canvas.getBoundingClientRect();
-      S = Math.max(180, box.width || 300);
-      canvas.width = S*dpr; canvas.height = S*dpr;
-      ctx.setTransform(dpr,0,0,dpr,0,0);
+    var ctx = canvas.getContext("2d"), dpr = 1, S = 300, t = 0, amp = 0, ampT = 0, pulse = 0, raf = 0;
+    var cur = hex2rgb("#5B8DEF"), tgt = hex2rgb("#5B8DEF"), ripples = [];
+    var N = 118, nodes = [];
+    for (var i = 0; i < N; i++) {
+      var y = 1 - 2 * (i + .5) / N, rr = Math.sqrt(Math.max(0, 1 - y * y)), ph = i * 2.399963;
+      nodes.push({ x: Math.cos(ph) * rr, y: y, z: Math.sin(ph) * rr, tw: Math.random() * 6.28, sp: .6 + Math.random() * .9 });
     }
-    function col(a) { return "rgba("+cur.r+","+cur.g+","+cur.b+","+a+")"; }
-    function ringPoint(ring, ang, R) {
-      var rot = ring.rot + t*ring.spd;
-      var x = Math.cos(ang)*R, y = Math.sin(ang)*R*ring.tilt;
-      return { x: x*Math.cos(rot) - y*Math.sin(rot), y: x*Math.sin(rot) + y*Math.cos(rot),
-               depth: Math.sin(ang)*ring.tilt };
+    var edges = [];
+    for (var a = 0; a < N; a++) {
+      var ds = [];
+      for (var b = 0; b < N; b++) { if (a === b) continue; var dx = nodes[a].x - nodes[b].x, dy = nodes[a].y - nodes[b].y, dz = nodes[a].z - nodes[b].z; ds.push([dx * dx + dy * dy + dz * dz, b]); }
+      ds.sort(function (p, q) { return p[0] - q[0]; });
+      for (var k = 0; k < 3; k++) { var bb = ds[k][1]; if (bb > a) edges.push([a, bb, Math.random() * 6.28]); }
     }
+    function size() { dpr = Math.min(2, window.devicePixelRatio || 1); var box = canvas.getBoundingClientRect(); S = Math.max(180, box.width || 300); canvas.width = S * dpr; canvas.height = S * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    function col(a) { return "rgba(" + Math.round(cur.r) + "," + Math.round(cur.g) + "," + Math.round(cur.b) + "," + a + ")"; }
     function draw() {
-      ctx.clearRect(0,0,S,S);
-      var cx=S/2, cy=S/2, R=S*0.33;
-      // lerp color + amplitud
-      cur.r += (tgt.r-cur.r)*0.08; cur.g += (tgt.g-cur.g)*0.08; cur.b += (tgt.b-cur.b)*0.08;
-      amp += (ampT-amp)*0.12; if (pulse>0) pulse*=0.92;
-      var energy = Math.min(1, amp + pulse);
-      var breathe = 0.5 + 0.5*Math.sin(t*1.1);
-
-      // halo externo
-      var hg = ctx.createRadialGradient(cx,cy,R*0.2, cx,cy,R*(1.5+energy*0.5));
-      hg.addColorStop(0, col(0.16+energy*0.12));
-      hg.addColorStop(0.5, col(0.05));
-      hg.addColorStop(1, col(0));
-      ctx.fillStyle = hg; ctx.fillRect(0,0,S,S);
-
-      // ondas al hablar
-      for (var r=ripples.length-1;r>=0;r--) {
-        var rp = ripples[r]; rp.rad += 1.8; rp.life -= 0.012;
-        if (rp.life<=0) { ripples.splice(r,1); continue; }
-        ctx.strokeStyle = col(rp.life*0.4); ctx.lineWidth = 1.4;
-        ctx.beginPath(); ctx.arc(cx,cy,R*0.55+rp.rad,0,6.28); ctx.stroke();
-      }
-
-      // anillos (arcos continuos) — mitad trasera tenue, delantera brillante
-      for (var k=0;k<rings.length;k++) {
-        var ring = rings[k], N=120;
-        ctx.lineWidth = ring.w*(1+energy*0.6);
-        for (var pass=0; pass<2; pass++) {
-          ctx.beginPath();
-          var started=false;
-          for (var s=0;s<=N;s++) {
-            var ang = s/N*6.28, pt = ringPoint(ring, ang, R);
-            var front = pt.depth>=0;
-            if ((pass===0)===front) { started=false; continue; }
-            var X=cx+pt.x, Y=cy+pt.y;
-            if (!started){ ctx.moveTo(X,Y); started=true; } else ctx.lineTo(X,Y);
-          }
-          ctx.strokeStyle = col(pass===0 ? 0.12 : 0.5+energy*0.35);
-          ctx.stroke();
-        }
-      }
-      // motes viajando por los anillos
-      for (var m=0;m<motes.length;m++) {
-        var mo=motes[m]; mo.a += mo.sp*0.01*(1+energy);
-        var pt=ringPoint(rings[mo.ring], mo.a, R);
-        var dep=(pt.depth+1)/2;
-        ctx.fillStyle = col(0.25+dep*0.55);
-        ctx.beginPath(); ctx.arc(cx+pt.x, cy+pt.y, mo.r*(0.6+dep*0.9), 0, 6.28); ctx.fill();
-      }
-      // núcleo
-      var coreR = R*(0.34 + breathe*0.05 + energy*0.16);
-      var cg = ctx.createRadialGradient(cx,cy,0, cx,cy,coreR);
-      cg.addColorStop(0, "rgba(255,255,255,"+(0.9)+")");
-      cg.addColorStop(0.35, col(0.85));
-      cg.addColorStop(1, col(0));
-      ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx,cy,coreR,0,6.28); ctx.fill();
-
-      t += reduce?0:0.016;
+      ctx.clearRect(0, 0, S, S);
+      var cx = S / 2, cy = S / 2, R = S * .30;
+      cur.r += (tgt.r - cur.r) * .08; cur.g += (tgt.g - cur.g) * .08; cur.b += (tgt.b - cur.b) * .08;
+      amp += (ampT - amp) * .12; if (pulse > 0) pulse *= .92;
+      var en = Math.min(1, amp + pulse), br = .5 + .5 * Math.sin(t * 1.2);
+      var ry = t * .33, rx = .44, ca = Math.cos(ry), sa = Math.sin(ry), cb = Math.cos(rx), sb = Math.sin(rx), pr = [];
+      for (var i = 0; i < N; i++) { var n = nodes[i];
+        var x = n.x * ca - n.z * sa, z = n.x * sa + n.z * ca, yy = n.y * cb - z * sb, z2 = n.y * sb + z * cb;
+        pr.push({ sx: cx + x * R, sy: cy + yy * R, d: (z2 + 1) / 2 }); }
+      var hg = ctx.createRadialGradient(cx, cy, R * .2, cx, cy, R * (1.7 + en * .5));
+      hg.addColorStop(0, col(.14 + en * .12)); hg.addColorStop(.5, col(.04)); hg.addColorStop(1, col(0));
+      ctx.fillStyle = hg; ctx.fillRect(0, 0, S, S);
+      for (var r = ripples.length - 1; r >= 0; r--) { var o = ripples[r]; o.rad += 1.9; o.life -= .012; if (o.life <= 0) { ripples.splice(r, 1); continue; } ctx.strokeStyle = col(o.life * .4); ctx.lineWidth = 1.3; ctx.beginPath(); ctx.arc(cx, cy, R * .6 + o.rad, 0, 6.283); ctx.stroke(); }
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(t * .18);
+      ctx.strokeStyle = col(.16); ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(0, 0, R * 1.22, 0, 6.283); ctx.stroke();
+      ctx.strokeStyle = col(.3 + en * .3); ctx.lineWidth = 1.4;
+      for (var a2 = 0; a2 < 48; a2++) { var an = a2 / 48 * 6.283, r1 = R * 1.18, r2 = (a2 % 4 === 0) ? R * 1.29 : R * 1.24; ctx.beginPath(); ctx.moveTo(Math.cos(an) * r1, Math.sin(an) * r1); ctx.lineTo(Math.cos(an) * r2, Math.sin(an) * r2); ctx.stroke(); }
+      ctx.restore();
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(-t * .12); ctx.strokeStyle = col(.22 + en * .25); ctx.lineWidth = 1.6;
+      for (var g = 0; g < 3; g++) { var s0 = g * 2.094 + .3; ctx.beginPath(); ctx.arc(0, 0, R * 1.4, s0, s0 + 1.12); ctx.stroke(); }
+      ctx.restore();
+      var sweep = (t * .9) % 6.283, sg = ctx.createLinearGradient(cx, cy, cx + Math.cos(sweep) * R * 1.15, cy + Math.sin(sweep) * R * 1.15);
+      sg.addColorStop(0, col(0)); sg.addColorStop(1, col(.5 + en * .3));
+      ctx.strokeStyle = sg; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(sweep) * R * 1.12, cy + Math.sin(sweep) * R * 1.12); ctx.stroke();
+      ctx.lineWidth = 1;
+      for (var e = 0; e < edges.length; e++) { var ea = pr[edges[e][0]], eb = pr[edges[e][1]], da = (ea.d + eb.d) / 2, fl = .6 + .4 * Math.sin(t * 2 + edges[e][2]);
+        ctx.strokeStyle = col((.04 + .28 * da) * (.6 + en * .7) * fl); ctx.beginPath(); ctx.moveTo(ea.sx, ea.sy); ctx.lineTo(eb.sx, eb.sy); ctx.stroke(); }
+      for (var i2 = 0; i2 < N; i2++) { var p = pr[i2], n2 = nodes[i2], tw = .6 + .4 * Math.sin(n2.tw + t * n2.sp), rad = (.5 + 1.7 * p.d) * (1 + en * .3);
+        ctx.fillStyle = col((.25 + .6 * p.d) * tw); ctx.beginPath(); ctx.arc(p.sx, p.sy, rad, 0, 6.283); ctx.fill();
+        if (p.d > .82) { ctx.fillStyle = "rgba(255,255,255," + (.5 * tw).toFixed(3) + ")"; ctx.beginPath(); ctx.arc(p.sx, p.sy, rad * .5, 0, 6.283); ctx.fill(); } }
+      var coreR = R * (.26 + br * .04 + en * .14), cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreR);
+      cg.addColorStop(0, "rgba(255,255,255,.95)"); cg.addColorStop(.4, col(.8)); cg.addColorStop(1, col(0));
+      ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(cx, cy, coreR, 0, 6.283); ctx.fill();
+      t += reduce ? 0 : .016;
     }
-    function loop(){ draw(); raf=requestAnimationFrame(loop); }
-    this.setColor = function(hex){ tgt = hex2rgb(hex); };
-    this.refreshColor = function(hex){ cur = hex2rgb(hex); tgt = hex2rgb(hex); };
-    this.setSpeaking = function(b){ ampT = b?1:0; if(b) ripples.push({rad:0,life:1}); };
-    this.pulse = function(){ pulse = 0.55; ripples.push({rad:0,life:0.8}); };
+    function loop() { draw(); raf = requestAnimationFrame(loop); }
+    this.setColor = function (h) { tgt = hex2rgb(h); };
+    this.refreshColor = function (h) { cur = hex2rgb(h); tgt = hex2rgb(h); };
+    this.setSpeaking = function (b) { ampT = b ? 1 : 0; if (b) ripples.push({ rad: 0, life: 1 }); };
+    this.pulse = function () { pulse = .6; ripples.push({ rad: 0, life: .8 }); };
     this.resize = size;
-    this.start = function(){ size(); if (reduce){ draw(); } else loop(); };
-    this.stop = function(){ cancelAnimationFrame(raf); };
+    this.start = function () { size(); if (reduce) draw(); else loop(); };
+    this.stop = function () { cancelAnimationFrame(raf); };
   }
+
 
   /* =========================================================
      VOZ — femenina, cálida (es-MX) con fallback
@@ -241,7 +207,12 @@
         '<button class="eiv-arrow" data-dir="-1" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>'+
         '<div class="eiv-track-wrap"><ul class="eiv-track" id="eivTrack"></ul></div>'+
         '<button class="eiv-arrow" data-dir="1" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>'+
-      '</nav>';
+      '</nav>'+
+      '<div class="eiv-dial" id="eivDial" aria-hidden="true">'+
+        '<svg class="eiv-dial-arc" viewBox="0 0 340 140" aria-hidden="true"><path id="eivDialArc" d=""/></svg>'+
+        '<div class="eiv-dial-items" id="eivDialItems"></div>'+
+        '<p class="eiv-dial-hint">'+(lang==="en"?"Swipe ← → · tap to open":"Desliza ← → · toca para abrir")+'</p>'+
+      '</div>';
 
     var canvas = document.getElementById("eivCanvas");
     var idn = new Identity(canvas); idn.start();
@@ -260,6 +231,24 @@
     var sets=3, html="";
     for (var s=0;s<sets;s++) for (var i=0;i<P.length;i++) html+=chipHTML(P[i], i);
     track.innerHTML = html;
+
+    // ---- menú de media luna (vista de celular, estilo ORBI) ----
+    var DCX=170, DCY=255, DR=205, dslots=[];
+    function dialArc(){ var a=2.45*0.34, x1=(DCX-DR*Math.sin(a)).toFixed(1), x2=(DCX+DR*Math.sin(a)).toFixed(1), y=(DCY-DR*Math.cos(a)).toFixed(1); var p=mount.querySelector("#eivDialArc"); if(p) p.setAttribute("d","M"+x1+" "+y+" A"+DR+" "+DR+" 0 0 1 "+x2+" "+y); }
+    function buildDial(){
+      var host=mount.querySelector("#eivDialItems"); if(!host) return; host.innerHTML=""; dslots=[];
+      for (var i=0;i<5;i++){ var b=document.createElement("button"); b.className="eiv-dslot"; b.type="button"; b.innerHTML='<span class="ic"><svg viewBox="0 0 24 24"></svg></span><span class="dl"></span>'; host.appendChild(b); dslots.push(b); }
+      dialArc();
+    }
+    function updateDial(){
+      if (!dslots.length || sel<0) return;
+      for (var s2=0;s2<5;s2++){ var off=s2-2, idx=(((sel+off)%P.length)+P.length)%P.length, p=P[idx], th=off*0.34,
+          x=DCX+DR*Math.sin(th), y=DCY-DR*Math.cos(th), b=dslots[s2];
+        b.style.left=x.toFixed(1)+"px"; b.style.top=y.toFixed(1)+"px"; b.style.setProperty("--c", areaColor(p.area));
+        b.dataset.idx=idx; b.classList.toggle("on", off===0); b.style.opacity = Math.abs(off)===2 ? ".5" : "1";
+        b.querySelector(".ic svg").innerHTML = ICON[p.icon]||""; b.querySelector(".dl").textContent = off===0 ? (p.sub?p.sub[lang]:p.nombre[lang]) : "";
+      }
+    }
 
     var segW=0, pos=0, auto=!reduce, dragging=false, dragX=0, dragPos=0, moved=false;
     function measure(){
@@ -287,7 +276,7 @@
       phraseEl.classList.remove("show");
       setTimeout(function(){ phraseEl.textContent=p.frase[lang]; phraseEl.classList.add("show"); }, 120);
       idn.setColor(c); idn.pulse();
-      markCurrent(idx);
+      markCurrent(idx); updateDial();
       if (speak) voice.say(p.frase[lang], function(){ idn.setSpeaking(true); }, function(){ idn.setSpeaking(false); });
     }
 
@@ -373,6 +362,17 @@
         pos += dir*(segW/P.length); wrap(); applyTrack();
       });
     });
+
+    // ---- interacción del dial de media luna (móvil) ----
+    buildDial();
+    var dial=mount.querySelector("#eivDial"), ddx=null, dmoved=false;
+    if (dial){
+      dial.addEventListener("pointerdown", function(e){ ddx=e.clientX; dmoved=false; paused=true; });
+      dial.addEventListener("pointermove", function(e){ if(ddx==null) return; var dx=e.clientX-ddx; if(Math.abs(dx)>42){ setSel((sel+(dx<0?1:-1)+P.length)%P.length, true); ddx=e.clientX; dmoved=true; } });
+      dial.addEventListener("pointerup", function(){ ddx=null; setTimeout(function(){ if(!sheet.classList.contains("open")) paused=false; }, 3500); });
+      dial.addEventListener("pointercancel", function(){ ddx=null; });
+      dial.addEventListener("click", function(e){ var b=e.target.closest(".eiv-dslot"); if(!b) return; if(dmoved){ dmoved=false; return; } var idx=+b.dataset.idx; if(idx===sel) openDetail(idx); else setSel(idx, true); });
+    }
 
     // identidad / CTA
     function openCurrent(){ if(sel<0) setSel(0,true); openDetail(sel<0?0:sel); }

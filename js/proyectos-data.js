@@ -40,8 +40,8 @@
       highlights:{es:["Kanban + calendario + recordatorios en un solo lugar","Sync real con Google Calendar y avisos por WhatsApp","Vista de 'caminos' con progreso por materia y hábito"],
                   en:["Kanban + calendar + reminders in one place","Real Google Calendar sync and WhatsApp alerts","A 'roads' view with progress by subject and habit"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script","Vercel"],
-      // tablero real (privado por contraseña); se muestra como carrusel de capturas
-      preview:{type:"carousel", shots:[
+      // tablero real (privado por contraseña); carrusel animado y clicable al tablero real
+      preview:{type:"carousel", autoplay:3000, url:"https://tablero.irvingsoriano.com", shots:[
         {src:"assets/proyectos/tablero-calendario.jpg", cap:{es:"Vista semanal del calendario: clases, deporte, hábitos y pagos.", en:"Weekly calendar view: classes, sport, habits and payments."}},
         {src:"assets/proyectos/tablero-kanban.jpg", cap:{es:"Tablero kanban de desarrollo profesional, con progreso por tarjeta.", en:"Professional-development kanban board, with progress per card."}}
       ]}
@@ -146,8 +146,8 @@
       highlights:{es:["Un mismo motor, dos marcas distintas","Google Sheets como backend sin servidor","Semilla del Gestor de actividades"],
                   en:["One engine, two distinct brands","Google Sheets as a serverless backend","The seed of the activity manager"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script"],
-      // tablero del SBG/SCD (privado por contraseña); se muestra como carrusel de capturas
-      preview:{type:"carousel", shots:[
+      // tablero del SBG/SCD (privado por contraseña); carrusel animado y clicable al tablero real
+      preview:{type:"carousel", autoplay:3000, url:"https://creativity-sbg-ipn.vercel.app/", shots:[
         {src:"assets/proyectos/sbg-creativity.jpg", cap:{es:"Tablero del área de Creativity del AWS SBG IPN.", en:"Creativity area board of the AWS SBG IPN."}},
         {src:"assets/proyectos/scd-diseno.jpg", cap:{es:"Tablero de diseño del AWS Student Community Day CDMX 2026.", en:"Design board for AWS Student Community Day CDMX 2026."}}
       ]}

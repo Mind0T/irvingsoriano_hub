@@ -88,7 +88,7 @@
                en:"The 'Health Monitoring Software for Astronauts' challenge at NASA Space Apps Challenge CDMX 2026, with team Tacos de Asada. My role was UX/UI designer and design thinker: I ran the empathize and define phases, built astronaut Katya's persona, the journey map and the clickable human figure, and designed ORBI — a calm identity that only speaks when something changes. Local software, no internet."},
       highlights:{es:["Reframe del reto: de monitorear indicadores a la autoevaluación del astronauta","Persona, empathy map y journey map (antes / durante / después)","ORBI: identidad que cambia de color y solo avisa cuando algo importa","Diseño de UI/UX y frontend, conectado al backend real"],
                   en:["Reframed the challenge: from tracking metrics to astronaut self-assessment","Persona, empathy map and journey map (before / during / after)","ORBI: an identity that shifts color and speaks only when it matters","UI/UX and frontend design, wired to the real backend"]},
-      tech:["Figma","Claude Design","Design Thinking","React","UX Research"],
+      tech:["Figma","Design Thinking","React","UX Research"],
       preview:{type:"live", frames:[
         {url:"https://spaceappdesign.vercel.app/proyecto.html", cap:{es:"Ideación: aterrizar el problema, la solución y el mapa de empatía.", en:"Ideation: framing the problem, the solution and the empathy map."}},
         {url:"https://space-challenge-front.vercel.app", cap:{es:"El frontend en vivo: la interfaz ORBI.", en:"The live frontend: the ORBI interface."}}

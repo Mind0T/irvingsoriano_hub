@@ -83,11 +83,12 @@
 .eiv-tech span{font:700 12px var(--font-display); color:var(--text-secondary); border:1px solid var(--border-strong); border-radius:99px; padding:6px 13px}
 
 /* preview — póster clicable que siempre renderiza (+ iframe que aparece si carga) */
-.eiv-frame{position:relative; display:block; border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; background:var(--bg-lane); aspect-ratio:16/10; isolation:isolate; transition:border-color .2s, transform .2s}
+.eiv-frame{position:relative; display:block; border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; background:var(--bg-lane); aspect-ratio:16/9; isolation:isolate; transition:border-color .2s, transform .2s}
 .eiv-frame:hover{border-color:var(--c,var(--silver)); transform:translateY(-2px)}
 .eiv-poster{position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:18px; background:radial-gradient(120% 120% at 50% 0%, color-mix(in oklab, var(--c,var(--silver)) 26%, var(--bg-lane)), var(--bg-lane)); transition:opacity .4s}
-/* vista en vivo: iframe real de la página, aparece al cargar y el póster se desvanece */
-.eiv-live{position:absolute; inset:0; width:100%; height:100%; border:0; z-index:0; background:var(--bg-lane); pointer-events:none; opacity:0; transition:opacity .5s}
+/* vista en vivo: iframe real de la página, renderizada a ancho de laptop y
+   escalada al recuadro (JS fija width/height/transform). Aparece al cargar. */
+.eiv-live{position:absolute; top:0; left:0; border:0; z-index:0; background:var(--bg-lane); pointer-events:none; opacity:0; transition:opacity .5s; transform-origin:top left}
 .eiv-frame.live-on .eiv-live{opacity:1}
 .eiv-frame.live-on .eiv-poster{opacity:0; pointer-events:none}
 .eiv-frame.has-live .eiv-frame-badge{opacity:0; transition:opacity .3s}

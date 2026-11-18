@@ -58,12 +58,13 @@
       sub:{es:"Monitoreo de salud de astronautas", en:"Astronaut health monitoring"},
       lang:"UX/UI · Design Thinking",
       repos:[
-        {t:"Front", u:GH+"Mind0T/Space-Challenge-Front"},
-        {t:"Backend (Rubén)", u:GH+"Taquit/Space-Challenge"},
-        {t:"Design kit", u:GH+"Mind0T/Space_app_design"}
+        {t:{es:"Repositorio frontend", en:"Frontend repo"}, u:GH+"Mind0T/Space-Challenge-Front"},
+        {t:{es:"Repositorio backend", en:"Backend repo"}, u:GH+"Taquit/Space-Challenge"},
+        {t:{es:"Design kit", en:"Design kit"}, u:GH+"Mind0T/Space_app_design"}
       ],
       live:"https://spaceappdesign.vercel.app/proyecto.html",
-      video:"https://youtu.be/rZDq3W7zDKk",
+      liveLabel:{es:"Proyecto en vivo (ideación)", en:"Live project (ideation)"},
+      deploys:[{t:{es:"Front en vivo (ORBI)", en:"Live front (ORBI)"}, u:"https://space-challenge-front.vercel.app"}],
       rol:{es:"UX/UI Designer & Design Thinker", en:"UX/UI Designer & Design Thinker"},
       frase:{es:"En el reto de la NASA diseñé la calma: salud de astronautas que se entiende de un vistazo.",
              en:"At the NASA challenge I designed calm: astronaut health you grasp at a glance."},
@@ -72,10 +73,7 @@
       highlights:{es:["Reframe del reto: de monitorear indicadores a la autoevaluación del astronauta","Persona, empathy map y journey map (antes / durante / después)","ORBI: identidad que cambia de color y solo avisa cuando algo importa","Diseño generado en Claude Design y conectado al backend real"],
                   en:["Reframed the challenge: from tracking metrics to astronaut self-assessment","Persona, empathy map and journey map (before / during / after)","ORBI: an identity that shifts color and speaks only when it matters","Design built in Claude Design and wired to the real backend"]},
       tech:["Figma","Claude Design","Design Thinking","React","UX Research"],
-      preview:{type:"gallery", shots:[
-        {src:"assets/orbital/front-demo.png", url:"https://space-challenge-front.vercel.app", cap:{es:"La interfaz ORBI (front en vivo): tripulación, identidad y arco de salud.", en:"The ORBI interface (live front): crew, identity and the health arc."}},
-        {src:"assets/orbital/design-kit.png", url:"https://github.com/Mind0T/Space_app_design", cap:{es:"Design Thinking Kit — aterrizar el problema antes de construir.", en:"Design Thinking Kit — landing the problem before building."}}
-      ]}
+      preview:{type:"live", url:"https://spaceappdesign.vercel.app/proyecto.html"}
     },
     {
       id:"linea-tiempo", area:"ux", icon:"timeline",

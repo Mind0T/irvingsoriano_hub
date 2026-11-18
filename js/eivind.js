@@ -219,13 +219,17 @@
 
     // ---- hoja de detalle (ventana flotante centrada) ----
     var sheet=document.getElementById("eivSheet");
+    function L(v){ return (v && typeof v==="object") ? (v[lang]||v.es) : v; }
     function links(p) {
       var out="";
       var repos = p.repos || (p.repo?[{t:tx.repo,u:p.repo}]:[]);
-      if (p.live) out+='<a class="eiv-link live" href="'+p.live+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>'+tx.live+'</a>';
+      if (p.live) out+='<a class="eiv-link live" href="'+p.live+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>'+(p.liveLabel?L(p.liveLabel):tx.live)+'</a>';
+      (p.deploys||[]).forEach(function(d){
+        out+='<a class="eiv-link" href="'+d.u+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>'+L(d.t)+'</a>';
+      });
       if (p.video) out+='<a class="eiv-link" href="'+p.video+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4V8z"/><rect x="2.5" y="4" width="19" height="16" rx="3"/></svg>'+tx.video+'</a>';
       repos.forEach(function(r){
-        out+='<a class="eiv-link" href="'+r.u+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6A4.6 4.6 0 0 0 19 7.5 4.3 4.3 0 0 0 18.9 4S17.7 3.6 15 5.3a13 13 0 0 0-6 0C6.3 3.6 5.1 4 5.1 4A4.3 4.3 0 0 0 5 7.5 4.6 4.6 0 0 0 3.5 11c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V23"/></svg>'+(repos.length>1?r.t:tx.repo)+'</a>';
+        out+='<a class="eiv-link" href="'+r.u+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6A4.6 4.6 0 0 0 19 7.5 4.3 4.3 0 0 0 18.9 4S17.7 3.6 15 5.3a13 13 0 0 0-6 0C6.3 3.6 5.1 4 5.1 4A4.3 4.3 0 0 0 5 7.5 4.6 4.6 0 0 0 3.5 11c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V23"/></svg>'+(repos.length>1?L(r.t):tx.repo)+'</a>';
       });
       return out;
     }
@@ -291,7 +295,20 @@
         var frame=fr.closest(".eiv-frame"), done=false;
         fr.addEventListener("load", function(){ if(done)return; done=true; frame.classList.add("live-on"); });
       });
+      fitLiveFrames(sheet);
     }
+    // el iframe se renderiza a ancho de LAPTOP (1440×810, 16:9) y se escala al
+    // recuadro: así la página muestra su layout de escritorio, no el móvil.
+    var LIVE_W=1440, LIVE_H=810;
+    function fitLiveFrames(root){
+      (root||document).querySelectorAll(".eiv-frame.has-live .eiv-live").forEach(function(fr){
+        var frame=fr.closest(".eiv-frame"); if(!frame)return;
+        var w=frame.clientWidth||1;
+        fr.style.width=LIVE_W+"px"; fr.style.height=LIVE_H+"px";
+        fr.style.transform="scale("+(w/LIVE_W).toFixed(4)+")";
+      });
+    }
+    var frt; window.addEventListener("resize", function(){ clearTimeout(frt); frt=setTimeout(function(){ fitLiveFrames(document); }, 160); });
     function closeDetail(){
       sheet.classList.remove("open"); document.body.style.overflow="";
       setTimeout(function(){ var pi=sheet.querySelector("#eivPanelInner"); if(pi) pi.innerHTML=""; var pp=sheet.querySelector(".eiv-panel"); if(pp){ pp.style.transform=""; pp.style.transition=""; } }, 300);

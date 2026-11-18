@@ -8,7 +8,7 @@
       "lang": "Jupyter Notebook",
       "repo": "Entreno-code",
       "live": "https://estudio.irvingsoriano.com",
-      "fecha": "2026-11-17",
+      "fecha": "2026-11-18",
       "destacado": true,
       "estado": "",
       "es": "Sitio para estudiar algoritmos y estructuras de datos con animaciones SVG y pruebas de escritorio que siguen el código C línea por línea: pila, heap y apuntadores. Creciendo a más lenguajes.",
@@ -39,6 +39,19 @@
       "estado": "",
       "es": "Línea de tiempo interactiva de la evolución de la computación: un camino con hitos por generación, hardware, arquitectura y programación. La raíz visual de los caminos del tablero.",
       "en": "Interactive timeline of computing's evolution: a path with milestones by generation, hardware, architecture and programming. The visual root of the board's roads."
+    },
+    {
+      "id": "misspalomitas",
+      "nombre": "MissPalomitas",
+      "area": "web",
+      "lang": "JavaScript",
+      "repo": "MissPalomitas",
+      "live": "https://www.misspalomitas.com/",
+      "fecha": "2026-11-18",
+      "destacado": false,
+      "estado": "",
+      "es": "Sitio web de mi negocio de palomitas gourmet: catálogo de sabores salados, dulces y picositos, y vitrina de la marca.",
+      "en": "Website for my gourmet popcorn business: a catalog of savory, sweet and spicy flavors and the brand's storefront."
     },
     {
       "id": "creativity-board-scd",
@@ -130,19 +143,6 @@
       "estado": "",
       "es": "Portafolio de fotografía comercial, editorial, de producto y retrato. Vanilla JS con lazy loading, imágenes responsivas y optimización de carga (WPO).",
       "en": "A commercial, editorial, product and portrait photography portfolio. Vanilla JS with lazy loading, responsive images and load optimization (WPO)."
-    },
-    {
-      "id": "misspalomitas",
-      "nombre": "MissPalomitas",
-      "area": "web",
-      "lang": "JavaScript",
-      "repo": "MissPalomitas",
-      "live": "https://www.misspalomitas.com/",
-      "fecha": "2025-12-09",
-      "destacado": false,
-      "estado": "",
-      "es": "Sitio web de mi negocio de palomitas gourmet: catálogo de sabores salados, dulces y picositos, y vitrina de la marca.",
-      "en": "Website for my gourmet popcorn business: a catalog of savory, sweet and spicy flavors and the brand's storefront."
     }
   ]
 }

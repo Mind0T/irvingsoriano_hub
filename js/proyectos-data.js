@@ -40,8 +40,8 @@
       highlights:{es:["Kanban + calendario + recordatorios en un solo lugar","Sync real con Google Calendar y avisos por WhatsApp","Vista de 'caminos' con progreso por materia y hábito"],
                   en:["Kanban + calendar + reminders in one place","Real Google Calendar sync and WhatsApp alerts","A 'roads' view with progress by subject and habit"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script","Vercel"],
-      // el tablero real es privado (contraseña); la preview muestra un demo con datos ficticios
-      preview:{type:"live", url:"demos/tablero-demo.html?board=irving"}
+      // tablero real (privado por contraseña); el link va al tablero real
+      preview:{type:"live", url:"https://tablero.irvingsoriano.com"}
     },
     {
       id:"estudio", area:"tool", icon:"estudio",
@@ -86,7 +86,10 @@
       highlights:{es:["Reframe del reto: de monitorear indicadores a la autoevaluación del astronauta","Persona, empathy map y journey map (antes / durante / después)","ORBI: identidad que cambia de color y solo avisa cuando algo importa","Diseño generado en Claude Design y conectado al backend real"],
                   en:["Reframed the challenge: from tracking metrics to astronaut self-assessment","Persona, empathy map and journey map (before / during / after)","ORBI: an identity that shifts color and speaks only when it matters","Design built in Claude Design and wired to the real backend"]},
       tech:["Figma","Claude Design","Design Thinking","React","UX Research"],
-      preview:{type:"live", url:"https://spaceappdesign.vercel.app/proyecto.html"}
+      preview:{type:"live", frames:[
+        {url:"https://spaceappdesign.vercel.app/proyecto.html", cap:{es:"Ideación: aterrizar el problema, la solución y el mapa de empatía.", en:"Ideation: framing the problem, the solution and the empathy map."}},
+        {url:"https://space-challenge-front.vercel.app", cap:{es:"El frontend en vivo: la interfaz ORBI.", en:"The live frontend: the ORBI interface."}}
+      ]}
     },
     {
       id:"linea-tiempo", area:"ux", icon:"timeline",
@@ -140,8 +143,8 @@
       highlights:{es:["Un mismo motor, dos marcas distintas","Google Sheets como backend sin servidor","Semilla del Gestor de actividades"],
                   en:["One engine, two distinct brands","Google Sheets as a serverless backend","The seed of the activity manager"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script"],
-      // tablero del SBG/SCD, privado; la preview muestra un demo con datos ficticios
-      preview:{type:"live", url:"demos/tablero-demo.html?board=sbg"}
+      // tablero del SBG/SCD (privado por contraseña); el link va al tablero real
+      preview:{type:"live", url:"https://creativity-sbg-ipn.vercel.app/"}
     },
     {
       id:"alura-telecom2", area:"data", icon:"ml",

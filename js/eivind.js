@@ -156,7 +156,6 @@
           '<svg class="eiv-dial-arc" id="eivDialSvg" aria-hidden="true"><path id="eivDialArc" d=""/></svg>'+
           '<div class="eiv-dial-items" id="eivDialItems"></div>'+
         '</div>'+
-        '<p class="eiv-dial-hint">'+(lang==="en"?"Swipe · tap a project to browse · the center one opens":"Desliza · toca un proyecto para recorrer · el del centro abre")+'</p>'+
       '</div>';
 
     var canvas = document.getElementById("eivCanvas");
@@ -234,18 +233,22 @@
       return out;
     }
     var OPEN_SVG='<svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+    // un marco de vista en vivo (iframe real + póster de respaldo que se desvanece)
+    function liveFrame(p, f){
+      var embed = f.noembed ? "" :
+        '<iframe class="eiv-live" src="'+f.url+'" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>';
+      var nm = f.nombre ? L(f.nombre) : p.nombre[lang];
+      return '<a class="eiv-frame'+(f.noembed?"":" has-live")+'" href="'+f.url+'" target="_blank" rel="noopener" style="--c:'+areaColor(p.area)+'" aria-label="'+tx.live+'">'+
+          embed+
+          '<span class="eiv-poster"><span class="pic"><svg viewBox="0 0 24 24">'+(ICON[p.icon]||"")+'</svg></span><span class="pnm">'+nm+'</span><span class="popen">'+tx.live+' '+OPEN_SVG+'</span></span>'+
+          '<span class="eiv-frame-badge">'+tx.live+' '+OPEN_SVG+'</span>'+
+          '</a>'+
+          (f.cap ? '<p class="eiv-frame-cap">'+L(f.cap)+'</p>' : '');
+    }
     function preview(p) {
       if (p.preview.type==="live") {
-        // iframe en vivo (vista real de la página) + póster de respaldo que se
-        // desvanece al cargar. Si la página no se puede incrustar o 'noembed',
-        // se queda el póster clicable.
-        var embed = p.preview.noembed ? "" :
-          '<iframe class="eiv-live" src="'+p.preview.url+'" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>';
-        return '<a class="eiv-frame'+(p.preview.noembed?"":" has-live")+'" href="'+p.preview.url+'" target="_blank" rel="noopener" style="--c:'+areaColor(p.area)+'" aria-label="'+tx.live+'">'+
-          embed+
-          '<span class="eiv-poster"><span class="pic"><svg viewBox="0 0 24 24">'+(ICON[p.icon]||"")+'</svg></span><span class="pnm">'+p.nombre[lang]+'</span><span class="popen">'+tx.live+' '+OPEN_SVG+'</span></span>'+
-          '<span class="eiv-frame-badge">'+tx.live+' '+OPEN_SVG+'</span>'+
-          '</a>';
+        var frames = p.preview.frames || [{url:p.preview.url, noembed:p.preview.noembed}];
+        return frames.map(function(f){ return liveFrame(p, f); }).join("");
       }
       if (p.preview.type==="gallery") {
         return '<div class="eiv-shots">'+p.preview.shots.map(function(sh){

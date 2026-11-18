@@ -10,12 +10,12 @@
   var UI = {
     es: { titulo:"Irving Soriano", subtitulo:"Científico de datos", hint:"Abrir proyecto",
           open:"Ver proyecto",
-          live:"Abrir en vivo", repo:"Código", loading:"Cargando vista en vivo…",
+          live:"Abrir en vivo", repo:"Código", video:"Video", loading:"Cargando vista en vivo…",
           role:"Mi rol", preview:"Vista", about:"De qué va", high:"Lo que hice", tech:"Herramientas",
           nolive:"Visualización del análisis" },
     en: { titulo:"Irving Soriano", subtitulo:"Data Scientist", hint:"Open project",
           open:"View project",
-          live:"Open live", repo:"Code", loading:"Loading live view…",
+          live:"Open live", repo:"Code", video:"Video", loading:"Loading live view…",
           role:"My role", preview:"Preview", about:"What it is", high:"What I did", tech:"Tools",
           nolive:"Analysis visualization" }
   };
@@ -145,6 +145,7 @@
       '<section class="eiv-stage">'+
         '<h1 class="eiv-name">'+tx.titulo+'</h1>'+
         '<p class="eiv-sub eiv-role">'+tx.subtitulo+'</p>'+
+        '<p class="eiv-current" id="eivCurrent" aria-live="polite"></p>'+
         '<div class="eiv-core" id="eivCore" role="button" tabindex="0" aria-label="'+tx.open+'">'+
           '<canvas id="eivCanvas"></canvas>'+
           '<span class="eiv-hint">'+tx.hint+'</span>'+
@@ -162,19 +163,19 @@
     var idn = new Identity(canvas); idn.start();
     var core = document.getElementById("eivCore");
 
-    // ---- selección ----
-    var sel = -1;
-    function setSel(idx){
-      if (idx<0 || idx>=P.length) return;
-      sel = idx; var p = P[idx], c = areaColor(p.area);
-      document.documentElement.style.setProperty("--acc", c);
-      mount.style.setProperty("--acc", c);
+    // ---- selección (posición fraccional continua, giro fluido e infinito) ----
+    var sel = 0, selF = 0, dialRAF = 0, lastBase = null, vel = 0;
+    var curEl = mount.querySelector("#eivCurrent");
+    function idxOf(u){ return ((u % P.length)+P.length)%P.length; }
+    function applyAccent(ix){
+      var c = areaColor(P[ix].area);
+      document.documentElement.style.setProperty("--acc", c); mount.style.setProperty("--acc", c);
       idn.setColor(c); idn.pulse();
-      updateDial();
     }
+    function updateCurrent(ix){ if(curEl) curEl.textContent = P[ix].nombre[lang]; }
 
-    // ---- menú de media luna (todos los dispositivos, estilo ORBI, infinito) ----
-    var DN = 5, SP = 0.30, dslots = [];
+    // ---- menú de media luna ----
+    var DN = 7, SP = 0.30, center = (DN-1)/2, dslots = [];
     var dialStage = mount.querySelector("#eivDialStage"),
         dialSvg   = mount.querySelector("#eivDialSvg"),
         dialPath  = mount.querySelector("#eivDialArc"),
@@ -184,21 +185,37 @@
       for (var i=0;i<DN;i++){ var b=document.createElement("button"); b.className="eiv-dslot"; b.type="button";
         b.innerHTML='<span class="ic"><svg viewBox="0 0 24 24"></svg></span><span class="dl"></span>'; dialItems.appendChild(b); dslots.push(b); }
     }
-    function updateDial(){
-      if (!dslots.length || sel<0) return;
-      var W = dialStage.clientWidth || 340, H = dialStage.clientHeight || 150;
-      var R = W*0.58, cx = W/2, cy = R + 16;
+    function renderDial(){
+      if (!dslots.length) return;
+      var W = dialStage.clientWidth || 340, H = dialStage.clientHeight || 150, R = W*0.58, cx = W/2, cy = R + 16;
       if (dialSvg) dialSvg.setAttribute("viewBox","0 0 "+W+" "+H);
-      if (dialPath){ var am=2.4*SP, x1=(cx-R*Math.sin(am)).toFixed(1), x2=(cx+R*Math.sin(am)).toFixed(1), ay=(cy-R*Math.cos(am)).toFixed(1);
+      if (dialPath){ var am=2*SP, x1=(cx-R*Math.sin(am)).toFixed(1), x2=(cx+R*Math.sin(am)).toFixed(1), ay=(cy-R*Math.cos(am)).toFixed(1);
         dialPath.setAttribute("d","M"+x1+" "+ay+" A"+R.toFixed(1)+" "+R.toFixed(1)+" 0 0 1 "+x2+" "+ay); }
-      for (var s2=0;s2<DN;s2++){ var off=s2-(DN-1)/2, idx=(((sel+off)%P.length)+P.length)%P.length, p=P[idx], th=off*SP,
-          x=cx+R*Math.sin(th), y=cy-R*Math.cos(th), b=dslots[s2];
-        b.style.left=x.toFixed(1)+"px"; b.style.top=y.toFixed(1)+"px"; b.style.setProperty("--c", areaColor(p.area));
-        b.dataset.idx=idx; b.classList.toggle("on", off===0); b.style.opacity = Math.abs(off)>=2 ? ".5" : "1";
-        b.querySelector(".ic svg").innerHTML = ICON[p.icon]||"";
-        b.querySelector(".dl").textContent = off===0 ? (p.sub?p.sub[lang]:p.nombre[lang]) : "";
+      var base = Math.round(selF), nearest = -1, nearestAbs = 1e9;
+      for (var s2=0;s2<DN;s2++){
+        var off=s2-center, u=base+off, ix=idxOf(u), p=P[ix], b=dslots[s2];
+        var ang=(off+(base-selF))*SP, aa=Math.abs(ang);
+        b.style.left=(cx+R*Math.sin(ang)).toFixed(1)+"px";
+        b.style.top=(cy-R*Math.cos(ang)).toFixed(1)+"px";
+        b.style.opacity=Math.max(0,1-Math.pow(aa/(SP*2.4),1.5)).toFixed(3);
+        if(aa<nearestAbs){nearestAbs=aa;nearest=s2;}
+        if(b._ix!==ix){ b._ix=ix; b.dataset.idx=ix; b.style.setProperty("--c", areaColor(p.area));
+          b.querySelector(".ic svg").innerHTML = ICON[p.icon]||""; }
+        b.dataset.off=off;
       }
+      for (var s3=0;s3<DN;s3++) dslots[s3].classList.toggle("on", s3===nearest);
+      if (base!==lastBase){ lastBase=base; applyAccent(idxOf(base)); updateCurrent(idxOf(base)); }
     }
+    var updateDial = renderDial;
+    function stepDial(){
+      vel=(vel+(sel-selF)*0.20)*0.62;
+      selF+=vel;
+      if(Math.abs(sel-selF)<0.0012 && Math.abs(vel)<0.0012){ selF=sel; vel=0; renderDial(); dialRAF=0; return; }
+      renderDial(); dialRAF=requestAnimationFrame(stepDial);
+    }
+    function startDialAnim(){ if(!dialRAF) dialRAF=requestAnimationFrame(stepDial); }
+    function setSel(u){ sel=u; if(reduce){ selF=u; vel=0; renderDial(); } else startDialAnim(); }
+    function rotate(step){ setSel(Math.round(selF)+step); }
 
     // ---- hoja de detalle (ventana flotante centrada) ----
     var sheet=document.getElementById("eivSheet");
@@ -206,6 +223,7 @@
       var out="";
       var repos = p.repos || (p.repo?[{t:tx.repo,u:p.repo}]:[]);
       if (p.live) out+='<a class="eiv-link live" href="'+p.live+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>'+tx.live+'</a>';
+      if (p.video) out+='<a class="eiv-link" href="'+p.video+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4V8z"/><rect x="2.5" y="4" width="19" height="16" rx="3"/></svg>'+tx.video+'</a>';
       repos.forEach(function(r){
         out+='<a class="eiv-link" href="'+r.u+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6A4.6 4.6 0 0 0 19 7.5 4.3 4.3 0 0 0 18.9 4S17.7 3.6 15 5.3a13 13 0 0 0-6 0C6.3 3.6 5.1 4 5.1 4A4.3 4.3 0 0 0 5 7.5 4.6 4.6 0 0 0 3.5 11c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V23"/></svg>'+(repos.length>1?r.t:tx.repo)+'</a>';
       });
@@ -214,9 +232,15 @@
     var OPEN_SVG='<svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg>';
     function preview(p) {
       if (p.preview.type==="live") {
-        // póster clicable (siempre renderiza) + iframe que aparece si carga en el navegador
-        return '<a class="eiv-frame" href="'+p.preview.url+'" target="_blank" rel="noopener" style="--c:'+areaColor(p.area)+'" aria-label="'+tx.live+'">'+
+        // iframe en vivo (vista real de la página) + póster de respaldo que se
+        // desvanece al cargar. Si la página no se puede incrustar o 'noembed',
+        // se queda el póster clicable.
+        var embed = p.preview.noembed ? "" :
+          '<iframe class="eiv-live" src="'+p.preview.url+'" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>';
+        return '<a class="eiv-frame'+(p.preview.noembed?"":" has-live")+'" href="'+p.preview.url+'" target="_blank" rel="noopener" style="--c:'+areaColor(p.area)+'" aria-label="'+tx.live+'">'+
+          embed+
           '<span class="eiv-poster"><span class="pic"><svg viewBox="0 0 24 24">'+(ICON[p.icon]||"")+'</svg></span><span class="pnm">'+p.nombre[lang]+'</span><span class="popen">'+tx.live+' '+OPEN_SVG+'</span></span>'+
+          '<span class="eiv-frame-badge">'+tx.live+' '+OPEN_SVG+'</span>'+
           '</a>';
       }
       if (p.preview.type==="gallery") {
@@ -262,6 +286,11 @@
       sheet.classList.add("open"); document.body.style.overflow="hidden";
       sheet.querySelector("#eivClose").addEventListener("click", closeDetail);
       wireGrab(panel, sheet.querySelector("#eivGrab"));
+      // vista en vivo: al cargar el iframe, desvanece el póster para mostrar la página
+      sheet.querySelectorAll(".eiv-frame.has-live .eiv-live").forEach(function(fr){
+        var frame=fr.closest(".eiv-frame"), done=false;
+        fr.addEventListener("load", function(){ if(done)return; done=true; frame.classList.add("live-on"); });
+      });
     }
     function closeDetail(){
       sheet.classList.remove("open"); document.body.style.overflow="";
@@ -270,29 +299,53 @@
     sheet.querySelector(".eiv-scrim").addEventListener("click", closeDetail);
     document.addEventListener("keydown", function(e){ if(e.key==="Escape" && sheet.classList.contains("open")) closeDetail(); });
 
-    // ---- interacción del dial ----
+    // ---- interacción del dial (arrastre continuo con inercia) ----
     buildDial();
-    var dial=mount.querySelector("#eivDial"), ddx=null, dmoved=false;
-    function rotate(step){ setSel(((sel+step)%P.length+P.length)%P.length); }
-    dialStage.addEventListener("pointerdown", function(e){ ddx=e.clientX; dmoved=false; });
-    dialStage.addEventListener("pointermove", function(e){ if(ddx==null) return; var dx=e.clientX-ddx; if(Math.abs(dx)>38){ rotate(dx<0?1:-1); ddx=e.clientX; dmoved=true; } });
-    dialStage.addEventListener("pointerup", function(){ ddx=null; });
-    dialStage.addEventListener("pointercancel", function(){ ddx=null; });
-    dialStage.addEventListener("click", function(e){ var b=e.target.closest(".eiv-dslot"); if(!b) return; if(dmoved){ dmoved=false; return; } var idx=+b.dataset.idx; if(idx===sel) openDetail(idx); else setSel(idx); });
+    var dial=mount.querySelector("#eivDial"), dragX=null, dragSelF=0, dragMoved=false, dragStep=1, lastSelF=0, lastT=0;
+    dialStage.addEventListener("pointerdown", function(e){
+      dragX=e.clientX; dragSelF=selF; dragMoved=false; vel=0;
+      dragStep=(dialStage.clientWidth||340)*0.16;
+      lastSelF=selF; lastT=performance.now();
+      if(dialRAF){cancelAnimationFrame(dialRAF);dialRAF=0;}
+      try{dialStage.setPointerCapture(e.pointerId);}catch(_){}
+    });
+    dialStage.addEventListener("pointermove", function(e){
+      if(dragX==null) return; var dx=e.clientX-dragX; if(Math.abs(dx)>4)dragMoved=true;
+      selF=dragSelF-dx/dragStep;
+      var now=performance.now(), dt=now-lastT;
+      if(dt>0){ var inst=(selF-lastSelF)/(dt/16); vel=vel*0.6+inst*0.4; lastSelF=selF; lastT=now; }
+      renderDial();
+    });
+    function endDrag(){
+      if(dragX==null) return; dragX=null;
+      if(reduce){ sel=Math.round(selF); selF=sel; vel=0; renderDial(); return; }
+      var v=Math.max(-1.2,Math.min(1.2,vel)), base=Math.round(selF);
+      var tgt=Math.round(selF+v*6); tgt=Math.max(base-4,Math.min(base+4,tgt));
+      sel=tgt; startDialAnim();
+    }
+    dialStage.addEventListener("pointerup", endDrag);
+    dialStage.addEventListener("pointercancel", endDrag);
+    dialStage.addEventListener("click", function(e){
+      var b=e.target.closest(".eiv-dslot"); if(!b) return;
+      if(dragMoved){ dragMoved=false; return; }
+      var off=+b.dataset.off, tgt=Math.round(selF)+off;
+      if(off===0 && Math.abs(selF-Math.round(selF))<0.08) openDetail(idxOf(tgt)); else setSel(tgt);
+    });
     dial.addEventListener("wheel", function(e){ if(Math.abs(e.deltaX)>Math.abs(e.deltaY) && Math.abs(e.deltaX)>4){ e.preventDefault(); rotate(e.deltaX>0?1:-1); } }, {passive:false});
 
     // identidad
-    function openCurrent(){ if(sel<0) setSel(0); openDetail(sel<0?0:sel); }
+    function openCurrent(){ openDetail(idxOf(Math.round(selF))); }
     core.addEventListener("click", openCurrent);
     core.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openCurrent(); } });
 
     // arranque (el menú NO avanza solo: lo recorre el usuario)
-    function boot(){ setSel(0); updateDial(); }
+    function boot(){ selF=0; sel=0; lastBase=null; renderDial(); }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ setTimeout(boot,30); }); else setTimeout(boot,60);
 
-    var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt=setTimeout(function(){ idn.resize(); updateDial(); }, 150); });
+    var rt; window.addEventListener("resize", function(){ clearTimeout(rt); rt=setTimeout(function(){ idn.resize(); renderDial(); }, 150); });
     window.addEventListener("temachange", function(){
-      if (sel>=0){ var c=areaColor(P[sel].area); idn.refreshColor(c); document.documentElement.style.setProperty("--acc",c); mount.style.setProperty("--acc",c); updateDial(); }
+      var c=areaColor(P[idxOf(Math.round(selF))].area); idn.refreshColor(c);
+      document.documentElement.style.setProperty("--acc",c); mount.style.setProperty("--acc",c); renderDial();
     });
   }
 

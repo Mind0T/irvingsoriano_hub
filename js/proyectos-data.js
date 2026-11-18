@@ -62,7 +62,9 @@
         {t:"Backend (Rubén)", u:GH+"Taquit/Space-Challenge"},
         {t:"Design kit", u:GH+"Mind0T/Space_app_design"}
       ],
-      live:"https://space-challenge-front.vercel.app", rol:{es:"UX/UI Designer & Design Thinker", en:"UX/UI Designer & Design Thinker"},
+      live:"https://spaceappdesign.vercel.app/proyecto.html",
+      video:"https://youtu.be/rZDq3W7zDKk",
+      rol:{es:"UX/UI Designer & Design Thinker", en:"UX/UI Designer & Design Thinker"},
       frase:{es:"En el reto de la NASA diseñé la calma: salud de astronautas que se entiende de un vistazo.",
              en:"At the NASA challenge I designed calm: astronaut health you grasp at a glance."},
       resumen:{es:"Reto 'Health Monitoring Software for Astronauts' del NASA Space Apps Challenge CDMX 2026, con el equipo Tacos de Asada. Mi rol fue UX/UI designer y design thinker: corrí las fases de empatizar y definir, construí el persona de la astronauta Katya, el journey map y la figura humana clicable, y diseñé ORBI — una identidad calmada que solo habla cuando algo cambia. Software local, sin internet.",

@@ -9,6 +9,8 @@
 .eiv-stage{display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px}
 .eiv-name{font-size:clamp(30px,5vw,56px); font-weight:900; color:var(--text-primary); margin:0; letter-spacing:-.02em; line-height:1.04; transition:color .4s}
 .eiv-sub,.eiv-role{font:700 clamp(11px,1.4vw,14px) var(--font-display); letter-spacing:.2em; text-transform:uppercase; color:var(--acc,var(--text-muted)); margin:5px 0 0; transition:color .5s}
+/* nombre del proyecto seleccionado — entre el subtítulo y la esfera de identidad */
+.eiv-current{font:800 clamp(15px,2vw,22px) var(--font-display); color:var(--text-primary); letter-spacing:-.01em; line-height:1.15; margin:8px 0 0; min-height:1.2em; transition:color .4s}
 .eiv-core{position:relative; width:clamp(300px,42vh,460px); height:clamp(300px,42vh,460px); display:grid; place-items:center; cursor:pointer; touch-action:manipulation; margin-top:clamp(2px,2vh,16px)}
 /* el lienzo rebasa el core para que el aura se desvanezca libre (sin recorte cuadrado) */
 .eiv-core canvas{position:absolute; top:-30%; left:-30%; width:160%; height:160%; pointer-events:none}
@@ -31,11 +33,11 @@
 .eiv-dial-arc path{fill:none; stroke:var(--border-strong); stroke-width:1; opacity:.5}
 .eiv-dial-items{position:absolute; inset:0}
 .eiv-dslot{position:absolute; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:6px;
-  transition:left .34s cubic-bezier(.2,.7,.2,1), top .34s cubic-bezier(.2,.7,.2,1), opacity .3s; background:none; border:0; padding:0; cursor:pointer}
+  transition:none; background:none; border:0; padding:0; cursor:pointer; will-change:left,top,opacity}
 .eiv-dslot .ic{position:relative; width:clamp(44px,5vw,56px); height:clamp(44px,5vw,56px); border-radius:50%; display:grid; place-items:center;
   border:1px solid color-mix(in oklab, var(--c,var(--silver)) 45%, var(--border-default)); background:var(--bg-surface); transition:width .25s, height .25s, background .25s, border-color .25s}
 .eiv-dslot .ic svg{width:48%; height:48%; stroke:var(--c,var(--text-primary)); fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
-.eiv-dslot .dl{font:700 clamp(10px,1.1vw,12px) var(--font-display); color:var(--text-secondary); max-width:130px; text-align:center; line-height:1.18; opacity:0; transition:opacity .3s}
+.eiv-dslot .dl{display:none}
 .eiv-dslot .dsoon{display:none}
 .eiv-dslot:hover .ic{border-color:var(--c,var(--silver))}
 .eiv-dslot.on{z-index:3}
@@ -83,7 +85,13 @@
 /* preview — póster clicable que siempre renderiza (+ iframe que aparece si carga) */
 .eiv-frame{position:relative; display:block; border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; background:var(--bg-lane); aspect-ratio:16/10; isolation:isolate; transition:border-color .2s, transform .2s}
 .eiv-frame:hover{border-color:var(--c,var(--silver)); transform:translateY(-2px)}
-.eiv-poster{position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:18px; background:radial-gradient(120% 120% at 50% 0%, color-mix(in oklab, var(--c,var(--silver)) 26%, var(--bg-lane)), var(--bg-lane))}
+.eiv-poster{position:absolute; inset:0; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:18px; background:radial-gradient(120% 120% at 50% 0%, color-mix(in oklab, var(--c,var(--silver)) 26%, var(--bg-lane)), var(--bg-lane)); transition:opacity .4s}
+/* vista en vivo: iframe real de la página, aparece al cargar y el póster se desvanece */
+.eiv-live{position:absolute; inset:0; width:100%; height:100%; border:0; z-index:0; background:var(--bg-lane); pointer-events:none; opacity:0; transition:opacity .5s}
+.eiv-frame.live-on .eiv-live{opacity:1}
+.eiv-frame.live-on .eiv-poster{opacity:0; pointer-events:none}
+.eiv-frame.has-live .eiv-frame-badge{opacity:0; transition:opacity .3s}
+.eiv-frame.live-on .eiv-frame-badge{opacity:1}
 .eiv-poster .pic{width:66px; height:66px; border-radius:50%; display:grid; place-items:center; border:1px solid color-mix(in oklab, var(--c,var(--silver)) 55%, transparent); background:color-mix(in oklab, var(--c,var(--silver)) 16%, transparent)}
 .eiv-poster .pic svg{width:34px; height:34px; stroke:var(--c,var(--silver)); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
 .eiv-poster .pnm{font:800 clamp(15px,1.7vw,19px) var(--font-display); color:var(--text-primary); max-width:24ch; line-height:1.25}

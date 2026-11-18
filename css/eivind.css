@@ -9,8 +9,10 @@
 .eiv-stage{display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px}
 .eiv-name{font-size:clamp(30px,5vw,56px); font-weight:900; color:var(--text-primary); margin:0; letter-spacing:-.02em; line-height:1.04; transition:color .4s}
 .eiv-sub,.eiv-role{font:700 clamp(11px,1.4vw,14px) var(--font-display); letter-spacing:.2em; text-transform:uppercase; color:var(--acc,var(--text-muted)); margin:5px 0 0; transition:color .5s}
-/* nombre del proyecto seleccionado — entre el subtítulo y la esfera de identidad */
-.eiv-current{font:800 clamp(15px,2vw,22px) var(--font-display); color:var(--text-primary); letter-spacing:-.01em; line-height:1.15; margin:8px 0 0; min-height:1.2em; transition:color .4s}
+/* etiqueta de sección — Montserrat delgada y espaciada, bajo "Científico de datos" */
+.eiv-seccion{font:300 clamp(11px,1.3vw,13px) var(--font-display); letter-spacing:.42em; text-transform:uppercase; color:var(--text-muted); margin:9px 0 0; padding-left:.42em}
+/* nombre del proyecto seleccionado — entre la esfera de identidad y el menú de media luna */
+.eiv-current{font:800 clamp(15px,2vw,22px) var(--font-display); color:var(--text-primary); letter-spacing:-.01em; line-height:1.15; margin:clamp(2px,1.6vh,14px) 0 0; min-height:1.2em; transition:color .4s}
 .eiv-core{position:relative; width:clamp(300px,42vh,460px); height:clamp(300px,42vh,460px); display:grid; place-items:center; cursor:pointer; touch-action:manipulation; margin-top:clamp(2px,2vh,16px)}
 /* el lienzo rebasa el core para que el aura se desvanezca libre (sin recorte cuadrado) */
 .eiv-core canvas{position:absolute; top:-30%; left:-30%; width:160%; height:160%; pointer-events:none}
@@ -113,6 +115,22 @@
 .eiv-shot .eiv-frame-badge{bottom:auto; top:10px}
 .eiv-viz{border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-lane); padding:18px}
 .eiv-viz svg{width:100%; height:auto; display:block; overflow:visible}
+
+/* preview — carrusel de capturas (flechas, puntos y swipe) */
+.eiv-carousel{position:relative; border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; background:var(--bg-lane)}
+.eiv-cviewport{position:relative; overflow:hidden; touch-action:pan-y}
+.eiv-ctrack{display:flex; transition:transform .42s cubic-bezier(.2,.7,.2,1); will-change:transform}
+.eiv-cslide{flex:0 0 100%; min-width:0; margin:0}
+.eiv-cslide img{width:100%; height:auto; display:block; -webkit-user-drag:none; user-select:none}
+.eiv-ccap{margin:0; font-size:12.5px; color:var(--text-secondary); line-height:1.45; padding:10px 14px; border-top:1px solid var(--border-default)}
+.eiv-carr{position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:99px; border:1px solid var(--border-strong); background:color-mix(in oklab, var(--bg-surface) 80%, transparent); color:var(--text-primary); display:grid; place-items:center; cursor:pointer; z-index:3; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:var(--transition-base)}
+.eiv-carr:hover{border-color:var(--c,var(--silver)); background:var(--bg-surface)}
+.eiv-carr svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.eiv-carr.prev{left:10px} .eiv-carr.next{right:10px}
+.eiv-cdots{position:absolute; left:0; right:0; bottom:10px; display:flex; gap:7px; justify-content:center; z-index:3}
+.eiv-cdot{width:8px; height:8px; padding:0; border:0; border-radius:99px; background:rgba(255,255,255,.5); box-shadow:0 1px 4px rgba(0,0,0,.45); cursor:pointer; transition:background .25s, width .25s}
+.eiv-cdot.on{background:var(--c,var(--silver)); width:22px}
+:root[data-tema="claro"] .eiv-cdot{background:rgba(0,0,0,.3)}
 
 .eiv-links{display:flex; flex-wrap:wrap; gap:10px}
 .eiv-link{display:inline-flex; align-items:center; gap:8px; height:42px; padding:0 17px; border-radius:99px; font:700 13px var(--font-display); transition:var(--transition-base); border:1px solid var(--border-strong); color:var(--text-primary)}

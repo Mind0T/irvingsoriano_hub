@@ -40,8 +40,11 @@
       highlights:{es:["Kanban + calendario + recordatorios en un solo lugar","Sync real con Google Calendar y avisos por WhatsApp","Vista de 'caminos' con progreso por materia y hábito"],
                   en:["Kanban + calendar + reminders in one place","Real Google Calendar sync and WhatsApp alerts","A 'roads' view with progress by subject and habit"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script","Vercel"],
-      // tablero real (privado por contraseña); el link va al tablero real
-      preview:{type:"live", url:"https://tablero.irvingsoriano.com"}
+      // tablero real (privado por contraseña); se muestra como carrusel de capturas
+      preview:{type:"carousel", shots:[
+        {src:"assets/proyectos/tablero-calendario.jpg", cap:{es:"Vista semanal del calendario: clases, deporte, hábitos y pagos.", en:"Weekly calendar view: classes, sport, habits and payments."}},
+        {src:"assets/proyectos/tablero-kanban.jpg", cap:{es:"Tablero kanban de desarrollo profesional, con progreso por tarjeta.", en:"Professional-development kanban board, with progress per card."}}
+      ]}
     },
     {
       id:"estudio", area:"tool", icon:"estudio",
@@ -83,9 +86,9 @@
              en:"At the NASA challenge I designed calm: astronaut health you grasp at a glance."},
       resumen:{es:"Reto 'Health Monitoring Software for Astronauts' del NASA Space Apps Challenge CDMX 2026, con el equipo Tacos de Asada. Mi rol fue UX/UI designer y design thinker: corrí las fases de empatizar y definir, construí el persona de la astronauta Katya, el journey map y la figura humana clicable, y diseñé ORBI — una identidad calmada que solo habla cuando algo cambia. Software local, sin internet.",
                en:"The 'Health Monitoring Software for Astronauts' challenge at NASA Space Apps Challenge CDMX 2026, with team Tacos de Asada. My role was UX/UI designer and design thinker: I ran the empathize and define phases, built astronaut Katya's persona, the journey map and the clickable human figure, and designed ORBI — a calm identity that only speaks when something changes. Local software, no internet."},
-      highlights:{es:["Reframe del reto: de monitorear indicadores a la autoevaluación del astronauta","Persona, empathy map y journey map (antes / durante / después)","ORBI: identidad que cambia de color y solo avisa cuando algo importa","Diseño generado en Claude Design y conectado al backend real"],
-                  en:["Reframed the challenge: from tracking metrics to astronaut self-assessment","Persona, empathy map and journey map (before / during / after)","ORBI: an identity that shifts color and speaks only when it matters","Design built in Claude Design and wired to the real backend"]},
-      tech:["Figma","Claude Design","Design Thinking","React","UX Research"],
+      highlights:{es:["Reframe del reto: de monitorear indicadores a la autoevaluación del astronauta","Persona, empathy map y journey map (antes / durante / después)","ORBI: identidad que cambia de color y solo avisa cuando algo importa","Diseño de UI/UX y frontend, conectado al backend real"],
+                  en:["Reframed the challenge: from tracking metrics to astronaut self-assessment","Persona, empathy map and journey map (before / during / after)","ORBI: an identity that shifts color and speaks only when it matters","UI/UX and frontend design, wired to the real backend"]},
+      tech:["Figma","Design Thinking","React","UX Research"],
       preview:{type:"live", frames:[
         {url:"https://spaceappdesign.vercel.app/proyecto.html", cap:{es:"Ideación: aterrizar el problema, la solución y el mapa de empatía.", en:"Ideation: framing the problem, the solution and the empathy map."}},
         {url:"https://space-challenge-front.vercel.app", cap:{es:"El frontend en vivo: la interfaz ORBI.", en:"The live frontend: the ORBI interface."}}
@@ -122,8 +125,8 @@
              en:"The face of AWS Student Community Day: identity and experience end to end."},
       resumen:{es:"Interfaz y experiencia de la web oficial del AWS Student Community Day CDMX 2026: identidad visual, UX/UI y maquetado del evento, pensados para que la comunidad encuentre todo sin fricción.",
                en:"UI and experience for the official AWS Student Community Day CDMX 2026 website: visual identity, UX/UI and layout, built so the community finds everything without friction."},
-      highlights:{es:["Identidad visual del evento de principio a fin","Arquitectura de información clara para asistentes","Maquetado responsivo del sitio oficial"],
-                  en:["End-to-end visual identity for the event","Clear information architecture for attendees","Responsive layout of the official site"]},
+      highlights:{es:["Identidad visual del evento de principio a fin","Diseño de UI/UX y arquitectura de información para asistentes","Maquetado y frontend responsivo del sitio oficial"],
+                  en:["End-to-end visual identity for the event","UI/UX design and information architecture for attendees","Responsive layout and frontend of the official site"]},
       tech:["UX/UI","HTML","CSS","Python"],
       preview:{type:"live", url:"https://studentcommunitydaymexico.com"}
     },
@@ -143,8 +146,11 @@
       highlights:{es:["Un mismo motor, dos marcas distintas","Google Sheets como backend sin servidor","Semilla del Gestor de actividades"],
                   en:["One engine, two distinct brands","Google Sheets as a serverless backend","The seed of the activity manager"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script"],
-      // tablero del SBG/SCD (privado por contraseña); el link va al tablero real
-      preview:{type:"live", url:"https://creativity-sbg-ipn.vercel.app/"}
+      // tablero del SBG/SCD (privado por contraseña); se muestra como carrusel de capturas
+      preview:{type:"carousel", shots:[
+        {src:"assets/proyectos/sbg-creativity.jpg", cap:{es:"Tablero del área de Creativity del AWS SBG IPN.", en:"Creativity area board of the AWS SBG IPN."}},
+        {src:"assets/proyectos/scd-diseno.jpg", cap:{es:"Tablero de diseño del AWS Student Community Day CDMX 2026.", en:"Design board for AWS Student Community Day CDMX 2026."}}
+      ]}
     },
     {
       id:"alura-telecom2", area:"data", icon:"ml",
@@ -240,15 +246,15 @@
       id:"misspalomitas", area:"web", icon:"popcorn",
       nombre:{es:"MissPalomitas", en:"MissPalomitas"},
       sub:{es:"Palomitas gourmet", en:"Gourmet popcorn"},
-      objetivo:{es:"Darle presencia web a mi negocio de palomitas gourmet con un catálogo de sabores y la vitrina de la marca.",
-                en:"Give my gourmet popcorn business a web presence with a flavor catalog and the brand's storefront."},
-      necesidad:{es:"Un negocio pequeño necesita un escaparate propio donde la gente vea los sabores y la identidad de la marca. El sitio cumple esa función de catálogo y presentación.",
-                 en:"A small business needs a storefront of its own where people can see the flavors and the brand's identity. The site serves that catalog-and-presentation role."},
+      objetivo:{es:"Darle presencia web a la marca de palomitas gourmet Miss Palomitas, con un catálogo de sabores y la vitrina de la marca.",
+                en:"Give the Miss Palomitas gourmet popcorn brand a web presence, with a flavor catalog and the brand's storefront."},
+      necesidad:{es:"Una marca pequeña necesita un escaparate propio donde la gente vea los sabores y su identidad. El sitio de Miss Palomitas cumple esa función de catálogo y presentación.",
+                 en:"A small brand needs a storefront of its own where people can see the flavors and its identity. The Miss Palomitas site serves that catalog-and-presentation role."},
       lang:"JavaScript", repo:GH+"Mind0T/MissPalomitas", live:"https://www.misspalomitas.com/",
       frase:{es:"Hasta las palomitas tienen su sitio: dulce, salado y picosito.",
              en:"Even popcorn gets its own site: sweet, salty and spicy."},
-      resumen:{es:"Sitio web de mi negocio de palomitas gourmet: catálogo de sabores salados, dulces y picositos, y vitrina de la marca.",
-               en:"Website for my gourmet popcorn business: a catalog of savory, sweet and spicy flavors and the brand's storefront."},
+      resumen:{es:"Sitio web de la marca de palomitas gourmet Miss Palomitas: catálogo de sabores salados, dulces y picositos, y vitrina de la marca.",
+               en:"Website for the Miss Palomitas gourmet popcorn brand: a catalog of savory, sweet and spicy flavors and the brand's storefront."},
       highlights:{es:["Catálogo de sabores por categoría","Vitrina de marca propia","Un proyecto con sabor"],
                   en:["Flavor catalog by category","A storefront for my own brand","A project with flavor"]},
       tech:["JavaScript","HTML","CSS"],

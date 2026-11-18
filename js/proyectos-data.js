@@ -36,7 +36,8 @@
       highlights:{es:["Kanban + calendario + recordatorios en un solo lugar","Sync real con Google Calendar y avisos por WhatsApp","Vista de 'caminos' con progreso por materia y hábito"],
                   en:["Kanban + calendar + reminders in one place","Real Google Calendar sync and WhatsApp alerts","A 'roads' view with progress by subject and habit"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script","Vercel"],
-      preview:{type:"live", url:"https://tablero.irvingsoriano.com"}
+      // el tablero real es privado (contraseña); la preview muestra un demo con datos ficticios
+      preview:{type:"live", url:"demos/tablero-demo.html?board=irving"}
     },
     {
       id:"estudio", area:"tool", icon:"estudio",
@@ -115,7 +116,8 @@
       highlights:{es:["Un mismo motor, dos marcas distintas","Google Sheets como backend sin servidor","Semilla del Gestor de actividades"],
                   en:["One engine, two distinct brands","Google Sheets as a serverless backend","The seed of the activity manager"]},
       tech:["HTML","JavaScript","Google Sheets","Apps Script"],
-      preview:{type:"live", url:"https://creativity-sbg-ipn.vercel.app/"}
+      // tablero del SBG/SCD, privado; la preview muestra un demo con datos ficticios
+      preview:{type:"live", url:"demos/tablero-demo.html?board=sbg"}
     },
     {
       id:"alura-telecom2", area:"data", icon:"ml",

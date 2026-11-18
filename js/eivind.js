@@ -11,12 +11,12 @@
     es: { titulo:"Irving Soriano", subtitulo:"Científico de datos", hint:"Abrir proyecto",
           open:"Ver proyecto",
           live:"Abrir en vivo", repo:"Código", video:"Video", loading:"Cargando vista en vivo…",
-          role:"Mi rol", preview:"Vista", about:"De qué va", high:"Lo que hice", tech:"Herramientas",
+          role:"Mi rol", preview:"Vista", about:"De qué va", goal:"Objetivo", need:"Necesidad que cubre", high:"Lo que hice", tech:"Herramientas",
           nolive:"Visualización del análisis" },
     en: { titulo:"Irving Soriano", subtitulo:"Data Scientist", hint:"Open project",
           open:"View project",
           live:"Open live", repo:"Code", video:"Video", loading:"Loading live view…",
-          role:"My role", preview:"Preview", about:"What it is", high:"What I did", tech:"Tools",
+          role:"My role", preview:"Preview", about:"What it is", goal:"Goal", need:"The need it covers", high:"What I did", tech:"Tools",
           nolive:"Analysis visualization" }
   };
 
@@ -282,6 +282,8 @@
           '<div class="eiv-col-media"><div class="eiv-sec"><h3>'+tx.preview+'</h3>'+preview(p)+'</div></div>'+
           '<div class="eiv-col-text">'+
             '<div class="eiv-sec"><h3>'+tx.about+'</h3><p class="lead">'+p.resumen[lang]+'</p></div>'+
+            (p.objetivo?'<div class="eiv-sec"><h3>'+tx.goal+'</h3><p class="lead">'+p.objetivo[lang]+'</p></div>':'')+
+            (p.necesidad?'<div class="eiv-sec"><h3>'+tx.need+'</h3><p class="lead">'+p.necesidad[lang]+'</p></div>':'')+
             '<div class="eiv-sec"><h3>'+tx.high+'</h3><ul class="eiv-hl">'+p.highlights[lang].map(function(h){return '<li>'+h+'</li>';}).join("")+'</ul></div>'+
             '<div class="eiv-sec"><h3>'+tx.tech+'</h3><div class="eiv-tech">'+p.tech.map(function(t){return '<span>'+t+'</span>';}).join("")+'</div></div>'+
             '<div class="eiv-links">'+links(p)+'</div>'+

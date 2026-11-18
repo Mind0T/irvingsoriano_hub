@@ -8,12 +8,12 @@
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var UI = {
-    es: { titulo:"Irving Soriano", subtitulo:"Científico de datos", hint:"Abrir proyecto",
+    es: { titulo:"Irving Soriano", subtitulo:"Científico de datos", seccion:"Proyectos", hint:"Abrir proyecto",
           open:"Ver proyecto",
           live:"Abrir en vivo", repo:"Código", video:"Video", loading:"Cargando vista en vivo…",
           role:"Mi rol", preview:"Vista", about:"De qué va", goal:"Objetivo", need:"Necesidad que cubre", high:"Lo que hice", tech:"Herramientas",
           nolive:"Visualización del análisis" },
-    en: { titulo:"Irving Soriano", subtitulo:"Data Scientist", hint:"Open project",
+    en: { titulo:"Irving Soriano", subtitulo:"Data Scientist", seccion:"Projects", hint:"Open project",
           open:"View project",
           live:"Open live", repo:"Code", video:"Video", loading:"Loading live view…",
           role:"My role", preview:"Preview", about:"What it is", goal:"Goal", need:"The need it covers", high:"What I did", tech:"Tools",
@@ -25,6 +25,7 @@
     return v || fb;
   }
   function areaColor(area) { return cvar("--" + area, "#D4D4D4"); }
+  function escAttr(s) { return String(s==null?"":s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
   function hex2rgb(h) {
     h = (h || "").replace("#", "");
     if (h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
@@ -145,11 +146,12 @@
       '<section class="eiv-stage">'+
         '<h1 class="eiv-name">'+tx.titulo+'</h1>'+
         '<p class="eiv-sub eiv-role">'+tx.subtitulo+'</p>'+
-        '<p class="eiv-current" id="eivCurrent" aria-live="polite"></p>'+
+        '<p class="eiv-seccion">'+tx.seccion+'</p>'+
         '<div class="eiv-core" id="eivCore" role="button" tabindex="0" aria-label="'+tx.open+'">'+
           '<canvas id="eivCanvas"></canvas>'+
           '<span class="eiv-hint">'+tx.hint+'</span>'+
         '</div>'+
+        '<p class="eiv-current" id="eivCurrent" aria-live="polite"></p>'+
       '</section>'+
       '<div class="eiv-dial" id="eivDial" aria-label="'+(lang==="en"?"Projects":"Proyectos")+'">'+
         '<div class="eiv-dial-stage" id="eivDialStage">'+
@@ -250,6 +252,22 @@
         var frames = p.preview.frames || [{url:p.preview.url, noembed:p.preview.noembed}];
         return frames.map(function(f){ return liveFrame(p, f); }).join("");
       }
+      if (p.preview.type==="carousel") {
+        var shots = p.preview.shots || [];
+        var caps = shots.map(function(sh){ return sh.cap ? L(sh.cap) : ""; });
+        var slides = shots.map(function(sh,i){
+          return '<figure class="eiv-cslide"><img src="'+sh.src+'" alt="'+escAttr(sh.cap?L(sh.cap):p.nombre[lang])+'" loading="lazy"></figure>';
+        }).join("");
+        var multi = shots.length>1;
+        var dots = multi ? shots.map(function(sh,i){ return '<button class="eiv-cdot'+(i===0?" on":"")+'" type="button" data-i="'+i+'" aria-label="'+(i+1)+'"></button>'; }).join("") : "";
+        var arrows = multi ?
+          '<button class="eiv-carr prev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>'+
+          '<button class="eiv-carr next" type="button" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>' : "";
+        return '<div class="eiv-carousel" style="--c:'+areaColor(p.area)+'" data-caps="'+escAttr(JSON.stringify(caps))+'">'+
+            '<div class="eiv-cviewport"><div class="eiv-ctrack">'+slides+'</div>'+arrows+(multi?'<div class="eiv-cdots">'+dots+'</div>':'')+'</div>'+
+            (caps[0]?'<p class="eiv-ccap">'+caps[0]+'</p>':'')+
+          '</div>';
+      }
       if (p.preview.type==="gallery") {
         return '<div class="eiv-shots">'+p.preview.shots.map(function(sh){
           var o = sh.url ? (' href="'+sh.url+'" target="_blank" rel="noopener"') : "";
@@ -301,6 +319,7 @@
         fr.addEventListener("load", function(){ if(done)return; done=true; frame.classList.add("live-on"); });
       });
       fitLiveFrames(sheet);
+      wireCarousels(sheet);
     }
     // el iframe se renderiza a ancho de LAPTOP (1440×810, 16:9) y se escala al
     // recuadro: así la página muestra su layout de escritorio, no el móvil.
@@ -314,6 +333,32 @@
       });
     }
     var frt; window.addEventListener("resize", function(){ clearTimeout(frt); frt=setTimeout(function(){ fitLiveFrames(document); }, 160); });
+    // carrusel de capturas (flechas, puntos y swipe)
+    function wireCarousels(root){
+      (root||document).querySelectorAll(".eiv-carousel").forEach(function(car){
+        var track=car.querySelector(".eiv-ctrack"),
+            slides=car.querySelectorAll(".eiv-cslide"),
+            dots=car.querySelectorAll(".eiv-cdot"),
+            cap=car.querySelector(".eiv-ccap"),
+            caps=[]; try{ caps=JSON.parse(car.dataset.caps||"[]"); }catch(_){ }
+        var n=slides.length, i=0;
+        if(n<2) return;
+        function go(k){
+          i=((k%n)+n)%n;
+          track.style.transform="translateX("+(-i*100)+"%)";
+          for(var d=0;d<dots.length;d++) dots[d].classList.toggle("on", d===i);
+          if(cap && caps[i]!=null) cap.textContent=caps[i];
+        }
+        var prev=car.querySelector(".eiv-carr.prev"), next=car.querySelector(".eiv-carr.next");
+        if(prev) prev.addEventListener("click", function(){ go(i-1); });
+        if(next) next.addEventListener("click", function(){ go(i+1); });
+        dots.forEach(function(d){ d.addEventListener("click", function(){ go(+d.dataset.i); }); });
+        var sx=null;
+        car.addEventListener("pointerdown", function(e){ if(e.target.closest(".eiv-carr,.eiv-cdot")) return; sx=e.clientX; });
+        car.addEventListener("pointerup", function(e){ if(sx==null) return; var dx=e.clientX-sx; sx=null; if(Math.abs(dx)>40) go(dx<0?i+1:i-1); });
+        car.addEventListener("pointercancel", function(){ sx=null; });
+      });
+    }
     function closeDetail(){
       sheet.classList.remove("open"); document.body.style.overflow="";
       setTimeout(function(){ var pi=sheet.querySelector("#eivPanelInner"); if(pi) pi.innerHTML=""; var pp=sheet.querySelector(".eiv-panel"); if(pp){ pp.style.transform=""; pp.style.transition=""; } }, 300);

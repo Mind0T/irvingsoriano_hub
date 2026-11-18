@@ -26,7 +26,7 @@
   function aplicarTema(t) {
     document.documentElement.setAttribute("data-tema", t === "claro" ? "claro" : "oscuro");
     var li = document.getElementById("logoImg");
-    if (li) li.src = (t === "claro") ? "assets/logo-wordmark-dark.png" : "assets/logo-wordmark.png";
+    if (li) li.src = (t === "claro") ? "assets/logo-brand-light.png" : "assets/logo-brand.png";
     window.TEMA = t;
     try { window.dispatchEvent(new CustomEvent("temachange", { detail: t })); } catch (_) {}
   }
@@ -42,7 +42,7 @@
     header.className = "top wrap";
     header.innerHTML =
       '<a class="brand" href="index.html" aria-label="Irving Soriano · Inicio">' +
-        '<img id="logoImg" class="logo-full" src="' + (tema === "claro" ? "assets/logo-wordmark-dark.png" : "assets/logo-wordmark.png") + '" alt="Irving Soriano">' +
+        '<img id="logoImg" class="logo-full" src="' + (tema === "claro" ? "assets/logo-brand-light.png" : "assets/logo-brand.png") + '" alt="Irving Soriano">' +
       '</a>' +
       '<nav class="nav"><div class="seg2" id="segnav">' + navHTML() + '</div></nav>' +
       '<div class="head-right">' +

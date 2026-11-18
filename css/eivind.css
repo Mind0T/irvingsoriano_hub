@@ -7,7 +7,13 @@
 
 /* ----- escenario / identidad ----- */
 .eiv-stage{display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px}
-.eiv-name{font-size:clamp(30px,5vw,56px); font-weight:900; color:var(--text-primary); margin:0; letter-spacing:-.02em; line-height:1.04; transition:color .4s}
+.eiv-name{margin:0; line-height:0; display:flex; justify-content:center}
+/* el nombre ahora es el logotipo recortado (solo "Irving Soriano"), con variante por tema */
+.eiv-name-img{display:block; width:clamp(240px,42vw,480px); height:auto; margin:0 auto; filter:drop-shadow(0 0 14px rgba(255,255,255,.08))}
+.eiv-name-img.is-light{display:none}
+:root[data-tema="claro"] .eiv-name-img.is-dark{display:none}
+:root[data-tema="claro"] .eiv-name-img.is-light{display:block}
+:root[data-tema="claro"] .eiv-name-img{filter:none}
 .eiv-sub,.eiv-role{font:700 clamp(11px,1.4vw,14px) var(--font-display); letter-spacing:.2em; text-transform:uppercase; color:var(--acc,var(--text-muted)); margin:5px 0 0; transition:color .5s}
 /* etiqueta de sección — Montserrat delgada y espaciada, bajo "Científico de datos" */
 .eiv-seccion{font:300 clamp(11px,1.3vw,13px) var(--font-display); letter-spacing:.42em; text-transform:uppercase; color:var(--text-muted); margin:9px 0 0; padding-left:.42em}
@@ -120,8 +126,10 @@
 .eiv-carousel{position:relative; border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; background:var(--bg-lane)}
 .eiv-cviewport{position:relative; overflow:hidden; touch-action:pan-y}
 .eiv-ctrack{display:flex; transition:transform .42s cubic-bezier(.2,.7,.2,1); will-change:transform}
-.eiv-cslide{flex:0 0 100%; min-width:0; margin:0}
+.eiv-cslide{flex:0 0 100%; min-width:0; margin:0; display:block; position:relative}
+a.eiv-cslide{cursor:pointer; color:inherit; text-decoration:none}
 .eiv-cslide img{width:100%; height:auto; display:block; -webkit-user-drag:none; user-select:none}
+a.eiv-cslide:hover .eiv-frame-badge{filter:brightness(1.08)}
 .eiv-ccap{margin:0; font-size:12.5px; color:var(--text-secondary); line-height:1.45; padding:10px 14px; border-top:1px solid var(--border-default)}
 .eiv-carr{position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:99px; border:1px solid var(--border-strong); background:color-mix(in oklab, var(--bg-surface) 80%, transparent); color:var(--text-primary); display:grid; place-items:center; cursor:pointer; z-index:3; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); transition:var(--transition-base)}
 .eiv-carr:hover{border-color:var(--c,var(--silver)); background:var(--bg-surface)}

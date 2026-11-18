@@ -60,6 +60,9 @@
 /* experiencia y comunidad (perfil profesional) */
 .exp-title{display:flex; align-items:center; gap:10px; margin:30px 2px 16px; font:800 12px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:var(--c,var(--text-secondary))}
 .exp-title .dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.road-node .note-ul{list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:6px}
+.road-node .note-ul li{position:relative; padding-left:16px; color:var(--text-secondary); font-size:13px; line-height:1.5}
+.road-node .note-ul li::before{content:""; position:absolute; left:0; top:7px; width:6px; height:6px; border-radius:50%; background:var(--c); opacity:.85}
 .comm{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
 .ccard{position:relative; border:1px solid var(--border-default); background:linear-gradient(160deg,var(--bg-surface),#0E0E0E); border-radius:var(--radius-lg); padding:22px; overflow:hidden; transition:var(--transition-base)}
 .ccard::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
@@ -153,23 +156,69 @@ window.I18N = {
 };
 var EXP=[
   {yr:"Feb 2025 – actualidad",c:"var(--ai)",
-    es:{r:"Líder de Marketing y Diseño",o:"AWS Student Builder Group · IPN",n:"Identidad y branding de la comunidad, materiales para redes, producción audiovisual y una línea gráfica que impulsa el engagement."},
-    en:{r:"Marketing & Design Lead",o:"AWS Student Builder Group · IPN",n:"Community identity and branding, social media materials, audiovisual production and a graphic line that drives engagement."}},
+    es:{r:"Líder de Marketing y Diseño",o:"AWS Student Builder Group · IPN",n:[
+      "Dirijo la identidad visual y el branding de la comunidad: logotipo, paleta, tipografía y una línea gráfica consistente.",
+      "Diseño los materiales para redes sociales y las campañas de difusión de cada evento y convocatoria.",
+      "Produzco contenido audiovisual (foto y video) para la comunidad y sus actividades.",
+      "Coordino el esfuerzo creativo del equipo para mantener una imagen coherente en todos los canales.",
+      "Cuido que la línea gráfica impulse el engagement y el alcance de la comunidad."]},
+    en:{r:"Marketing & Design Lead",o:"AWS Student Builder Group · IPN",n:[
+      "I lead the community's visual identity and branding: logo, palette, typography and a consistent graphic line.",
+      "I design social-media assets and the promotional campaigns for every event and call.",
+      "I produce audiovisual content (photo and video) for the community and its activities.",
+      "I coordinate the team's creative effort to keep a coherent image across all channels.",
+      "I make sure the graphic line drives the community's engagement and reach."]}},
   {yr:"2026",c:"var(--ux)",
-    es:{r:"UX/UI Designer & Design Thinker",o:"NASA Space Apps Challenge CDMX · ORBITAL",n:"En el reto «Health Monitoring Software for Astronauts», con el equipo Tacos de Asada, dirigí las fases de empatizar y definir: construí el persona de la astronauta Katya, el empathy map y el journey map (antes / durante / después), y reformulé el reto —de monitorear indicadores a la autoevaluación del astronauta—. Diseñé ORBI, una identidad calmada que cambia de color y solo avisa cuando algo importa, además de la figura humana clicable. Prototipo en Figma y Claude Design, conectado al backend real del equipo."},
-    en:{r:"UX/UI Designer & Design Thinker",o:"NASA Space Apps Challenge CDMX · ORBITAL",n:"In the “Health Monitoring Software for Astronauts” challenge, with team Tacos de Asada, I led the empathize and define phases: I built astronaut Katya's persona, the empathy map and the journey map (before / during / after), and reframed the challenge —from tracking metrics to astronaut self-assessment—. I designed ORBI, a calm identity that shifts color and only speaks when it matters, plus the clickable human figure. Prototype in Figma and Claude Design, wired to the team's real backend."}},
+    es:{r:"UX/UI Designer & Design Thinker",o:"NASA Space Apps Challenge CDMX · ORBITAL",n:[
+      "Dirigí las fases de empatizar y definir del Design Thinking con el equipo Tacos de Asada, en el reto «Health Monitoring Software for Astronauts».",
+      "Construí el persona de la astronauta Katya, el empathy map y el journey map (antes / durante / después).",
+      "Reformulé el reto: de monitorear indicadores a la autoevaluación del astronauta.",
+      "Diseñé ORBI, una identidad calmada que cambia de color y solo avisa cuando algo importa, además de la figura humana clicable.",
+      "Prototipé en Figma y Claude Design, conectado al backend real del equipo."]},
+    en:{r:"UX/UI Designer & Design Thinker",o:"NASA Space Apps Challenge CDMX · ORBITAL",n:[
+      "I led the empathize and define phases of Design Thinking with team Tacos de Asada, in the “Health Monitoring Software for Astronauts” challenge.",
+      "I built astronaut Katya's persona, the empathy map and the journey map (before / during / after).",
+      "I reframed the challenge: from tracking metrics to astronaut self-assessment.",
+      "I designed ORBI, a calm identity that shifts color and only speaks when it matters, plus the clickable human figure.",
+      "I prototyped in Figma and Claude Design, wired to the team's real backend."]}},
   {yr:"2026",c:"var(--data)",
-    es:{r:"Líder de Creativity y Diseño Visual",o:"AWS Student Community Day CDMX",n:"Identidad visual del evento (mascota «Fetch»), merchandising, displays y UX/UI de la web oficial."},
-    en:{r:"Creativity & Visual Design Lead",o:"AWS Student Community Day CDMX",n:"Event visual identity (mascot “Fetch”), merchandising, displays and UX/UI of the official website."}},
+    es:{r:"Líder de Creativity y Diseño Visual",o:"AWS Student Community Day CDMX",n:[
+      "Creé la identidad visual del evento, incluida la mascota «Fetch».",
+      "Diseñé el merchandising y los displays físicos del evento.",
+      "Lideré el UX/UI de la web oficial del AWS Student Community Day CDMX.",
+      "Mantuve la coherencia de la marca entre lo físico y lo digital."]},
+    en:{r:"Creativity & Visual Design Lead",o:"AWS Student Community Day CDMX",n:[
+      "I created the event's visual identity, including the “Fetch” mascot.",
+      "I designed the event's merchandising and physical displays.",
+      "I led the UX/UI of the official AWS Student Community Day CDMX website.",
+      "I kept brand consistency across the physical and digital experience."]}},
   {yr:"2026",c:"var(--ux)",
-    es:{r:"Speaker",o:"AWS Summit 2026",n:"Plática «Todos necesitamos un tío Iroh»: el valor del mentoring en el desarrollo profesional."},
-    en:{r:"Speaker",o:"AWS Summit 2026",n:"Talk “We all need an uncle Iroh”: the value of mentoring in professional growth."}},
+    es:{r:"Speaker",o:"AWS Summit 2026",n:[
+      "Impartí la plática «Todos necesitamos un tío Iroh» ante la comunidad del AWS Summit 2026.",
+      "Abordé el valor del mentoring en el desarrollo profesional.",
+      "Compartí aprendizajes y referentes para quienes empiezan en tecnología."]},
+    en:{r:"Speaker",o:"AWS Summit 2026",n:[
+      "I gave the talk “We all need an uncle Iroh” to the AWS Summit 2026 community.",
+      "I covered the value of mentoring in professional growth.",
+      "I shared lessons and role models for those starting out in tech."]}},
   {yr:"2026",c:"var(--web)",
-    es:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · Track IBM",n:"Gané junto a mi equipo el 2.º lugar en «Ciudades Inteligentes y Sostenibles» con SUSVI, una plataforma de análisis geoespacial, donde fungí como speaker y design thinker."},
-    en:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · IBM Track",n:"Won 2nd place with my team in “Smart & Sustainable Cities” with SUSVI, a geospatial analysis platform, where I served as speaker and design thinker."}},
+    es:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · Track IBM",n:[
+      "Obtuve con mi equipo el 2.º lugar del track IBM en «Ciudades Inteligentes y Sostenibles».",
+      "Desarrollamos SUSVI, una plataforma de análisis geoespacial.",
+      "Fungí como speaker y design thinker, guiando la definición del problema y la propuesta."]},
+    en:{r:"Speaker & Design Thinker",o:"Hackathon Talent Land · IBM Track",n:[
+      "My team and I won 2nd place in the IBM track, “Smart & Sustainable Cities”.",
+      "We built SUSVI, a geospatial analysis platform.",
+      "I served as speaker and design thinker, guiding the problem framing and the pitch."]}},
   {yr:"Nov 2023 – Jul 2024",c:"var(--foto)",
-    es:{r:"Líder de Creativity",o:"Club de Ciencia de Datos · ESCOM",n:"Identidad del club, evento «Data for Everyone 2024», campañas en redes y producción multimedia."},
-    en:{r:"Creativity Lead",o:"Data Science Club · ESCOM",n:"Club identity, “Data for Everyone 2024” event, social campaigns and multimedia production."}}
+    es:{r:"Líder de Creativity",o:"Club de Ciencia de Datos · ESCOM",n:[
+      "Definí la identidad del club y su línea gráfica.",
+      "Lideré la creatividad del evento «Data for Everyone 2024».",
+      "Gestioné las campañas en redes y la producción multimedia del club."]},
+    en:{r:"Creativity Lead",o:"Data Science Club · ESCOM",n:[
+      "I defined the club's identity and graphic line.",
+      "I led the creative work for the “Data for Everyone 2024” event.",
+      "I managed the club's social campaigns and multimedia production."]}}
 ];
 var EDU=[
   {yr:"2024–…",c:"var(--data)",es:"Licenciatura en Ciencia de Datos",en:"B.S. in Data Science",w:"ESCOM · IPN",esn:"En curso · 3.er semestre",enn:"In progress · 3rd semester"},
@@ -186,7 +235,10 @@ function escp(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){retur
 window.render = function(lang){
   document.getElementById("expRoad").innerHTML = EXP.map(function(e){
     var t = lang==="es"?e.es:e.en;
-    return '<div class="road-node" style="--c:'+e.c+'"><div class="yr">'+escp(e.yr)+'</div><h3>'+escp(t.r)+'</h3><div class="where">'+escp(t.o)+'</div><div class="note">'+escp(t.n)+'</div></div>';
+    var note = Array.isArray(t.n)
+      ? '<ul class="note-ul">'+t.n.map(function(li){return '<li>'+escp(li)+'</li>';}).join("")+'</ul>'
+      : '<div class="note">'+escp(t.n)+'</div>';
+    return '<div class="road-node" style="--c:'+e.c+'"><div class="yr">'+escp(e.yr)+'</div><h3>'+escp(t.r)+'</h3><div class="where">'+escp(t.o)+'</div>'+note+'</div>';
   }).join("");
   document.getElementById("road").innerHTML = EDU.map(function(e){
     var note = lang==="es"?e.esn:e.enn;

@@ -5,7 +5,7 @@
 <script>(function(){try{var t=localStorage.getItem("irvin.tema");if(t!=="claro"&&t!=="oscuro"){t=(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches)?"claro":"oscuro";}document.documentElement.setAttribute("data-tema",t);}catch(e){document.documentElement.setAttribute("data-tema","oscuro");}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Comunidad · Irvin Soriano</title>
-<meta name="description" content="Comunidad: lo que Irvin Soriano construye y enseña con la comunidad tech — AWS SBG, Student Community Day, contenido y su plataforma de estudio abierta.">
+<meta name="description" content="Comunidad: divulgación en tecnología y formación — videos, charlas y cursos grabados de Irvin Soriano para la comunidad tech.">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -13,56 +13,81 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/sistema.css">
 <style>
-.sect-title{display:flex; align-items:center; gap:10px; margin:10px 2px 16px; font:800 12px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:var(--c,var(--text-secondary))}
+.sect-title{display:flex; align-items:center; gap:10px; margin:30px 2px 18px; font:800 12px var(--font-display); letter-spacing:.14em; text-transform:uppercase; color:var(--c,var(--text-secondary))}
 .sect-title .dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.sect-title .ln{flex:1;height:1px;background:linear-gradient(90deg,var(--border-strong),transparent)}
+.sect-lead{color:var(--text-secondary); font-size:14px; margin:-8px 2px 20px; max-width:62ch}
 
-.comm{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-.ccard{position:relative; border:1px solid var(--border-default); background:linear-gradient(160deg,var(--bg-surface),#0E0E0E); border-radius:var(--radius-lg); padding:22px; overflow:hidden; transition:var(--transition-base)}
-.ccard::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--c)}
-.ccard:hover{transform:translateY(-3px); border-color:var(--border-strong)}
-.ccard .role{display:inline-flex;align-items:center;gap:7px;font:800 10.5px var(--font-display);letter-spacing:.1em;text-transform:uppercase;color:var(--c);margin-bottom:10px}
-.ccard .role .dot{width:7px;height:7px;border-radius:50%;background:var(--c)}
-.ccard h3{font-size:17px;font-weight:800;color:#fff;margin:0 0 7px}
-.ccard p{font-size:13.5px;color:var(--text-secondary);margin:0}
+/* rejilla de videos */
+.vgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:18px}
+.vcard{border:1px solid var(--border-default); background:linear-gradient(160deg,var(--bg-surface),#0E0E0E); border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition-base)}
+.vcard:hover{transform:translateY(-3px); border-color:var(--border-strong)}
+.vcard.feat{grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,1.3fr) 1fr; align-items:stretch}
+@media (max-width:760px){ .vcard.feat{grid-template-columns:1fr} }
+.vthumb{position:relative; display:block; width:100%; aspect-ratio:16/9; border:0; padding:0; cursor:pointer; background:#000; overflow:hidden}
+.vthumb img{width:100%; height:100%; object-fit:cover; opacity:.85; transition:opacity .25s, transform .4s}
+.vthumb:hover img{opacity:1; transform:scale(1.03)}
+.vthumb .play{position:absolute; inset:0; margin:auto; width:64px; height:64px; border-radius:50%;
+  display:grid; place-items:center; background:color-mix(in oklab,var(--c,var(--silver)) 86%, #000); color:#fff;
+  box-shadow:0 8px 30px rgba(0,0,0,.5); transition:transform .2s}
+.vthumb:hover .play{transform:scale(1.08)}
+.vthumb .play svg{width:26px;height:26px;fill:currentColor; margin-left:3px}
+.vthumb .dur{position:absolute; right:10px; bottom:10px; font:700 11px var(--font-display); color:#fff; background:rgba(0,0,0,.7); padding:3px 8px; border-radius:6px}
+.vcard iframe{width:100%; aspect-ratio:16/9; border:0; display:block}
+.vmeta{padding:18px 20px; display:flex; flex-direction:column; justify-content:center; gap:8px}
+.vmeta .role{display:inline-flex;align-items:center;gap:7px;font:800 10.5px var(--font-display);letter-spacing:.1em;text-transform:uppercase;color:var(--c);}
+.vmeta .role .dot{width:7px;height:7px;border-radius:50%;background:var(--c)}
+.vmeta h3{font-size:17px;font-weight:800;color:var(--text-primary);margin:0}
+.vmeta p{font-size:13.5px;color:var(--text-secondary);margin:0; line-height:1.5}
+.vmeta .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}
+.vmeta .tags span{font:600 11px var(--font-display);color:var(--text-secondary);border:1px solid var(--border-default);background:var(--bg-surface-2);padding:5px 11px;border-radius:99px}
 
-/* CTA plataforma de estudio */
-.study{display:grid;grid-template-columns:1fr auto;align-items:center;gap:22px;
-  border:1px solid color-mix(in oklab,var(--data) 40%,var(--border-default));
-  background:linear-gradient(140deg,color-mix(in oklab,var(--data) 14%,#101010),#0C0C0C 72%);
-  border-radius:var(--radius-xl);padding:28px clamp(22px,3vw,34px)}
-.study .role{display:inline-flex;align-items:center;gap:7px;font:800 10.5px var(--font-display);letter-spacing:.12em;text-transform:uppercase;color:var(--data);margin-bottom:10px}
-.study .role .dot{width:7px;height:7px;border-radius:50%;background:var(--data);box-shadow:0 0 10px var(--data)}
-.study h3{font-size:clamp(20px,3vw,26px);font-weight:900;color:#fff;margin:0 0 8px}
-.study p{font-size:14.5px;color:var(--text-secondary);margin:0;max-width:52ch}
-@media (max-width:620px){.study{grid-template-columns:1fr}}
-
-/* contenido próximamente */
-.soon{border:1px dashed var(--border-strong); background:linear-gradient(160deg,var(--bg-surface),#0C0C0C); border-radius:var(--radius-xl); padding:clamp(28px,4vw,48px); text-align:center}
+/* formación / próximamente */
+.soon{border:1px dashed var(--border-strong); background:linear-gradient(160deg,var(--bg-surface),#0C0C0C); border-radius:var(--radius-xl); padding:clamp(28px,4vw,46px); text-align:center}
 .soon .tag{display:inline-block; font:700 11px var(--font-display); letter-spacing:.16em; text-transform:uppercase; color:var(--ai); border:1px solid color-mix(in oklab,var(--ai) 40%,transparent); background:color-mix(in oklab,var(--ai) 12%,transparent); padding:8px 16px; border-radius:99px; margin-bottom:18px}
-.soon h3{font-size:clamp(22px,3.6vw,32px); margin-bottom:12px; color:#fff; font-weight:900}
-.soon p{max-width:56ch; margin:0 auto; font-size:15px}
+.soon h3{font-size:clamp(20px,3.4vw,30px); margin-bottom:12px; color:var(--text-primary); font-weight:900}
+.soon p{max-width:58ch; margin:0 auto; font-size:15px; color:var(--text-secondary)}
 .soon .feats{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:24px}
 .soon .feats span{font:600 12.5px var(--font-display); color:var(--text-secondary); border:1px solid var(--border-default); background:var(--bg-surface-2); padding:9px 15px; border-radius:99px}
-
-@media (max-width:620px){ .comm{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
 <canvas id="sky" aria-hidden="true"></canvas>
 <main class="wrap page">
-  <div class="pagehead reveal" style="--acc:var(--ai)">
+  <div class="pagehead reveal" style="--acc:var(--ux)">
     <p class="eyebrow" data-i18n="eye">Comunidad</p>
-    <h2 data-i18n="h">Lo que viene</h2>
-    <p class="lead" data-i18n="p">Estoy preparando contenido para la comunidad tech. Esto es lo que se viene.</p>
+    <h2 data-i18n="h">Divulgación y formación</h2>
+    <p class="lead" data-i18n="p">Lo que comparto con la comunidad tech: charlas y proyectos de divulgación, y cursos grabados para aprender haciendo.</p>
   </div>
 
-  <!-- CREACIÓN DE CONTENIDO -->
+  <!-- DIVULGACIÓN EN TECNOLOGÍA -->
   <section class="reveal">
-    <div class="sect-title" style="--c:var(--ai)"><span class="dot"></span><span data-i18n="st3">Creación de contenido</span></div>
+    <div class="sect-title" style="--c:var(--ux)"><span class="dot"></span><span data-i18n="st1">Divulgación en tecnología</span><span class="ln"></span></div>
+    <p class="sect-lead" data-i18n="l1">Participaciones, retos y charlas donde comparto cómo se piensa y se construye un proyecto — de la idea a la solución.</p>
+    <div class="vgrid">
+      <article class="vcard feat" style="--c:var(--ux)">
+        <button class="vthumb" data-yt="rZDq3W7zDKk" aria-label="Reproducir video">
+          <img src="https://img.youtube.com/vi/rZDq3W7zDKk/hqdefault.jpg" alt="Video del reto NASA Space Apps" loading="lazy" onerror="this.style.display='none'">
+          <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+        <div class="vmeta">
+          <span class="role"><span class="dot"></span><span data-i18n="r1">NASA Space Apps Challenge</span></span>
+          <h3 data-i18n="t1">ORBITAL — Monitoreo de salud para astronautas</h3>
+          <p data-i18n="d1">La historia del reto: cómo aterrizamos el problema, el mapa de empatía y la ideación hasta ORBI, una interfaz que solo habla cuando algo cambia. Mi participación como UX/UI y design thinker.</p>
+          <div class="tags"><span>Design Thinking</span><span>UX/UI</span><span>Space Apps CDMX 2026</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN -->
+  <section class="reveal">
+    <div class="sect-title" style="--c:var(--ai)"><span class="dot"></span><span data-i18n="st2">Formación · cursos grabados</span><span class="ln"></span></div>
+    <p class="sect-lead" data-i18n="l2">Cursos en video sobre programación, datos y nube — alojados en YouTube y conectados con las rutas prácticas de la Learning Zone.</p>
     <div class="soon">
-      <span class="tag" data-i18n="tag">Próximamente · 2027</span>
-      <h3 data-i18n="sh">Cursos y contenido en video</h3>
-      <p data-i18n="sp">Preparo cursos de programación y contenido en video sobre nube, datos e IA: enseñar lo que aprendo, con el mismo formato de "caminos" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.</p>
+      <span class="tag" data-i18n="tag">Próximamente</span>
+      <h3 data-i18n="sh">Cursos grabados en YouTube</h3>
+      <p data-i18n="sp">Estoy grabando cursos con el mismo formato de "caminos" y práctica guiada de la Learning Zone. En cuanto estén publicados, cada curso aparecerá aquí como un video con su ruta correspondiente.</p>
       <div class="feats">
         <span data-i18n="f1">Rutas de aprendizaje</span><span data-i18n="f2">Videos en YouTube</span><span data-i18n="f3">Laboratorios y quizzes</span><span data-i18n="f4">Práctica con mis herramientas</span>
       </div>
@@ -74,17 +99,35 @@
 <script>
 window.PAGINA = "cursos";
 window.I18N = {
-  es:{eye:"Comunidad",h:"Lo que viene",p:"Estoy preparando contenido para la comunidad tech. Esto es lo que se viene.",
-    st3:"Creación de contenido",
-    tag:"Próximamente · 2027",sh:"Cursos y contenido en video",
-    sp:"Preparo cursos de programación y contenido en video sobre nube, datos e IA: enseñar lo que aprendo, con el mismo formato de \"caminos\" y práctica guiada de mis herramientas. Los videos vivirán en YouTube y las rutas, aquí.",
+  es:{eye:"Comunidad",h:"Divulgación y formación",p:"Lo que comparto con la comunidad tech: charlas y proyectos de divulgación, y cursos grabados para aprender haciendo.",
+    st1:"Divulgación en tecnología",l1:"Participaciones, retos y charlas donde comparto cómo se piensa y se construye un proyecto — de la idea a la solución.",
+    r1:"NASA Space Apps Challenge",t1:"ORBITAL — Monitoreo de salud para astronautas",
+    d1:"La historia del reto: cómo aterrizamos el problema, el mapa de empatía y la ideación hasta ORBI, una interfaz que solo habla cuando algo cambia. Mi participación como UX/UI y design thinker.",
+    st2:"Formación · cursos grabados",l2:"Cursos en video sobre programación, datos y nube — alojados en YouTube y conectados con las rutas prácticas de la Learning Zone.",
+    tag:"Próximamente",sh:"Cursos grabados en YouTube",
+    sp:"Estoy grabando cursos con el mismo formato de \"caminos\" y práctica guiada de la Learning Zone. En cuanto estén publicados, cada curso aparecerá aquí como un video con su ruta correspondiente.",
     f1:"Rutas de aprendizaje",f2:"Videos en YouTube",f3:"Laboratorios y quizzes",f4:"Práctica con mis herramientas"},
-  en:{eye:"Community",h:"What's coming",p:"I'm preparing content for the tech community. Here's what's on the way.",
-    st3:"Content creation",
-    tag:"Coming soon · 2027",sh:"Courses and video content",
-    sp:"I'm preparing programming courses and video content on cloud, data and AI: teaching what I learn, with the same \"roads\" format and guided practice from my tools. Videos will live on YouTube and the paths, here.",
+  en:{eye:"Community",h:"Outreach & learning",p:"What I share with the tech community: talks and outreach projects, and recorded courses to learn by doing.",
+    st1:"Tech outreach",l1:"Challenges, talks and projects where I share how a project is thought through and built — from idea to solution.",
+    r1:"NASA Space Apps Challenge",t1:"ORBITAL — Astronaut health monitoring",
+    d1:"The story of the challenge: how we framed the problem, the empathy map and the ideation up to ORBI, an interface that only speaks when something changes. My role as UX/UI and design thinker.",
+    st2:"Learning · recorded courses",l2:"Video courses on programming, data and cloud — hosted on YouTube and connected to the Learning Zone's practical paths.",
+    tag:"Coming soon",sh:"Recorded courses on YouTube",
+    sp:"I'm recording courses with the same \"roads\" format and guided practice from the Learning Zone. Once published, each course will appear here as a video with its matching path.",
     f1:"Learning paths",f2:"YouTube videos",f3:"Labs and quizzes",f4:"Practice with my tools"}
 };
+// lite-youtube: carga el reproductor sólo al hacer clic
+document.addEventListener("click", function(e){
+  var btn = e.target.closest(".vthumb[data-yt]");
+  if(!btn) return;
+  var id = btn.getAttribute("data-yt");
+  var fr = document.createElement("iframe");
+  fr.src = "https://www.youtube.com/embed/"+id+"?autoplay=1&rel=0";
+  fr.title = "Video";
+  fr.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  fr.setAttribute("allowfullscreen","");
+  btn.replaceWith(fr);
+});
 </script>
 <script src="js/sitio.js"></script>
 </body>
